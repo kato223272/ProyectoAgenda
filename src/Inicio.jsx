@@ -1,6 +1,6 @@
-import Navbar from '../Componentes/Navbar';
+import Navbar from './componentesNoRegistrado/components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel from '../../ComponentGlobales/carousel';
+import Carousel from './ComponentGlobales/carousel'
 
 function Inicio (){
     return(

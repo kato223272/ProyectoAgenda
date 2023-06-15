@@ -4,12 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import '../css/Navbar.css';
+import './Navbar.css';
 function navbar() {
   return (
     <Navbar bg="light" expand="lg"className='nav' >
       <Container fluid>
-        <Navbar.Brand className='inicio' href="/">Inicio</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -46,7 +45,7 @@ function navbar() {
            </div>
            <div className='favoritos'>
            <Nav.Link className='favoritosLetra'
-           href="/loginUser">Favoritos</Nav.Link>
+           href="./loginUser">Favoritos</Nav.Link>
            </div>
            <div className='citas'>
            <Nav.Link className='citasLetra'
@@ -55,7 +54,7 @@ function navbar() {
            <div className='iniciar'>
            <Nav.Link className='iniciarLetra'
            id='iniciarSesion'
-           href="./loginUser">Iniciar sesión</Nav.Link>
+           href="/loginUser">Iniciar sesión</Nav.Link>
            </div>
         </Navbar.Collapse>
         
