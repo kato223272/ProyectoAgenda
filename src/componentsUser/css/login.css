@@ -1,0 +1,50 @@
+.login{
+    border: 10%;
+    border-radius: 10%;
+    margin-left: 30%;
+    margin-top: 5%;
+    height: 40%;
+    width: 40%;
+    position: center;
+    text-align: center;
+    padding: 1%;
+    background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,238,255,1) 50%);
+}
+.email{
+    width: 65%;
+    margin-left: 20%;
+    margin-top: 2%;
+}
+.password{
+    margin-top: 2%;
+    width: 65%;
+    margin-left: 20%;
+}
+
+.botonInicio{
+    background-color: rgb(136, 156, 229);
+ 
+}
+.registrarse{
+    width: 40%;
+    height: 100%;
+    background-color: rgb(136, 156, 229);
+    margin-right: 22%;
+}
+.letraNoCuenta{
+    width: 125%;
+    margin-top: 2%;
+    margin-left: 15%;
+}
+.iniciaProve{
+    width: 50%;
+    height: 93%;
+    background-color: rgb(136, 156, 229);
+    margin-right: 22%;
+}
+.letraProv{
+    width: 125%;
+    margin-top: 2%;
+    margin-left: 15%;
+}

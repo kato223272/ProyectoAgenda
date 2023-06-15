@@ -1,0 +1,49 @@
+.historial{
+  margin-left: 5%;
+    width: 10%;
+}
+.historialLetra{
+    color: black;
+}
+.favoritos{
+    width: 10%;
+   
+}
+.favoritosLetra{
+    color: black;
+
+}
+.buscar{
+    width: 25%;
+    margin-left: 5%;
+}
+.buscarServicio{
+  
+    border-radius: 5%;
+   caret-color: rgb(153, 146, 246);
+
+}
+.corporacion{
+    /* margin-left: 2.5%; */
+    
+}
+.inicio{
+    margin-left: 4%;
+}
+.nav{
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,238,255,1) 50%);
+}
+.citas{
+    width: 25%;
+}
+.citasLetra{
+    color: black;
+}
+.iniciar{
+ width: 10%;
+ margin-right: 2.5%;
+}
+.iniciarLetra{
+    color: black;
+}
