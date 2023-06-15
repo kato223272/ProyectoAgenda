@@ -2,8 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../css/login.css';
-import Navbar from '../Componentes/NavInicio'
+import '../css/LoginProv.css';
+import Navbar from '../components/NavbarProv';
 function BasicExample() {
   return (
     <div>
@@ -11,7 +11,7 @@ function BasicExample() {
     <div className='login'>
     <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Ingresa tu correo ó usuario</Form.Label>
+        <Form.Label>Ingresa tu correo</Form.Label>
         <Form.Control className='email' type="email" placeholder="correo/usuario" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -32,15 +32,8 @@ function BasicExample() {
             <Button className='registrarse' variant="primary" type="submit"> Registrarse</Button>
             </Col>
         </Row>
-        <br />
-        <Row>
-            <Col>
-            <h6 className='letraProv'>¿Desea ingresar como proveedor?</h6> 
-            </Col>
-            <Col>
-            <Button href='/loginProv' className='iniciaProve' variant="primary" type="submit"> Iniciar sesion</Button>
-            </Col>
-        </Row>
+       
+        
     </div>
       
     </Form>
