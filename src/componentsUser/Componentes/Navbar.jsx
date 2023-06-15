@@ -7,9 +7,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../css/Navbar.css';
 function navbar() {
   return (
-    <Navbar bg="light" expand="lg"className='nav' >
+    <Navbar bg="light" expand="lg"className='navUser' >
       <Container fluid>
-        <Navbar.Brand className='inicio' href="/">Inicio</Navbar.Brand>
+        <Navbar.Brand className='inicioUser' href="/PrincipalUser">Inicio</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -42,20 +42,20 @@ function navbar() {
             <Button variant="outline-success">Buscar</Button>
           </Form>
           <div className='historial'>
-          <Nav.Link className='historialLetra' href="./loginUser">Historial</Nav.Link>
+          <Nav.Link className='historialLetra' href="/Historial">Historial</Nav.Link>
            </div>
            <div className='favoritos'>
            <Nav.Link className='favoritosLetra'
-           href="/loginUser">Favoritos</Nav.Link>
+           href="/Favoritos">Favoritos</Nav.Link>
            </div>
            <div className='citas'>
            <Nav.Link className='citasLetra'
-           href="./loginUser">Citas agendadas</Nav.Link>
+           href="/CitasAgendadasUser">Citas agendadas</Nav.Link>
            </div>
            <div className='iniciar'>
            <Nav.Link className='iniciarLetra'
-           id='iniciarSesion'
-           href="./loginUser">Iniciar sesión</Nav.Link>
+           id='cerraresion'
+           href="/">Cerrar sesión</Nav.Link>
            </div>
         </Navbar.Collapse>
         
