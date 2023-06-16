@@ -15,6 +15,7 @@ function App() {
   return (
    
     <Router>
+
     <Routes>
       {/* vista principal */}
       <Route path="/" element={<Inicio/>}/>
@@ -31,6 +32,7 @@ function App() {
       
       {/* vista proveedor */}
     </Routes>
+
   </Router>
   
   );
