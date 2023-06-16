@@ -14,19 +14,19 @@ function App() {
   return (
    
     <Router>
-    <Routes>
-      {/* vista principal */}
-      <Route path="/" element={<Inicio/>}/>
-      {/* Vista Iniciar sesion */}
-      <Route path="/loginUser" element={<LoginUsuario/>}/>
-      <Route path="/loginProv" element={<LoginProv/>}/>
-      {/* vista usuario */}
-      <Route path="/PrincipalUser" element={<PrincipalUsuario/>}/>
-      <Route path="/CitasAgendadasUser" element={<CitasAgendadasUser/>}/>
-      <Route path="/Favoritos" element={<Favoritos/>}/>
-      <Route path="/Historial" element={<Historial/>}/>
-      {/* vista proveedor */}
-    </Routes>
+      <Routes>
+        {/* vista principal */}
+        <Route path="/" element={<Inicio/>}/>
+        {/* Vista Iniciar sesion */}
+        <Route path="/loginUser" element={<LoginUsuario/>}/>
+        <Route path="/loginProv" element={<LoginProv/>}/>
+        {/* vista usuario */}
+        <Route path="/PrincipalUser" element={<PrincipalUsuario/>}/>
+        <Route path="/CitasAgendadasUser" element={<CitasAgendadasUser/>}/>
+        <Route path="/Favoritos" element={<Favoritos/>}/>
+        <Route path="/Historial" element={<Historial/>}/>
+        {/* vista proveedor */}
+      </Routes>
   </Router>
   
   );
