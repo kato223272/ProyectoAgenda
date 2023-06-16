@@ -10,9 +10,5 @@ function Inicio (){
        <Carousel></Carousel>
         </form>
     );
-   
-
-
-
 }
 export default Inicio;

@@ -19,7 +19,7 @@ function BasicExample() {
         <Form.Control className='password' type="password" placeholder="contraseña" />
       </Form.Group>
       
-      <Button className='botonInicio' variant="primary" type="submit">
+      <Button href='/PrincipalUser' className='botonInicio' variant="primary" type="submit">
         Iniciar sesión
       </Button>
       <br /><br /><br /><br />
@@ -29,7 +29,7 @@ function BasicExample() {
             <h6 className='letraNoCuenta'>¿No tienes una cuenta? registrate</h6> 
             </Col>
             <Col>
-            <Button className='registrarse' variant="primary" type="submit"> Registrarse</Button>
+            <Button href='/CrearCuentaUser' className='registrarse' variant="primary" type="submit"> Registrarse</Button>
             </Col>
         </Row>
         <br />
