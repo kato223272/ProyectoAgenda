@@ -1,0 +1,40 @@
+.RegistrarDatos{
+    border: 10%;
+    border-radius: 10%;
+    margin-left: 30%;
+    margin-top: 5%;
+    height: 40%;
+    width: 40%;
+    position: center;
+    text-align: center;
+    padding: 1%;
+    background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,238,255,1) 50%);
+}
+.cuadroTextUsuario{
+    width: 60%;
+    margin-left: 10%;
+   
+}
+.formUsuario{
+    margin-left: 47%;
+   width: 50%;
+   margin-top: -6%;
+}
+.cuadroTextNombre{
+    width: 70%;
+    margin-left: 10%;
+}
+.formNombre{
+    width: 70%;
+}
+.botonCrear{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+.botoncrear:hover{
+    border: 5px solid rgba(104, 43, 43, 0.6);
+    /* background-color: rgb(0, 0, 0);
+    color: black;
+    border-color: black; */
+}
