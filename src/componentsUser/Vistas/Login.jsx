@@ -7,8 +7,11 @@ import Navbar from '../Componentes/NavInicio'
 function BasicExample() {
   return (
     <div>
-       <Navbar></Navbar>
-    <div className='login'>
+      <header>
+      <Navbar></Navbar>
+      </header>
+      <body>
+      <div className='login'>
     <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo ó usuario</Form.Label>
@@ -45,6 +48,10 @@ function BasicExample() {
       
     </Form>
     </div>
+      </body>
+   <footer>
+    
+   </footer>
 
     </div>
   );

@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../css/Navbar.css';
+
 function navbar() {
   return (
     <Navbar bg="light" expand="lg"className='navUser' >
@@ -39,7 +40,7 @@ function navbar() {
               className="buscarServicio me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Buscar</Button>
+            <Button className='buscar' type='submit' variant="outline-success">Buscar</Button>
           </Form>
           <div className='historial'>
           <Nav.Link className='historialLetra' href="/Historial">Historial</Nav.Link>

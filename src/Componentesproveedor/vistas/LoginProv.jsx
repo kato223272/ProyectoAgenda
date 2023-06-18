@@ -7,8 +7,9 @@ import Navbar from '../components/NavbarProv';
 function BasicExample() {
   return (
     <div>
-       <Navbar></Navbar>
-    <div className='login'>
+      <header><Navbar></Navbar></header>
+       <body>
+       <div className='login'>
     <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo</Form.Label>
@@ -29,7 +30,7 @@ function BasicExample() {
             <h6 className='letraNoCuenta'>¿No tienes una cuenta? registrate</h6> 
             </Col>
             <Col>
-            <Button className='registrarse' variant="primary" type="submit"> Registrarse</Button>
+            <Button href='/CrearCuentaProov' className='registrarse' variant="primary" type="submit"> Registrarse</Button>
             </Col>
         </Row>
        
@@ -39,6 +40,8 @@ function BasicExample() {
     </Form>
     </div>
 
+       </body>
+    <footer></footer>
     </div>
   );
 

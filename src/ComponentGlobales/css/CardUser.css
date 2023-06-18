@@ -1,0 +1,33 @@
+.cardCompleta{
+    margin-right: 0%;
+    margin-left: 10%;
+    
+}
+.fondoCard{
+    background: rgb(89,59,177);
+    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(152,103,255,0.9529061624649859) 48%, rgba(82,12,152,0.9557072829131653) 74%);
+    margin-right: 5%;
+    margin-left: 12%;
+}
+.ImagenProvee{
+    width: 45%;
+    margin-left: 20%;
+}
+.NumTel{
+    margin-top: 60%;
+}
+
+.agendar{
+    background: rgb(128, 98, 250);
+   
+    color: white;
+    border: none;
+    border-radius: 5%;
+    font-size: 90%;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    overflow: hidden;
+}
+

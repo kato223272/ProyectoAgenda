@@ -38,7 +38,7 @@ function navbar() {
               className="buscarServicio me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Buscar</Button>
+            <Button className='buscar' type='submit' variant="outline-success">Buscar</Button>
           </Form>
           <div className='historial'>
           <Nav.Link className='historialLetra' href="./loginUser">Historial</Nav.Link>
