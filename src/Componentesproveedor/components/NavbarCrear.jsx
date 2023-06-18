@@ -6,7 +6,7 @@ function navbar() {
   return (
     <Navbar bg="light" expand="lg"className='navIni' >
       <Container fluid>
-      <Button className='inicio' href="/loginUser">Atras</Button>
+      <Button className='inicio' href="/loginProv">Atras</Button>
       </Container>
       <h5 className='LetrasSuperiores'>Bienvenido</h5>
     </Navbar>

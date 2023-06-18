@@ -1,0 +1,22 @@
+#ImagenRosa{
+    width: 43%;
+    margin-left: 27%;
+    display: flex;
+}
+.carouseel{
+    color: black;
+    /* background-color: powderblue; */
+    transition: background-color .5s;
+}
+.carouseel:hover{
+    color: black;
+    /* order: 5px solid rgba(104, 43, 43, 0.6); */
+}
+.carouseel:after{
+    color: black;
+}
+h3{
+    color: rgb(64,113,234);
+color: radial-gradient(circle, rgba(64,113,234,1) 22%, rgba(0,2,136,1) 43%);
+}
+

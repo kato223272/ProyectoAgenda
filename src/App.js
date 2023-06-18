@@ -10,6 +10,7 @@ import Favoritos from './componentsUser/Vistas/Favoritos.jsx'
 import Historial from './componentsUser/Vistas/Historial.jsx'
 import LoginProv from './Componentesproveedor/vistas/LoginProv.jsx'
 import CrearCuentaUser from './componentsUser/Vistas/CrearCuenta.jsx';
+import CrearCuentaProov from './Componentesproveedor/vistas/Registrar.jsx';
 
 function App() {
   return (
@@ -24,12 +25,12 @@ function App() {
       <Route path="/loginProv" element={<LoginProv/>}/>
       {/* Vista crear cuenta */}
       <Route path="/CrearCuentaUser" element={<CrearCuentaUser/>}/>
+      <Route path="/CrearCuentaProov" element={<CrearCuentaProov/>}/>
       {/* vista usuario */}
       <Route path="/PrincipalUser" element={<PrincipalUsuario/>}/>
       <Route path="/CitasAgendadasUser" element={<CitasAgendadasUser/>}/>
       <Route path="/Favoritos" element={<Favoritos/>}/>
       <Route path="/Historial" element={<Historial/>}/>
-      
       {/* vista proveedor */}
     </Routes>
 
