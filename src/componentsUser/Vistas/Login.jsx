@@ -14,12 +14,11 @@ function BasicExample() {
   const [pass, setPass] = useState("");
   return (
 
-    <div>
+   <div>
       <header>
       <Navbar></Navbar>
       </header>
       <body>
-      <div className='login'>
     <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo ó usuario</Form.Label>
@@ -55,14 +54,14 @@ function BasicExample() {
     </div>
       
     </Form>
-    </div>
+    
       </body>
    <footer>
     
    </footer>
 
-
-    </>
+   </div>
+   
   );
 }
 
