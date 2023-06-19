@@ -9,7 +9,6 @@ import '../css/CrearCuenta.css';
 import Navbar from '../Componentes/NavbarCrear'
 
 function FormExample() {
-  
   const { Formik } = formik;
 
   const schema = yup.object().shape({
