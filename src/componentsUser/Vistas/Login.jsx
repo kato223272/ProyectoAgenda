@@ -95,6 +95,16 @@ function validarInicio(mail, pass, navigate){
           }
         )
       }
+      else{
+        Swal.fire({
+          icon:'error',
+          title:'Correo inválido',
+          text:'Asegúrese de escribir correctamente su correo electrónico.',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        })
+      }
     }
     else if(!(/\d/.test(mail))){
       Swal.fire({
