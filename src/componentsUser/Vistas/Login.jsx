@@ -19,7 +19,7 @@ function BasicExample() {
       <Navbar></Navbar>
       </header>
       <body>
-    <Form >
+    <Form className='login':>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo ó usuario</Form.Label>
         <Form.Control className='email' type="email" placeholder="correo/usuario" />
