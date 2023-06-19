@@ -125,3 +125,4 @@ function validarInicio(mail, pass, navigate){
   }
 }
 export default BasicExample;
+
