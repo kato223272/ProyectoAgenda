@@ -13,7 +13,6 @@ function BasicExample() {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   return (
-
    <div>
       <header>
       <Navbar></Navbar>
