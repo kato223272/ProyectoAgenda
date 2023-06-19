@@ -7,9 +7,10 @@ import * as formik from 'formik';
 import * as yup from 'yup';
 import '../css/CrearCuenta.css';
 import Navbar from '../Componentes/NavbarCrear'
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 function FormExample() {
-  
   const { Formik } = formik;
 
   const schema = yup.object().shape({

@@ -4,7 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../css/LoginProv.css';
 import Navbar from '../components/NavbarProv';
+import Swal from 'sweetalert2';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 function BasicExample() {
+  const navigate = useNavigate();
+  const [mail, setMail] = useState("");
+  const [pass, setPass] = useState("");
   return (
     <div>
       <header><Navbar></Navbar></header>
@@ -13,14 +19,19 @@ function BasicExample() {
     <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo</Form.Label>
-        <Form.Control className='email' type="email" placeholder="correo/usuario" />
+        <Form.Control className='email' type="email" placeholder="correo/usuario"
+              value={mail}
+              onChange={ev => setMail(ev.target.value)} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control className='password' type="password" placeholder="contraseña" />
+        <Form.Control className='password' type="password" placeholder="contraseña"
+              value={pass}
+              onChange={ev => setPass(ev.target.value)} />
       </Form.Group>
       
-      <Button className='botonInicio' variant="primary" type="submit">
+      <Button className='botonInicio' variant="primary" type="button"
+        onClick={ev => validarInicio(mail, pass, navigate)}>
         Iniciar sesión
       </Button>
       <br /><br /><br /><br />
@@ -30,7 +41,7 @@ function BasicExample() {
             <h6 className='letraNoCuenta'>¿No tienes una cuenta? registrate</h6> 
             </Col>
             <Col>
-            <Button href='/CrearCuentaProov' className='registrarse' variant="primary" type="submit"> Registrarse</Button>
+            <Button href='/CrearCuentaProov' className='registrarse' variant="primary" type="button"> Registrarse</Button>
             </Col>
         </Row>
        
@@ -44,7 +55,63 @@ function BasicExample() {
     <footer></footer>
     </div>
   );
+}
 
-  
+function validarInicio(mail, pass, navigate){
+  if(mail.trim("") && pass.trim("")){
+    if(mail.includes("@")){
+      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)){
+        Swal.fire({
+          icon:'success',
+          title:'Todo correcto',
+          text:'Iniciando sesión...',
+          showConfirmButton:true,
+          confirmButtonText:'Entrar'
+      }).then(
+          function (result){
+              if(result.isConfirmed){
+                  navigate('/PrincipalUser');
+              }
+          }
+        )
+      }
+    }
+    else if(!(/\d/.test(mail))){
+      Swal.fire({
+        icon:'success',
+        title:'Todo correcto',
+        text:'Iniciando sesión...',
+        showConfirmButton:true,
+        confirmButtonText:'Entrar'
+      }).then(
+          function (result){
+              if(result.isConfirmed){
+                  navigate('/PrincipalUser');
+              }
+          }
+        )
+    }
+
+    else if(/\d/.test(mail)){
+      Swal.fire({
+        icon:'error',
+        title:'Nombre imposible',
+        text:'Se detecto numeros en su nombre, intente de nuevo',
+        showConfirmButton:false,
+        showDenyButton:true,
+        denyButtonText:'Volver a intentarlo'
+      })
+    }
+  }
+
+  else{
+    Swal.fire({
+      icon:'info',
+      title:'Espacios vacíos',
+      text:'Rellene los campos de ingreso',
+      showConfirmButton:true,
+      confirmButtonText:'Volver a intentarlo'
+    })
+  }
 }
 export default BasicExample;
