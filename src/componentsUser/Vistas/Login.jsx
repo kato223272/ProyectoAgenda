@@ -8,6 +8,41 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 
+function ejecutarBase(buscarQuery){
+  const mysql = require('mysql');
+  const bd = mysql.createConnection({
+
+      host: 'pi-bs.cqcdzfbv1wzk.us-east-1.rds.amazonaws.com',
+  
+      user: 'admin',
+  
+      password: '#LgSc06042004#',
+  
+      database: 'Proyecto_Integrador',
+  
+      insecureAuth: true
+  
+  });
+
+  bd.connect(function(err){
+      if(err){
+          console.log(err);
+      }
+
+      else{
+          bd.query({buscarQuery},function(err,resultado){
+              if(err){
+                  console.log(err);
+              }
+
+              else{
+                  return resultado;
+              }
+          });
+      }
+  });
+}
+
 function BasicExample() {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
@@ -81,19 +116,23 @@ function validarInicio(mail, pass, navigate){
   if(mail.trim("") && pass.trim("")){
     if(mail.includes("@")){
       if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)){
-        Swal.fire({
-          icon:'success',
-          title:'Todo correcto',
-          text:'Su registro ha sido un éxito.',
-          showConfirmButton:true,
-          confirmButtonText:'Salir'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
+        let valores = ejecutarBase('select Nombre, Correo, Password from Proyecto_Integrador.Empresa;')
+        valores.forEach(element => {
+          console.log(valores)
+        });
+            Swal.fire({
+              icon:'success',
+              title:'Todo correcto',
+              text:'Su registro ha sido un éxito.',
+              showConfirmButton:true,
+              confirmButtonText:'Salir'
+          }).then(
+              function (result){
+                  if(result.isConfirmed){
+                      navigate('/PrincipalUser');
+                  }
               }
-          }
-        )
+            )
       }
       else{
         Swal.fire({
