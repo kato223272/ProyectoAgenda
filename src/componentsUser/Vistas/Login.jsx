@@ -7,46 +7,14 @@ import Navbar from '../Componentes/NavInicio'
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
-function ejecutarBase(buscarQuery){
-  const mysql = require('mysql');
-  const bd = mysql.createConnection({
-
-      host: 'pi-bs.cqcdzfbv1wzk.us-east-1.rds.amazonaws.com',
-  
-      user: 'admin',
-  
-      password: '#LgSc06042004#',
-  
-      database: 'Proyecto_Integrador',
-  
-      insecureAuth: true
-  
-  });
-
-  bd.connect(function(err){
-      if(err){
-          console.log(err);
-      }
-
-      else{
-          bd.query({buscarQuery},function(err,resultado){
-              if(err){
-                  console.log(err);
-              }
-
-              else{
-                  return resultado;
-              }
-          });
-      }
-  });
-}
 
 function BasicExample() {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
+  
   return (
    <div>
       <header>
@@ -112,27 +80,37 @@ function BasicExample() {
   );
 }
 
-function validarInicio(mail, pass, navigate){
+async function validarInicio(mail, pass, navigate){
   if(mail.trim("") && pass.trim("")){
     if(mail.includes("@")){
       if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)){
-        let valores = ejecutarBase('select Nombre, Correo, Password from Proyecto_Integrador.Empresa;')
-        valores.forEach(element => {
-          console.log(valores)
-        });
+        try {
+          const response = await axios.post('https://localhost:44310/api/Usuarios/VerificarLogin?correo='+mail+'&contraseña='+pass);
+          if (response.status === 200) {
             Swal.fire({
               icon:'success',
               title:'Todo correcto',
-              text:'Su registro ha sido un éxito.',
+              text:'Iniciando sesión...',
               showConfirmButton:true,
-              confirmButtonText:'Salir'
+              confirmButtonText:'Entrar'
           }).then(
               function (result){
                   if(result.isConfirmed){
                       navigate('/PrincipalUser');
                   }
               }
-            )
+            );
+          } 
+        } catch (error) {
+          Swal.fire({
+            icon:'error',
+            title:'Contraseña incorrecta',
+            text:'Asegúrese de escribir correctamente su contraseña.',
+            showConfirmButton:false,
+            showDenyButton:true,
+            denyButtonText:'Volver a intentarlo'
+          });
+        }
       }
       else{
         Swal.fire({
@@ -145,20 +123,35 @@ function validarInicio(mail, pass, navigate){
         })
       }
     }
+    
     else if(!(/\d/.test(mail))){
-      Swal.fire({
-        icon:'success',
-        title:'Todo correcto',
-        text:'Su registro ha sido un éxito.',
-        showConfirmButton:true,
-        confirmButtonText:'Salir'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
-              }
-          }
-        )
+      try {
+        const response = await axios.post('https://localhost:44310/api/Usuarios/VerificarLogin?correo='+mail+'&contraseña='+pass);
+        if (response.status === 200) {
+          Swal.fire({
+            icon:'success',
+            title:'Todo correcto',
+            text:'Iniciando sesión...',
+            showConfirmButton:true,
+            confirmButtonText:'Entrar'
+        }).then(
+            function (result){
+                if(result.isConfirmed){
+                    navigate('/PrincipalUser');
+                }
+            }
+          );
+        } 
+      } catch (error) {
+        Swal.fire({
+          icon:'error',
+          title:'Contraseña incorrecta',
+          text:'Asegúrese de escribir correctamente su contraseña.',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
     }
 
     else if(/\d/.test(mail)){
@@ -171,8 +164,8 @@ function validarInicio(mail, pass, navigate){
         denyButtonText:'Volver a intentarlo'
       })
     }
+  
   }
-
   else{
     Swal.fire({
       icon:'info',
