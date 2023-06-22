@@ -16,16 +16,9 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.13.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
     "sweetalert2": "^6.6.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
-=======
-    "yup": "^1.2.0",
-    "sweetalert2": "^11.7.12",
-    "web-vitals": "^2.1.4"
-
->>>>>>> 933af513ade49637a08419dc53077a4e8d21718b
   },
   "scripts": {
     "start": "react-scripts start",
