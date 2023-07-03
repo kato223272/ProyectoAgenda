@@ -7,12 +7,15 @@ import Image from "react-bootstrap/Image";
 import "../ComponentGlobales/css/CardUser.css";
 import Spa from './img/spa.jpeg';
 
+
 function TextExample() {
   return (
+
+    <Container>
     <Row>
         {/* <Col ></Col> */}
       <Col>
-        <div style={{ width: "80%" }} className="fondoCard">
+        <div  style={{ width: "80%", marginTop:"3%" }} className="fondoCard">
           <br />
           <Card style={{ width: "80%" }} className="cardCompleta">
             <Row>
@@ -38,6 +41,7 @@ function TextExample() {
                   <Button className="agendar" type="submit">
                     Agendar
                   </Button>
+                  <Button className="favoritosb" onClick=''>Agregar a favoritos</Button>
                 </Card.Body>
               </Col>
               
@@ -50,6 +54,7 @@ function TextExample() {
       </Col>
      
     </Row>
+    </Container>
   );
 }
 

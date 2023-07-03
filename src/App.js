@@ -7,7 +7,8 @@ import LoginUsuario from'./componentsUser/Vistas/Login.jsx';
 import PrincipalUsuario from './componentsUser/Vistas/Principal';
 import CitasAgendadasUser from './componentsUser/Vistas/CitasAgendadas';
 import Favoritos from './componentsUser/Vistas/Favoritos.jsx'
-import Historial from './componentsUser/Vistas/Historial.jsx'
+import PrincipalProv from './Componentesproveedor/vistas/Principal.jsx'
+
 import LoginProv from './Componentesproveedor/vistas/LoginProv.jsx'
 import CrearCuentaUser from './componentsUser/Vistas/CrearCuenta.jsx';
 import CrearCuentaProov from './Componentesproveedor/vistas/Registrar.jsx';
@@ -30,8 +31,10 @@ function App() {
       <Route path="/PrincipalUser" element={<PrincipalUsuario/>}/>
       <Route path="/CitasAgendadasUser" element={<CitasAgendadasUser/>}/>
       <Route path="/Favoritos" element={<Favoritos/>}/>
-      <Route path="/Historial" element={<Historial/>}/>
+      
       {/* vista proveedor */}
+      <Route path="/PrincipalProv" element={<PrincipalProv/>}/>
+
     </Routes>
 
   </Router>
