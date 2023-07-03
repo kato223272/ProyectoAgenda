@@ -20,7 +20,7 @@ function BasicExample() {
         <Form.Control className='password' type="password" placeholder="contraseña" />
       </Form.Group>
       
-      <Button className='botonInicio' variant="primary" type="submit">
+      <Button className='botonInicio' variant="primary" type="submit" href='/PrincipalProv'>
         Iniciar sesión
       </Button>
       <br /><br /><br /><br />
