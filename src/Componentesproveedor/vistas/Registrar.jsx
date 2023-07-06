@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -8,7 +9,12 @@ import Servicios from "../components/TipoDeServicio.jsx"
 import Navbar from "../components/NavbarCrear";
 
 function FormExample() {
- 
+  const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
+  const [nombreLocal, setNombreLocal] = useState("");
+  const [direccion, setDireccion] = useState([]); //Calle: , entre calle: , tipo calle: , etc
+  const [usuario, setUsuario] = useState([]); //nombre: , num.telefono: , etc.
+
 
   return (
     <div>
