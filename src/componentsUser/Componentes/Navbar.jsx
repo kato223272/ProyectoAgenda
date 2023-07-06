@@ -11,8 +11,11 @@ function navbar() {
     <Navbar bg="light" expand="lg"className='navUser' >
       <Container fluid>
         <Navbar.Brand className='inicioUser' href="/PrincipalUser">Inicio</Navbar.Brand>
+         
         <Navbar.Toggle aria-controls="navbarScroll" />
+        
         <Navbar.Collapse id="navbarScroll">
+           {/* ------------------------------------------------------------------------------------------------------------ */}
           <Nav
             className="corporacion me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
@@ -31,8 +34,8 @@ function navbar() {
                 Todos
               </NavDropdown.Item>
             </NavDropdown>
-           
           </Nav>
+            {/* ------------------------------------------------------------------------------------------------------------ */}
           <Form className="buscar d-flex">
             <Form.Control
               type="search"
@@ -42,9 +45,29 @@ function navbar() {
             />
             <Button className='buscar' type='submit' variant="outline-success">Buscar</Button>
           </Form>
+    {/* ------------------------------------------------------------------------------------------------------------ */}
           <div className='historial'>
-          <Nav.Link className='historialLetra' href="/Historial">Historial</Nav.Link>
+          <Nav
+            className="corporacion me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <NavDropdown title="Historial" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action3"></NavDropdown.Item>
+              <NavDropdown.Item href="#action4">
+              
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action4">
+              
+              </NavDropdown.Item>
+            
+              <NavDropdown.Item href="#action5">
+                
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
            </div>
+             {/* ------------------------------------------------------------------------------------------------------------ */}
            <div className='favoritos'>
            <Nav.Link className='favoritosLetra'
            href="/Favoritos">Favoritos</Nav.Link>
@@ -53,6 +76,7 @@ function navbar() {
            <Nav.Link className='citasLetra'
            href="/CitasAgendadasUser">Citas agendadas</Nav.Link>
            </div>
+             {/* ------------------------------------------------------------------------------------------------------------ */}
            <div className='iniciar'>
            <Nav.Link className='iniciarLetra'
            id='cerraresion'

@@ -3,18 +3,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
-import * as formik from "formik";
-import * as yup from "yup";
+import Buttoon from "../components/ButtoonEstado";
+import Servicios from "../components/TipoDeServicio.jsx"
 import Navbar from "../components/NavbarCrear";
 
 function FormExample() {
-  const { Formik } = formik;
-
-  const schema = yup.object().shape({
-    Nombre: yup.string().required(),
-    Numero: yup.string().required(),
-    file: yup.mixed().required(),
-  });
+ 
 
   return (
     <div>
@@ -23,17 +17,9 @@ function FormExample() {
       </header>
       <body>
         <div className="RegistrarDatos">
-          <Formik
-            validationSchema={schema}
-            onSubmit={console.log}
-            initialValues={{
-              Nombre: "",
-              Numero: "",
-              file: null,
-            }}
-          >
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
-              <Form noValidate onSubmit={handleSubmit}>
+       
+          
+              <Form noValidate >
                 <Row>
                   <Form.Group className="mb-3" controlId="formEmail">
                     <Form.Label>Ingrese correo</Form.Label>
@@ -64,10 +50,10 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik101"
+                    controlId=""
                     className="formNombre"
                   >
-                    <InputGroup hasValidation>
+                    <InputGroup >
                       <InputGroup.Text id="inputGroupPrepend">
                         Entre calle
                       </InputGroup.Text>
@@ -85,7 +71,7 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik102"
+                    
                     className="position-relative"
                   ></Form.Group>
 
@@ -95,7 +81,7 @@ function FormExample() {
                     md="4"
                     controlId="ValidacionUser"
                   >
-                    <InputGroup hasValidation>
+                    <InputGroup>
                       <InputGroup.Text id="inputGroupPrepend">
                         Entre calle
                       </InputGroup.Text>
@@ -122,10 +108,10 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik101"
+                    controlId=""
                     className="formNombre"
                   >
-                    <InputGroup hasValidation>
+                    <InputGroup >
                       <InputGroup.Text id="inputGroupPrepend">
                         Entre calle
                       </InputGroup.Text>
@@ -143,7 +129,7 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik102"
+                    controlId=""
                     className="position-relative"
                   ></Form.Group>
 
@@ -153,7 +139,7 @@ function FormExample() {
                     md="4"
                     controlId="ValidacionUser"
                   >
-                    <InputGroup hasValidation>
+                    <InputGroup >
                       <InputGroup.Text id="inputGroupPrepend">
                         Entre calle
                       </InputGroup.Text>
@@ -172,10 +158,10 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik101"
+                    controlId=""
                     className="formNombre"
                   >
-                    <InputGroup hasValidation>
+                    <InputGroup>
                       <InputGroup.Text id="inputGroupPrepend">
                         Nombre
                       </InputGroup.Text>
@@ -185,12 +171,11 @@ function FormExample() {
                         className="cuadroTextNombre"
                         aria-describedby="inputGroupPrepend"
                         name="username"
-                        value={values.Nombre}
-                        onChange={handleChange}
-                        isValid={touched.Nombre && !errors.Nombre}
+                        
+                      
                       />
                       <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.Nombre}
+                   
                       </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
@@ -199,7 +184,7 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="4"
-                    controlId="validationFormik102"
+                    controlId=""
                     className="position-relative"
                   >
                     <Form.Control.Feedback tooltip>bien</Form.Control.Feedback>
@@ -212,7 +197,7 @@ function FormExample() {
                     controlId="ValidacionUser"
                   >
                     {/* <Form.Label className='letrasUsuario'>Usuario nuevo</Form.Label> */}
-                    <InputGroup hasValidation>
+                    <InputGroup>
                       <InputGroup.Text id="inputGroupPrepend">
                         Num.
                       </InputGroup.Text>
@@ -222,12 +207,10 @@ function FormExample() {
                         className="cuadroTextUsuario"
                         aria-describedby="inputGroupPrepend"
                         name="Numero"
-                        value={values.Numero}
-                        onChange={handleChange}
-                        isInvalid={!!errors.Numero}
+                     
                       />
                       <Form.Control.Feedback type="invalid" tooltip>
-                        {errors.Numero}
+                    
                       </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
@@ -236,41 +219,113 @@ function FormExample() {
                   <Form.Group
                     as={Col}
                     md="6"
-                    controlId="validationFormik103"
+                    controlId=""
                     className="position-relative"
                   ></Form.Group>
                   <Form.Group
                     as={Col}
                     md="3"
-                    controlId="validationFormik104"
+                    controlId=""
                     className="position-relative"
                   ></Form.Group>
                   <Form.Group
                     as={Col}
                     md="3"
-                    controlId="validationFormik105"
+                    controlId=""
                     className="position-relative"
                   ></Form.Group>
                 </Row>
+
+                <Form.Group className="mb-3" controlId="">
+                    <Form.Label>Ingrese localidad</Form.Label>
+                    <Form.Control type="" placeholder="localidad" />
+                  </Form.Group>
+
+                <Buttoon></Buttoon>
+
+                <Form.Group className="mb-3" controlId="">
+                    <Form.Label>Ingrese Asentamiento</Form.Label>
+                    <Form.Control type="" placeholder="Asentamiento" />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Label>Ingrese Municipio</Form.Label>
+                    <Form.Control type="" placeholder="Municipio" />
+                  </Form.Group>
+                  
+                  <br />
+
+                  <Row className="formNombre">
+                  <Form.Group
+                    as={Col}
+                    md="4"
+                    controlId=""
+                    className="formNombre"
+                  >
+                    <InputGroup >
+                      <InputGroup.Text id="inputGroupPrepend">
+                        Numero exterior
+                      </InputGroup.Text>
+                      <Form.Control
+                        type="text"
+                        placeholder="Exterior"
+                        className="cuadroTextNombre"
+                        aria-describedby="inputGroupPrepend"
+                        name="Calle"
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Form.Group
+                    as={Col}
+                    md="4"
+                    controlId=""
+                    className="position-relative"
+                  ></Form.Group>
+
+                  <Form.Group
+                    className="formUsuario"
+                    as={Col}
+                    md="4"
+                    controlId="ValidacionUser"
+                  >
+                    <InputGroup >
+                      <InputGroup.Text id="inputGroupPrepend">
+                        Numero interior
+                      </InputGroup.Text>
+                      <Form.Control
+                        type="text"
+                        placeholder="Interior"
+                        className="cuadroTextUsuario"
+                        aria-describedby="inputGroupPrepend"
+                        name="Calle"
+                      />
+                    </InputGroup>
+                  </Form.Group>
+                </Row>
+
+                <br />
+
                 <Form.Group className="position-relative mb-3">
                   <Form.Label>Selecciona una imagen para tu logo</Form.Label>
                   <Form.Control
                     type="file"
-                    required
+                  
                     name="file"
-                    onChange={handleChange}
-                    isInvalid={!!errors.file}
+                   
                   />
                   <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                    {errors.file}
+                  <br />
+                  <Servicios></Servicios>
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button className="botonCrear" type="submit">
+                <Button className="botonCrear" type="submit" href='/PrincipalProv' >
                   Crear cuenta
                 </Button>
               </Form>
-            )}
-          </Formik>
+         
+        
         </div>
       </body>
       <footer></footer>
