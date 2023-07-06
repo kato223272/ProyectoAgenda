@@ -7,6 +7,11 @@ import Row from "react-bootstrap/Row";
 import Buttoon from "../components/ButtoonEstado";
 import Servicios from "../components/TipoDeServicio.jsx"
 import Navbar from "../components/NavbarCrear";
+import axios from 'axios';
+
+function registrarUsuario(){
+
+}
 
 function FormExample() {
   const [correo, setCorreo] = useState("");
@@ -14,7 +19,6 @@ function FormExample() {
   const [nombreLocal, setNombreLocal] = useState("");
   const [direccion, setDireccion] = useState([]); //Calle: , entre calle: , tipo calle: , etc
   const [usuario, setUsuario] = useState([]); //nombre: , num.telefono: , etc.
-
 
   return (
     <div>
