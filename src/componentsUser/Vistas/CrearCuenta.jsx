@@ -3,23 +3,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import * as formik from 'formik';
-import * as yup from 'yup';
+
 import '../css/CrearCuenta.css';
 import Navbar from '../Componentes/NavbarCrear'
 
 function FormExample() {
-  const { Formik } = formik;
-
-  const schema = yup.object().shape({
-    Nombre: yup.string().required(),
-    username: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    zip: yup.string().required(),
-    file: yup.mixed().required(),
-    terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
-  });
+ 
 
   return (
     <div>
@@ -31,21 +20,9 @@ function FormExample() {
    <body>
    <div className='RegistrarDatos'>
            
-           <Formik
-             validationSchema={schema}
-             onSubmit={console.log}
-             initialValues={{
-              Nombre: '',
-              username: '',
-               city: '',
-               state: '',
-               zip: '',
-               file: null,
-               terms: false,
-             }}
-           >
-             {({ handleSubmit, handleChange, values, touched, errors }) => (
-               <Form noValidate onSubmit={handleSubmit}>
+         
+             
+               <Form noValidate >
                <Row>
                      <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Ingrese correo</Form.Label>
@@ -76,12 +53,12 @@ function FormExample() {
                          className='cuadroTextNombre'
                          aria-describedby="inputGroupPrepend"
                          name="username"
-                         value={values.Nombre}
-                       onChange={handleChange}
-                       isValid={touched.Nombre && !errors.Nombre}
+                         value={''}
+                       onChange={''}
+                       isValid={''}
                        />
                        <Form.Control.Feedback type="invalid" tooltip>
-                         {errors.Nombre}
+                        
                        </Form.Control.Feedback>
                      </InputGroup>
                    </Form.Group>
@@ -106,12 +83,12 @@ function FormExample() {
                          className='cuadroTextUsuario'
                          aria-describedby="inputGroupPrepend"
                          name="username"
-                         value={values.username}
-                         onChange={handleChange}
-                         isInvalid={!!errors.username}
+                         value={''}
+                         onChange={''}
+                         isInvalid={''}
                        />
                        <Form.Control.Feedback type="invalid" tooltip>
-                         {errors.username}
+                        
                        </Form.Control.Feedback>
                      </InputGroup>
                    </Form.Group>
@@ -145,11 +122,11 @@ function FormExample() {
                      type="file"
                      required
                      name="file"
-                     onChange={handleChange}
-                     isInvalid={!!errors.file}
+                     onChange={''}
+                     isInvalid={''}
                    />
                    <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                     {errors.file}
+                    
                    </Form.Control.Feedback>
                  </Form.Group>
                  {/* <Form.Group className="position-relative mb-3">
@@ -167,8 +144,8 @@ function FormExample() {
                  </Form.Group> */}
                  <Button className='botonCrear' type="submit">Crear cuenta</Button>
                </Form>
-             )}
-           </Formik>
+            
+          
            </div>
           
    </body>
