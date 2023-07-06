@@ -53,9 +53,7 @@ function FormExample() {
                          className='cuadroTextNombre'
                          aria-describedby="inputGroupPrepend"
                          name="username"
-                         value={''}
-                       onChange={''}
-                       isValid={''}
+                       
                        />
                        <Form.Control.Feedback type="invalid" tooltip>
                         
@@ -83,9 +81,7 @@ function FormExample() {
                          className='cuadroTextUsuario'
                          aria-describedby="inputGroupPrepend"
                          name="username"
-                         value={''}
-                         onChange={''}
-                         isInvalid={''}
+                        
                        />
                        <Form.Control.Feedback type="invalid" tooltip>
                         
@@ -122,8 +118,7 @@ function FormExample() {
                      type="file"
                      required
                      name="file"
-                     onChange={''}
-                     isInvalid={''}
+                    
                    />
                    <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                     
