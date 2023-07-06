@@ -9,17 +9,7 @@ import '../css/CrearCuenta.css';
 import Navbar from '../Componentes/NavbarCrear'
 
 function FormExample() {
-  const { Formik } = formik;
-
-  const schema = yup.object().shape({
-    Nombre: yup.string().required(),
-    username: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    zip: yup.string().required(),
-    file: yup.mixed().required(),
-    terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
-  });
+ 
 
   return (
     <div>
