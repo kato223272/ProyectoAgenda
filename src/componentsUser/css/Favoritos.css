@@ -1,0 +1,12 @@
+.cardDiv{
+    /* margin: 0% auto; */
+    
+    /* margin-right: 30%; */
+    /* width: 20%; */
+}
+.botonAgendar{
+ /* margin-right: 10%; */
+  margin-left: 20%;
+  background: rgb(89,59,177);
+  background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgb(176, 145, 246) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
+}
