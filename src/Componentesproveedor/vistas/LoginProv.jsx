@@ -31,10 +31,6 @@ function BasicExample() {
               value={pass}
               onChange={ev => setPass(ev.target.value)} />
       </Form.Group>
-      
-
-      <Button className='botonInicio' variant="primary" type="submit" href='/PrincipalProv' />
-
       <Button className='botonInicio' variant="primary" type="button"
         onClick={ev => validarInicio(mail, pass, navigate)}>
         Iniciar sesión
