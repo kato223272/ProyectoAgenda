@@ -7,11 +7,14 @@ import Navbar from '../Componentes/NavInicio'
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+
 
 function BasicExample() {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
+  
   return (
 
    <div >
@@ -24,34 +27,48 @@ function BasicExample() {
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Ingresa tu correo ó usuario</Form.Label>
-        <Form.Control className='email' type="email" placeholder="correo/usuario" />
+        <Form.Control 
+          className='email' 
+          type="email" 
+          placeholder="correo/usuario"
+          value={mail}
+          onChange={ev => setMail(ev.target.value)} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Contraseña</Form.Label>
-        <Form.Control className='password' type="password" placeholder="contraseña" />
+        <Form.Control 
+          className='password' 
+          type="password" 
+          placeholder="contraseña"
+          value={pass}
+          onChange={ev => setPass(ev.target.value)} />
       </Form.Group>
       
-      <Button href='/PrincipalUser' className='botonInicio' variant="primary" type="submit">
+      <Button 
+        className='botonInicio' 
+        variant="primary" 
+        type="button"
+        onClick={ev => validarInicio(mail, pass, navigate)}>
         Iniciar sesión
       </Button>
       <br /><br /><br /><br />
       <div>
         <Row>
-            <Col>
+          <Col>
             <h6 className='letraNoCuenta'>¿No tienes una cuenta? registrate</h6> 
-            </Col>
-            <Col>
-            <Button href='/CrearCuentaUser' className='registrarse' variant="primary" type="submit"> Registrarse</Button>
-            </Col>
+          </Col>
+          <Col>
+            <Button href='/CrearCuentaUser' className='registrarse' variant="primary" type="button">Registrarse</Button>
+          </Col>
         </Row>
         <br />
         <Row>
-            <Col>
+          <Col>
             <h6 className='letraProv'>¿Desea ingresar como proveedor?</h6> 
-            </Col>
-            <Col>
-            <Button href='/loginProv' className='iniciaProve' variant="primary" type="submit"> Iniciar sesion</Button>
-            </Col>
+          </Col>
+          <Col>
+            <Button href='/loginProv' className='iniciaProve' variant="primary" type="button">Iniciar sesion</Button>
+          </Col>
         </Row>
     </div>
       
@@ -67,53 +84,82 @@ function BasicExample() {
   );
 }
 
-function validarInicio(mail, pass, navigate){
+async function validarInicio(mail, pass, navigate){
   if(mail.trim("") && pass.trim("")){
     if(mail.includes("@")){
       if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)){
-        Swal.fire({
-          icon:'success',
-          title:'Todo correcto',
-          text:'Su registro ha sido un éxito.',
-          showConfirmButton:true,
-          confirmButtonText:'Salir'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
+        try {
+          const response = await axios.post('https://localhost:44310/api/Usuarios/VerificarLogin?correo='+mail+'&contraseña='+pass);
+          if (response.status === 200) {
+            Swal.fire({
+              icon:'success',
+              title:'Todo correcto',
+              text:'Iniciando sesión...',
+              showConfirmButton:true,
+              confirmButtonText:'Entrar'
+          }).then(
+              function (result){
+                  if(result.isConfirmed){
+                      navigate('/PrincipalUser');
+                  }
               }
-          }
-        )
+            );
+          } 
+        } catch (error) {
+          Swal.fire({
+            icon:'error',
+            title:'Usuario no encontrado',
+            text:'Asegúrese de escribir correctamente su usuario y contraseña.',
+            showConfirmButton:false,
+            showDenyButton:true,
+            denyButtonText:'Volver a intentarlo'
+          });
+        }
       }
     }
+    
     else if(!(/\d/.test(mail))){
-      Swal.fire({
-        icon:'success',
-        title:'Todo correcto',
-        text:'Su registro ha sido un éxito.',
-        showConfirmButton:true,
-        confirmButtonText:'Salir'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
-              }
-          }
-        )
+      try {
+        const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?correo='+mail+'&contraseña='+pass);
+        if (response.status === 200) {
+          Swal.fire({
+            icon:'success',
+            title:'Todo correcto',
+            text:'Iniciando sesión...',
+            showConfirmButton:true,
+            confirmButtonText:'Entrar'
+        }).then(
+            function (result){
+                if(result.isConfirmed){
+                    navigate('/PrincipalUser');
+                }
+            }
+          );
+        } 
+      } catch (error) {
+        Swal.fire({
+          icon:'error',
+          title:'Usuario no encontrado',
+          text:'Asegúrese de escribir correctamente su usuario y contraseña.',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
     }
 
     else if(/\d/.test(mail)){
       Swal.fire({
         icon:'error',
         title:'Nombre imposible',
-        text:'Se detecto nombres en su nombre, intente de nuevo',
+        text:'Se detecto numeros en su nombre, intente de nuevo',
         showConfirmButton:false,
         showDenyButton:true,
         denyButtonText:'Volver a intentarlo'
-      })
+      });
     }
+  
   }
-
   else{
     Swal.fire({
       icon:'info',
