@@ -27,8 +27,6 @@ function FormExample() {
       </header>
       <body>
         <div className="RegistrarDatos">
-       
-          
               <Form noValidate >
                 <Row>
                   <Form.Group className="mb-3" controlId="formEmail">
