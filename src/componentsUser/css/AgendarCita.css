@@ -1,0 +1,26 @@
+.letraServicios{
+    margin-left: 45%;
+}
+.colorServicios{
+    background-color: rgb(190, 156, 221);
+}
+.ServiciosDiv{
+    background: rgb(89,59,177);
+    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
+}
+.ServiciosDivBlan{
+    background-color: white;
+}
+.ServiciosDiv{
+    background: rgb(89,59,177);
+    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
+}
+.radioButton{
+    margin-left: -65%;
+}
+.fondoButton{
+    margin-left: 20%;
+}
+.AgendarBoton{
+    margin-left: 40%;
+}
