@@ -16,6 +16,7 @@ function registrarUsuario(){
 function FormExample() {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
+  const [altPass, setAltPass] = useState("")
   const [nombreLocal, setNombreLocal] = useState("");
   const [direccion, setDireccion] = useState([]); //Calle: , entre calle: , tipo calle: , etc
   const [usuario, setUsuario] = useState([]); //nombre: , num.telefono: , etc.
@@ -31,32 +32,54 @@ function FormExample() {
                 <Row>
                   <Form.Group className="mb-3" controlId="formEmail">
                     <Form.Label>Ingrese correo</Form.Label>
-                    <Form.Control type="email" placeholder="Ingresar correo" />
+                    <Form.Control type="email" placeholder="Ingresar correo"
+                    value={correo}
+                    onChange={ev => setCorreo(ev.target.value)} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formContraseña">
                     <Form.Label>Ingrese contraseña nueva</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña" />
+                    <Form.Control type="password" placeholder="Contraseña"
+                    value={password}
+                    onChange={ev => setPassword(ev.target.value)} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formContraseña">
                     <Form.Label>Ingrese la contraseña de nuevo</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña" />
+                    <Form.Control type="password" placeholder="Contraseña"
+                    value={altPass}
+                    onChange={ev => setAltPass(ev.target.value)} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formNombreLugar">
                     <Form.Label>Ingrese nombre del lugar</Form.Label>
-                    <Form.Control type="email" placeholder="Nombre del lugar" />
+                    <Form.Control type="email" placeholder="Nombre del lugar"
+                    value={nombreLocal}
+                    onChange={ev => setNombreLocal(ev.target.value)} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formDireccion">
                     <Form.Label>Ingrese Dirección</Form.Label>
-                    <Form.Control type="email" placeholder="Dirección" />
+                    <Form.Control type="email" placeholder="Dirección"
+                    value={direccion.DireccionLugar} 
+                    onChange={ev => setDireccion((prevState) => {
+                      return([
+                        ...prevState,
+                        direccion.DireccionLugar = ev.target.value
+                      ])
+                    })}/>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formCalle">
                     <Form.Label>Ingrese calle</Form.Label>
-                    <Form.Control type="email" placeholder="Calle" />
+                    <Form.Control type="email" placeholder="Calle"
+                    value={direccion.Calle} 
+                    onChange={ev => setDireccion((prevState) => {
+                      return([
+                        ...prevState,
+                        direccion.Calle = ev.target.value
+                      ])
+                    })} />
                   </Form.Group>
                 </Row>
                 <Row className="formNombre">
                   <Form.Group
-                    as={Col}
+                    as={Col} //FALTA TIPO DE CALLE
                     md="4"
                     controlId=""
                     className="formNombre"
@@ -71,6 +94,7 @@ function FormExample() {
                         className="cuadroTextNombre"
                         aria-describedby="inputGroupPrepend"
                         name="Calle"
+                        value={direccion.Entre_Calle1}
                       />
                     </InputGroup>
                   </Form.Group>
