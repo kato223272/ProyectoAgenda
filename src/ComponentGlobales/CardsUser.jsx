@@ -38,7 +38,7 @@ function TextExample() {
                   <Card.Text>Biografia</Card.Text>
                   <Card.Text>Estado</Card.Text>
                   <Card.Text>+52 9611234567</Card.Text>
-                  <Button className="agendar" type="submit">
+                  <Button className="agendar" type="submit" href="/AgendarCita">
                     Agendar
                   </Button>
                   <Button className="favoritosb" onClick=''>Agregar a favoritos</Button>

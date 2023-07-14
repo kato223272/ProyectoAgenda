@@ -4,10 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function Inicio() {
   return (
     <form action="">
+      <header>
         <Navbar></Navbar>
-   
-        <br />
-    
+      </header>
+    <body>
+    <br />
+    </body>
+     <footer>
+        
+     </footer>
     </form>
   );
 }
