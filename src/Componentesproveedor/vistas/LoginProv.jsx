@@ -7,6 +7,8 @@ import Navbar from '../components/NavbarProv';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
+
 function BasicExample() {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
@@ -29,7 +31,6 @@ function BasicExample() {
               value={pass}
               onChange={ev => setPass(ev.target.value)} />
       </Form.Group>
-      
       <Button className='botonInicio' variant="primary" type="button"
         onClick={ev => validarInicio(mail, pass, navigate)}>
         Iniciar sesión
@@ -57,23 +58,37 @@ function BasicExample() {
   );
 }
 
-function validarInicio(mail, pass, navigate){
+async function validarInicio(mail, pass, navigate){
   if(mail.trim("") && pass.trim("")){
     if(mail.includes("@")){
       if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)){
-        Swal.fire({
-          icon:'success',
-          title:'Todo correcto',
-          text:'Iniciando sesión...',
-          showConfirmButton:true,
-          confirmButtonText:'Entrar'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
+        try {
+          const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?correo='+mail+'&contraseña='+pass);
+          if (response.status === 200) {
+            Swal.fire({
+              icon:'success',
+              title:'Todo correcto',
+              text:'Iniciando sesión...',
+              showConfirmButton:true,
+              confirmButtonText:'Entrar'
+          }).then(
+              function (result){
+                  if(result.isConfirmed){
+                      navigate('/PrincipalUser');
+                  }
               }
-          }
-        )
+            );
+          } 
+        } catch (error) {
+          Swal.fire({
+            icon:'error',
+            title:'Contraseña incorrecta',
+            text:'Asegúrese de escribir correctamente su contraseña.',
+            showConfirmButton:false,
+            showDenyButton:true,
+            denyButtonText:'Volver a intentarlo'
+          });
+        }
       }
       else{
         Swal.fire({
@@ -86,20 +101,35 @@ function validarInicio(mail, pass, navigate){
         })
       }
     }
+    
     else if(!(/\d/.test(mail))){
-      Swal.fire({
-        icon:'success',
-        title:'Todo correcto',
-        text:'Iniciando sesión...',
-        showConfirmButton:true,
-        confirmButtonText:'Entrar'
-      }).then(
-          function (result){
-              if(result.isConfirmed){
-                  navigate('/PrincipalUser');
-              }
-          }
-        )
+      try {
+        const response = await axios.post('https://localhost:44310/api/Empresas/VerificarLogin?correo='+mail+'&contraseña='+pass);
+        if (response.status === 200) {
+          Swal.fire({
+            icon:'success',
+            title:'Todo correcto',
+            text:'Iniciando sesión...',
+            showConfirmButton:true,
+            confirmButtonText:'Entrar'
+        }).then(
+            function (result){
+                if(result.isConfirmed){
+                    navigate('/PrincipalUser');
+                }
+            }
+          );
+        } 
+      } catch (error) {
+        Swal.fire({
+          icon:'error',
+          title:'Contraseña incorrecta',
+          text:'Asegúrese de escribir correctamente su contraseña.',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
     }
 
     else if(/\d/.test(mail)){
@@ -112,8 +142,8 @@ function validarInicio(mail, pass, navigate){
         denyButtonText:'Volver a intentarlo'
       })
     }
+  
   }
-
   else{
     Swal.fire({
       icon:'info',
