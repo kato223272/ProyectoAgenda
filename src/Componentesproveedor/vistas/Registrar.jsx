@@ -6,7 +6,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Buttoon from "../components/ButtoonEstado";
 import Servicios from "../components/TipoDeServicio.jsx"
-import Navbar from "../components/NavbarCrear";
 import axios from 'axios';
 
 function registrarUsuario(){
@@ -23,9 +22,7 @@ function FormExample() {
 
   return (
     <div>
-      <header>
-        <Navbar></Navbar>
-      </header>
+    
       <body>
         <div className="RegistrarDatos">
               <Form noValidate >

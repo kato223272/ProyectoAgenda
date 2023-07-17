@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { AiOutlineUser, AiOutlineLock, AiOutlineArrowRight } from 'react-icons/ai';
 import { FaUserPlus } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router';
 import '../css/login.css';
 import axios from 'axios';
 
 async function validarInicio(mail, pass, navigate) {
-  if (mail.trim("") && pass.trim("")) {
-    if (mail.includes("@")) {
+  if (mail.trim() !== '' && pass.trim() !== '') {
+    if (mail.includes('@')) {
       if (/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)) {
         try {
           const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?correo=' + mail + '&contraseña=' + pass);
@@ -38,9 +38,17 @@ async function validarInicio(mail, pass, navigate) {
             denyButtonText: 'Volver a intentarlo'
           });
         }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Correo inválido',
+          text: 'Ingrese un correo electrónico válido.',
+          showConfirmButton: false,
+          showDenyButton: true,
+          denyButtonText: 'Volver a intentarlo'
+        });
       }
-    }
-    else if (!(/\d/.test(mail))) {
+    } else {
       try {
         const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?correo=' + mail + '&contraseña=' + pass);
         if (response.status === 200) {
@@ -69,27 +77,14 @@ async function validarInicio(mail, pass, navigate) {
         });
       }
     }
-
-    else if (/\d/.test(mail)) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Nombre imposible',
-        text: 'Se detecto numeros en su nombre, intente de nuevo',
-        showConfirmButton: false,
-        showDenyButton: true,
-        denyButtonText: 'Volver a intentarlo'
-      });
-    }
-
-  }
-  else {
+  } else {
     Swal.fire({
       icon: 'info',
       title: 'Espacios vacíos',
       text: 'Rellene los campos de ingreso',
       showConfirmButton: true,
       confirmButtonText: 'Volver a intentarlo'
-    })
+    });
   }
 }
 
@@ -131,7 +126,7 @@ function BasicExample() {
             </Form.Group>
           </div>
 
-          <Button className="botonInicio" variant="primary" type="submit" onClick={ev => validarInicio(mail, pass, navigate)}>
+          <Button className="botonInicio" variant="primary" type="button" onClick={() => validarInicio(mail, pass, navigate)}>
             Iniciar sesión <AiOutlineArrowRight className="button-icon" />
           </Button>
 
@@ -139,16 +134,16 @@ function BasicExample() {
 
           <div className="register-section">
             <h6 className="letraNoCuenta">¿No tienes una cuenta? Regístrate</h6>
-            <Button href="/CrearCuentaUser" className="registrarse" variant="primary" type="submit">
+            <Link to="/CrearCuentaUser" className="registrarse">
               <FaUserPlus className="button-icon" /> Registrarse
-            </Button>
+            </Link>
           </div>
 
           <div className="provider-section">
             <h6 className="letraProv">¿Deseas ingresar como proveedor?</h6>
-            <Button href="/loginProv" className="iniciaProve" variant="primary" type="submit">
+            <Link to="/loginProv" className="iniciaProve">
               Iniciar sesión <AiOutlineArrowRight className="button-icon" />
-            </Button>
+            </Link>
           </div>
         </Form>
       </div>

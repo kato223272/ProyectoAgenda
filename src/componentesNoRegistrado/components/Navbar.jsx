@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown, FormControl, Button } from 'react-bootstrap';
 import { AiOutlineSearch } from 'react-icons/ai'; // Importa el icono de lupa
-import { FaUser, FaHeart, FaCalendarAlt, FaSignOutAlt, FaHome } from 'react-icons/fa'; // Importa iconos de Font Awesome
+import { FaUser, FaHeart, FaCalendarAlt, FaHome, FaClipboardList, FaHistory } from 'react-icons/fa'; // Importa iconos de Font Awesome
 import '../../componentsUser/css/Navbar.css';
 
 function NavbarComponent() {
@@ -16,14 +16,14 @@ function NavbarComponent() {
 
         <Navbar.Collapse id="navbarScroll">
           <Nav className="menuIzquierda me-auto my-2 my-lg-0" navbarScroll>
-            <NavDropdown title="Corporación" id="navbarScrollingDropdown">
+            <NavDropdown title={<><FaClipboardList /> Corporación</>} id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Psicología</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Estética</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Barbería</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Historial" id="navbarScrollingDropdown">
+            <NavDropdown title={<><FaHistory /> Historial</>} id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Elemento 1</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Elemento 2</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Elemento 3</NavDropdown.Item>
