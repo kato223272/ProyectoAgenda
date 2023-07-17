@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from '../../ComponentGlobales/carousel';
 import Card from '../../ComponentGlobales/CardsUser';
 import '../css/Principal.css';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 function Inicio() {
   const [showCarousel, setShowCarousel] = useState(false);
@@ -44,6 +45,7 @@ function Inicio() {
       <div id="card" className={`appear-fade-right ${showCard ? 'visible' : ''}`}>
         <Card />
       </div>
+      <Footer></Footer>
     </form>
   );
 }

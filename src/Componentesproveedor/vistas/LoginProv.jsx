@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../css/LoginProv.css';
-import Navbar from '../components/NavbarProv';
+
 import Swal from 'sweetalert2';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -15,7 +15,7 @@ function BasicExample() {
   const [pass, setPass] = useState("");
   return (
     <div>
-      <header><Navbar></Navbar></header>
+    
        <body>
        <div className='login'>
     <Form >

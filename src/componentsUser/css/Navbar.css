@@ -120,3 +120,36 @@
 .navUser .inicioUser:hover {
   color: #66b3ff;
 }
+/* Estilos para dispositivos grandes */
+.navUser .container {
+  padding: 20px 40px;
+}
+
+/* Estilos para dispositivos medianos */
+@media (max-width: 992px) {
+  .navUser .container {
+    padding: 20px;
+  }
+}
+
+/* Estilos para dispositivos pequeños */
+@media (max-width: 768px) {
+  .navUser .container {
+    padding: 15px;
+  }
+  .navbar-toggler {
+    margin-right: 15px;
+  }
+  .navbar-toggler-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .navUser .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navUser .navbar-nav .nav-link {
+    margin: 5px 0;
+  }
+}
+

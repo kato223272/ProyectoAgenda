@@ -1,30 +1,29 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown, FormControl, Button } from 'react-bootstrap';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { FaUser, FaHeart, FaCalendarAlt, FaHome } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom'; // Importa NavLink para el efecto de navegación activa
-import '../css/Navbar.css';
+import { AiOutlineSearch } from 'react-icons/ai'; // Importa el icono de lupa
+import { FaUser, FaHeart, FaCalendarAlt, FaHome, FaClipboardList, FaHistory } from 'react-icons/fa'; // Importa iconos de Font Awesome
+import '../../componentsUser/css/Navbar.css';
 
 function NavbarComponent() {
   return (
-    <Navbar bg="dark" expand="lg" variant="dark" className="navUser">
+    <Navbar bg="primary" expand="lg" className="navUser">
       <Container fluid>
-        <Navbar.Brand as={NavLink} to="/PrincipalUser" className="inicioUser">
+        <Navbar.Brand className="inicioUser" href="/">
           <FaHome className="casaIcon" /> Inicio
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
 
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <NavDropdown title="Corporación" id="navbarScrollingDropdown">
+          <Nav className="menuIzquierda me-auto my-2 my-lg-0" navbarScroll>
+            <NavDropdown title={<><FaClipboardList /> Corporación</>} id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Psicología</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Estética</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Barbería</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Historial" id="navbarScrollingDropdown">
+            <NavDropdown title={<><FaHistory /> Historial</>} id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Elemento 1</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Elemento 2</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Elemento 3</NavDropdown.Item>
@@ -47,17 +46,17 @@ function NavbarComponent() {
           </div>
 
           <Nav className="corporacion me-auto my-2 my-lg-0" navbarScroll>
-            <NavLink to="/Favoritos" className="navLinkItem" activeClassName="activeNavLink">
+            <Nav.Link className="navLinkItem" href="/loginUser">
               <FaHeart /> <span className="icon-text-separator">Favoritos</span>
-            </NavLink>
-            <NavLink to="/CitasAgendadasUser" className="navLinkItem" activeClassName="activeNavLink">
+            </Nav.Link>
+            <Nav.Link className="navLinkItem" href="/loginUser">
               <FaCalendarAlt /> <span className="icon-text-separator">Citas agendadas</span>
-            </NavLink>
+            </Nav.Link>
           </Nav>
 
           <div className="navLinkSection">
-            <Nav.Link className="navLinkItem" id="cerraresion" href="/">
-              <FaUser /> <span className="icon-text-separator">Cerrar sesión</span>
+            <Nav.Link className="navLinkItem" id="IniciarSesion" href="/loginUser">
+              <FaUser /> <span href="/loginUser" className="icon-text-separator">Iniciar sesión</span>
             </Nav.Link>
           </div>
         </Navbar.Collapse>
@@ -67,3 +66,4 @@ function NavbarComponent() {
 }
 
 export default NavbarComponent;
+
