@@ -5,10 +5,10 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import '../css/CrearCuenta.css';
-import Navbar from '../Componentes/NavbarCrear';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+
 
 function FormExample() {
   const navegar = useNavigate();
@@ -22,7 +22,7 @@ function FormExample() {
     <div>
         <header>
         <div>
-     <Navbar></Navbar>
+
      </div>
         </header>
    <body>
