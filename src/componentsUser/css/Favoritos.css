@@ -1,12 +1,17 @@
-.cardDiv{
-    /* margin: 0% auto; */
-    
-    /* margin-right: 30%; */
-    /* width: 20%; */
+/* Favoritos.css */
+
+/* Estilos para el botón */
+.botonAgendar {
+  background-color: #007bff; /* Color azul */
+  border-color: #007bff;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
 }
-.botonAgendar{
- /* margin-right: 10%; */
-  margin-left: 20%;
-  background: rgb(89,59,177);
-  background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgb(176, 145, 246) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
+
+.botonAgendar:hover {
+  background-color: #0056b3; /* Color azul oscuro al pasar el mouse por encima */
+  transform: scale(1.1); /* Efecto de agrandar al pasar el mouse por encima */
 }

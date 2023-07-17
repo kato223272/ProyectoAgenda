@@ -1,72 +1,75 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import '../css/login.css';
-import Navbar from '../Componentes/NavInicio'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import { AiOutlineUser, AiOutlineLock, AiOutlineArrowRight } from 'react-icons/ai';
+import { FaUserPlus } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
+import '../css/login.css';
 
 function BasicExample() {
   const navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
+
+
+ 
   return (
+    <div className="login-container">
+      <div className="login-content">
+        <h1 className="login-title text-center">Iniciar Sesión</h1>
+        <Form className="login-form">
+          <div className="input-container">
+            <AiOutlineUser className="input-icon" />
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label className="input-label text-center">Ingresa tu correo o usuario</Form.Label>
+              <Form.Control
+                 className='email' 
+                 type="email" 
+                 placeholder="correo/usuario"
+                 value={mail}
+                 onChange={ev => setMail(ev.target.value)} 
+              />
+            </Form.Group>
+          </div>
 
-   <div >
-      <header>
-      <Navbar></Navbar>
-      </header>
-      <body>
+          <div className="input-container">
+            <AiOutlineLock className="input-icon" />
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label className="input-label text-center">Contraseña</Form.Label>
+              <Form.Control
+               className='password' 
+               type="password" 
+               placeholder="contraseña"
+               value={pass}
+               onChange={ev => setPass(ev.target.value)} 
+              />
+            </Form.Group>
+          </div>
 
-    <Form  className='login'>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Ingresa tu correo ó usuario</Form.Label>
-        <Form.Control className='email' type="email" placeholder="correo/usuario" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control className='password' type="password" placeholder="contraseña" />
-      </Form.Group>
-      
-      <Button href='/PrincipalUser' className='botonInicio' variant="primary" type="submit">
-        Iniciar sesión
+          <Button className="botonInicio" variant="primary" type="submit" onClick={ev => validarInicio(mail, pass, navigate)}>
+        Iniciar sesión <AiOutlineArrowRight className="button-icon" />
       </Button>
-      <br /><br /><br /><br />
-      <div>
-        <Row>
-            <Col>
-            <h6 className='letraNoCuenta'>¿No tienes una cuenta? registrate</h6> 
-            </Col>
-            <Col>
-            <Button href='/CrearCuentaUser' className='registrarse' variant="primary" type="submit"> Registrarse</Button>
-            </Col>
-        </Row>
-        <br />
-        <Row>
-            <Col>
-            <h6 className='letraProv'>¿Desea ingresar como proveedor?</h6> 
-            </Col>
-            <Col>
-            <Button href='/loginProv' className='iniciaProve' variant="primary" type="submit"> Iniciar sesion</Button>
-            </Col>
-        </Row>
-    </div>
-      
-    </Form>
-    
-      </body>
-   <footer>
-    
-   </footer>
 
-   </div>
-   
+      <div className="linea-separadora"></div> {/* Línea separadora */}
+          
+      <div className="register-section">
+        <h6 className="letraNoCuenta">¿No tienes una cuenta? Regístrate</h6>
+        <Button href="/CrearCuentaUser" className="registrarse" variant="primary" type="submit">
+          <FaUserPlus className="button-icon" /> Registrarse
+        </Button>
+      </div>
+
+      <div className="provider-section">
+        <h6 className="letraProv">¿Deseas ingresar como proveedor?</h6>
+        <Button href="/loginProv" className="iniciaProve" variant="primary" type="submit">
+          Iniciar sesión <AiOutlineArrowRight className="button-icon" />
+        </Button>
+      </div>
+        </Form>
+      </div>
+    </div>
   );
 }
-
 function validarInicio(mail, pass, navigate){
   if(mail.trim("") && pass.trim("")){
     if(mail.includes("@")){

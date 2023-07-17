@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
 import '../css/CrearCuenta.css';
-import Navbar from '../Componentes/NavbarCrear'
+
 
 function FormExample() {
  
@@ -14,7 +14,7 @@ function FormExample() {
     <div>
         <header>
         <div>
-     <Navbar></Navbar>
+
      </div>
         </header>
    <body>

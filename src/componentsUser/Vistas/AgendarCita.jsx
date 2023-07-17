@@ -1,4 +1,3 @@
-import Navbar from "../Componentes/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Servicio from "../../Componentesproveedor/components/Card.jsx";
 import Card from "react-bootstrap/Card";
@@ -9,6 +8,7 @@ import Container from "react-bootstrap/Container";
 import "../css/AgendarCita.css";
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
+
 function Inicio() {
   return (
     <form action="">

@@ -1,47 +1,82 @@
-.cardCompleta{
-    margin-right: 0%;
-    margin-left: 10%;
-    
-}
-.fondoCard{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(152,103,255,0.9529061624649859) 48%, rgba(82,12,152,0.9557072829131653) 74%);
-    margin-right: 5%;
-    margin-left: 12%;
-}
-.ImagenProvee{
-    width: 45%;
-    margin-left: 20%;
-}
-.NumTel{
-    margin-top: 60%;
-}
-
-.agendar{
-    background: rgb(128, 98, 250);
-   
+.fondoPrincipal {
+    background: linear-gradient(135deg, rgba(26, 63, 118, 0.1), rgba(26, 63, 118, 0.2));
+    padding: 50px 0;
+  }
+  
+  .fondoCard {
+    background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .ImagenProvee {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover; /* Ajustar la imagen de manera responsable */
+    border-radius: 10px;
+  }
+  
+  .nombreEmpresaa {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .especialidad {
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .contacto {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icono-telefono {
+    margin-right: 5px;
+  }
+  
+  .icono-estrella {
+    margin-right: 5px;
+  }
+  
+  .botones-separados {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .agendar,
+  .favoritosb {
     color: white;
     border: none;
-    border-radius: 10%;
-    font-size: 90%;
+    border-radius: 10px;
+    font-size: 16px;
     font-weight: bold;
-    position: relative;
-    z-index: 1;
     cursor: pointer;
-    overflow: hidden;
-}
-.favoritosb{
-    background: rgb(128, 98, 250);
-    width: 50%;
-    color: white;
-    border: none;
-    border-radius: 10%;
-    font-size: 90%;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    overflow: hidden;
-    margin-left: 4%;
+    padding: 10px 20px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .agendar:hover,
+  .favoritosb:hover {
+    background: #1a3f76;
+  }
+  .agendar,
+.favoritosb {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s ease, transform 0.3s ease; /* Agregamos la transición */
 }
 
+.agendar:hover,
+.favoritosb:hover {
+  background: #1a3f76;
+  transform: scale(1.05); /* Agrandar el botón al pasar el mouse */
+}

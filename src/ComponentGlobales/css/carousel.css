@@ -1,22 +1,30 @@
-#ImagenRosa{
-    width: 50%;
-    height: 2%;
-    margin-left: 25%;
-}
-.carouseel{
-    color: black;
-    /* background-color: powderblue; */
-    transition: background-color .5s;
-}
-.carouseel:hover{
-    color: black;
-    /* order: 5px solid rgba(104, 43, 43, 0.6); */
-}
-.carouseel:after{
-    color: black;
-}
-h3{
-    color: rgb(64,113,234);
-color: radial-gradient(circle, rgba(64,113,234,1) 22%, rgba(0,2,136,1) 43%);
-}
-
+.carousel-image-container {
+    position: relative;
+    height: 400px; /* Ajustar la altura según tus necesidades */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .carousel-image-container:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+ 
+  .imagen-carousel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .carousel-image-container:hover .imagen-carousel {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  

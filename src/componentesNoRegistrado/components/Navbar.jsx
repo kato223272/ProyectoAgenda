@@ -1,67 +1,68 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import './Navbar.css';
-function navbar() {
+import React from 'react';
+import { Navbar, Container, Nav, NavDropdown, FormControl, Button } from 'react-bootstrap';
+import { AiOutlineSearch } from 'react-icons/ai'; // Importa el icono de lupa
+import { FaUser, FaHeart, FaCalendarAlt, FaSignOutAlt, FaHome } from 'react-icons/fa'; // Importa iconos de Font Awesome
+import '../../componentsUser/css/Navbar.css';
+
+function NavbarComponent() {
   return (
-    <Navbar bg="light" expand="lg"className='nav' >
+    <Navbar bg="primary" expand="lg" className="navUser">
       <Container fluid>
+        <Navbar.Brand className="inicioUser" href="/">
+          <FaHome className="casaIcon" /> Inicio
+        </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
+
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="corporacion me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
+          <Nav className="menuIzquierda me-auto my-2 my-lg-0" navbarScroll>
             <NavDropdown title="Corporación" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Psicología</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-               Estetica
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-               Barber
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Estética</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Barbería</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Todos
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>
-           
+            <NavDropdown title="Historial" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action3">Elemento 1</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Elemento 2</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Elemento 3</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">Elemento 4</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
-          <Form className="buscar d-flex">
-            <Form.Control
+
+          <div className="buscarServicioWrapper">
+            <AiOutlineSearch className="lupaIcon" />
+            <FormControl
               type="search"
               placeholder="Buscar servicio"
-              className="buscarServicio me-2"
+              className="buscarServicio"
               aria-label="Search"
             />
-            <Button className='buscar' type='submit' variant="light">Buscar</Button>
-          </Form>
-          <div className='historial'>
-          <Nav.Link className='historialLetra' href="./loginUser">Historial</Nav.Link>
-           </div>
-           <div className='favoritos'>
-           <Nav.Link className='favoritosLetra'
-           href="./loginUser">Favoritos</Nav.Link>
-           </div>
-           <div className='citas'>
-           <Nav.Link className='citasLetra'
-           href="./loginUser">Citas agendadas</Nav.Link>
-           </div>
-           <div className='iniciar'>
-           <Nav.Link className='iniciarLetra'
-           id='iniciarSesion'
-           href="/loginUser">Iniciar sesión</Nav.Link>
-           </div>
+            <Button className="buscar" type="submit" variant="outline-light">
+              Buscar
+            </Button>
+          </div>
+
+          <Nav className="corporacion me-auto my-2 my-lg-0" navbarScroll>
+            <Nav.Link className="navLinkItem" href="/loginUser">
+              <FaHeart /> <span className="icon-text-separator">Favoritos</span>
+            </Nav.Link>
+            <Nav.Link className="navLinkItem" href="/loginUser">
+              <FaCalendarAlt /> <span className="icon-text-separator">Citas agendadas</span>
+            </Nav.Link>
+          </Nav>
+
+          <div className="navLinkSection">
+            <Nav.Link className="navLinkItem" id="IniciarSesion" href="/loginUser">
+              <FaUser /> <span href="/loginUser" className="icon-text-separator">Iniciar sesión</span>
+            </Nav.Link>
+          </div>
         </Navbar.Collapse>
-        
       </Container>
-      
     </Navbar>
   );
 }
 
-export default navbar;
+export default NavbarComponent;
