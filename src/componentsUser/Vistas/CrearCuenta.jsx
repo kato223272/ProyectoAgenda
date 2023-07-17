@@ -118,16 +118,6 @@ function FormExample() {
                    >
                    </Form.Group>
                  </Row>
-                 <Form.Group className="position-relative mb-3">
-                   <Form.Label>Selecciona una imagen para tu logo</Form.Label>
-                   <Form.Control
-                     type="file"
-                     name="file"
-                   />
-                   <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                    
-                   </Form.Control.Feedback>
-                 </Form.Group>
                  <Button className='botonCrear' type="button" 
                   onClick={() => {
                     const objeto = {
