@@ -18,10 +18,10 @@ function Inicio() {
       telefono: '1234567890',
       citaUrl: '/AgendarCitaEmpresa1',
     },
+   
     // Agregar más objetos con la información de las demás empresas
   ];
 
-  // Función para crear las cards dinámicamente
   const renderCards = () => {
     const cards = [];
 
@@ -31,9 +31,9 @@ function Inicio() {
       for (let j = i; j < i + 4 && j < datos.length; j++) {
         const empresa = datos[j];
         filaCards.push(
-          <Col key={j}>
-            <div className='cardDiv' style={{ padding: '5%', textAlign: 'center' }}>
-              <Card style={{ width: '25%' }}>
+          <Col key={j} sm={6} md={3}>
+            <div className='cardDiv'>
+              <Card>
                 <Card.Img variant="top" src={imgg} />
                 <Card.Body>
                   <Card.Title>{empresa.nombreEmpresa}</Card.Title>
@@ -65,7 +65,7 @@ function Inicio() {
 
   return (
     <form action="">
-      <div>{renderCards()}</div>
+      <div className="container-fluid">{renderCards()}</div>
     </form>
   );
 }

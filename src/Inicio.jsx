@@ -3,7 +3,7 @@ import Navbar from "./componentesNoRegistrado/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import { Element, animateScroll as scroll } from "react-scroll";
-import { FaRegSmileBeam, FaCompass } from "react-icons/fa"; // Importamos los íconos
+import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los íconos
 import Carousel from "./ComponentGlobales/carousel";
 import CardUser from "./ComponentGlobales/CardsUser";
 import TextInicio from "./ComponentGlobales/IniciaSesionText";
@@ -35,6 +35,18 @@ function Inicio() {
             transition={{ duration: 1 }}
           >
             <TextInicio />
+          </motion.div>
+          {/* Icono de flecha hacia abajo */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{
+              opacity: scrollPosition > 0 ? 0 : 1,
+              y: scrollPosition > 0 ? -20 : 0,
+            }}
+            transition={{ duration: 1 }}
+            className="arrow-icon-container"
+          >
+            <FaArrowDown className="arrow-icon" />
           </motion.div>
           {/* Separador "Bienvenido" */}
           <div className="separator">

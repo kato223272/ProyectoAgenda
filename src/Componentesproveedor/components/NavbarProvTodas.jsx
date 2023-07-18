@@ -1,45 +1,47 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import React from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { AiOutlineHome, AiOutlineUser, AiOutlineCalendar, AiOutlineLogout } from "react-icons/ai";
 import "../css/NavbarProvTodas.css";
 
-function navbar() {
+function NavbarProv() {
   return (
     <Navbar bg="light" expand="lg" className="navUser">
       <Container fluid>
         <Navbar.Toggle aria-controls="navbarScroll" />
 
         <Navbar.Collapse id="navbarScroll">
-        <Navbar.Brand className='inicioProv' href="/PrincipalProv">Inicio</Navbar.Brand>
-          {/* ------------------------------------------------------------------------------------------------------------ */}
-          <div className="editar">
-            <Nav.Link className="editarPerfil" href="">
+          <Nav className="me-auto" navbarScroll>
+            <Nav.Link href="/PrincipalProv">
+              <AiOutlineHome className="nav-icon" />
+              Inicio
+            </Nav.Link>
+
+            <Nav.Link href="">
+              <AiOutlineUser className="nav-icon" />
               Editar perfil
             </Nav.Link>
-          </div>
-          <div className="citas">
-            <Nav.Link className="citasLetra" href="">
-              Lista de pacientes
+
+            <Nav.Link href="">
+              <AiOutlineCalendar className="nav-icon" />
+              Lista de clientes
             </Nav.Link>
-          </div>
-          <div className="ingresos">
-            <Nav.Link className="IngresosLetra" href="">
+
+            <Nav.Link href="">
+              <AiOutlineCalendar className="nav-icon" />
               Ingresos generados
             </Nav.Link>
-          </div>
-          {/* ------------------------------------------------------------------------------------------------------------ */}
-          <div className="cerrar">
-            <Nav.Link className="cerrarLetra" id="cerrarSesion" href="/">
+          </Nav>
+
+          <Nav>
+            <Nav.Link href="/" className="cerrarLetra" id="cerrarSesion">
+              <AiOutlineLogout className="nav-icon" />
               Cerrar sesión
             </Nav.Link>
-          </div>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
 
-export default navbar;
+export default NavbarProv;
