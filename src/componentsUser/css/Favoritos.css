@@ -9,9 +9,46 @@
   color: #fff;
   padding: 8px 16px;
   font-size: 16px;
+  width: 100%; /* Ancho del botón al 100% del contenedor */
 }
 
 .botonAgendar:hover {
   background-color: #0056b3; /* Color azul oscuro al pasar el mouse por encima */
-  transform: scale(1.1); /* Efecto de agrandar al pasar el mouse por encima */
+  transform: scale(1.05); /* Efecto de agrandar al pasar el mouse por encima */
+}
+
+/* Estilos para las cards */
+.cardDiv {
+  padding: 1%;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  border-radius: 10px 10px 0 0;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Estilos para el contenedor de las filas */
+.container-fluid {
+  padding: 2%;
+}
+
+/* Estilos para las filas */
+.row {
+  margin-bottom: 2%;
 }

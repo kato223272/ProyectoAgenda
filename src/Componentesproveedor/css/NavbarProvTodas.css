@@ -1,28 +1,40 @@
-.inicioProv{
-    width: 15%;
-    
-    margin-left: 10%;
-}
-.navIni{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
-}
-.LetrasSuperiores{
-    margin-right: 45%;
-    width: 20%;
-}
-.editar{
-    width: 8%;
-    margin-left: 20%;
-}
-.citas{
-    width: 10%;
-    
-}
-.ingresos{
-    width: 12%;
-}
-
-.cerrar{
-    margin-left: 15%;
-}
+/* Estilos para el ícono en el navbar */
+.nav-icon {
+    margin-right: 5px;
+    font-size: 20px;
+  }
+  
+  /* Estilos para el enlace en el navbar */
+  .nav-link {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: background-color 0.3s, transform 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #1f4164;
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para el contenedor principal del navbar */
+  .navUser {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el ícono de cierre de sesión */
+  #cerrarSesion {
+    color: #dc3545;
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

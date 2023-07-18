@@ -1,26 +1,219 @@
-.letraServicios{
-    margin-left: 45%;
-}
-.colorServicios{
-    background-color: rgb(190, 156, 221);
-}
-.ServiciosDiv{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
-}
-.ServiciosDivBlan{
-    background-color: white;
-}
-.ServiciosDiv{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
-}
-.radioButton{
-    margin-left: -65%;
-}
-.fondoButton{
-    margin-left: 20%;
-}
-.AgendarBoton{
-    margin-left: 40%;
-}
+/* AgendarCita.css */
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para la tarjeta de la empresa */
+  .fondoButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2% auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .fondoButton:hover {
+    transform: scale(1.03);
+  }
+  
+  .nombreEmpresa {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .infoEmpresa {
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #555;
+  }
+  
+  .bioEmpresa {
+    font-size: 16px;
+    text-align: center;
+    color: #777;
+  }
+  
+  /* Estilos para la sección de servicios */
+  .colorServicios {
+    background-color: #a9ceff;
+    padding: 20px 0;
+  }
+  
+  .ServiciosDiv {
+    background: linear-gradient(45deg, #5900b3 0%, #d8c7ff 100%);
+    padding: 16px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px auto;
+  }
+  
+  .ServiciosDiv h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .letraServicios {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para la tabla de horarios */
+  .horariosTable {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .horariosTable th,
+  .horariosTable td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .horariosTable th {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    background-color: #f2f2f2;
+  }
+  
+  .horariosTable td {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .horariosTable tr:nth-child(even) {
+    background-color: #89d6f7;
+  }
+  
+  /* Estilos para el calendario */
+  .rbc-calendar {
+    margin-bottom: 20px;
+    background-color: #c0c6d9;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #8eafce;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .rbc-toolbar button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .rbc-toolbar button:hover {
+    color: #007bff;
+  }
+  
+  .rbc-month-view {
+    padding: 10px;
+  }
+  
+  .rbc-month-row {
+    display: flex;
+  }
+  
+  .rbc-day-bg {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  .rbc-day-slot {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  .rbc-event {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  /* Estilos para los botones de agendar cita */
+  .appointment-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .appointment-buttons button {
+    margin: 5px;
+  }
+  
+  /* Estilos para el botón de agendar cita */
+  .AgendarBoton {
+    display: block;
+    margin: 20px auto;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .AgendarBoton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para dispositivos móviles (teléfonos) */
+  @media (max-width: 767px) {
+    .nombreEmpresa {
+      font-size: 24px;
+    }
+  
+    .infoEmpresa {
+      font-size: 16px;
+    }
+  
+    .bioEmpresa {
+      font-size: 14px;
+    }
+  
+    .letraServicios {
+      font-size: 22px;
+    }
+  
+    .horariosTable th,
+    .horariosTable td {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .AgendarBoton {
+      width: 160px;
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
+  

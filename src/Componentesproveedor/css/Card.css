@@ -1,0 +1,45 @@
+/* Estilos para la card */
+.cardCompleta {
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+  }
+  
+  /* Estilos para la imagen del proveedor */
+  .ImagenProvee {
+    width: 150px;
+    height: 150px;
+  }
+  
+  /* Estilos para el nombre de la empresa */
+  .nombreEmpresaa {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Estilos para la especialidad */
+  .especialidad {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+  }
+  
+  /* Estilos para la biografía */
+  .card-text-bio {
+    font-size: 16px;
+    color: #444;
+  }
+  
+  /* Estilos para los datos de contacto */
+  .card-text-contacto {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Estilos para los iconos de contacto */
+  .icono-contacto {
+    margin-right: 5px;
+  }
+  

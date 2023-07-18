@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons';
 import '../css/ListaCitaAgendada.css';
 
 const ListaCitasAgendadas = () => {
   const [citasAgendadas, setCitasAgendadas] = useState([
-    // Datos de ejemplo para simular citas agendadas
+    
     {
       empresa: 'Empresa 1',
       tipoServicio: 'Consulta médica',
@@ -16,46 +16,36 @@ const ListaCitasAgendadas = () => {
       duracionHoras: 1,
       cantidadPagar: '$50',
       pdfUrl: 'url-del-pdf-empresa-1',
-      telefono: '123-456-7890', // Número de teléfono de contacto
+      telefono: '123-456-7890',
     },
-    // Agregar más citas agendadas
+   
   ]);
 
-  // Estado para mantener la hora actual
   const [horaActual, setHoraActual] = useState(new Date().toLocaleTimeString('default', { hour: 'numeric', minute: 'numeric' }));
 
-  // Función para obtener la hora actual y actualizarla cada minuto
   const obtenerHoraActual = () => {
     const interval = setInterval(() => {
       setHoraActual(new Date().toLocaleTimeString('default', { hour: 'numeric', minute: 'numeric' }));
-    }, 60000); // Actualizar cada minuto (60000 milisegundos)
+    }, 60000);
     return () => clearInterval(interval);
   };
 
   useEffect(() => {
-    // Al montar el componente, empezar a obtener y actualizar la hora actual
     obtenerHoraActual();
   }, []);
 
   const handleDownloadPDF = (pdfUrl) => {
-    // Implementar la descarga del PDF asociado a la cita
     console.log(`Descargando PDF desde: ${pdfUrl}`);
-    // Aquí utiliza una biblioteca para descargar el PDF o redireccionar a otra vista que lo permita.
   };
 
   const handleCancelarCita = (empresa, dia, hora) => {
-    // Convertir la fecha de la cita en un objeto Date
     const fechaCita = new Date(dia);
     fechaCita.setHours(parseInt(hora.split(':')[0]), parseInt(hora.split(':')[1]));
 
-    // Calcular la diferencia en milisegundos entre la fecha actual y la fecha de la cita
     const tiempoDiferencia = fechaCita.getTime() - new Date().getTime();
-
-    // Calcular el número de días de anticipación
     const diasAnticipacion = tiempoDiferencia / (1000 * 3600 * 24);
 
     if (diasAnticipacion >= 3) {
-      // Si se cumplen los requisitos de anticipación, permitir la cancelación de la cita
       Swal.fire({
         title: '¿Estás seguro de cancelar la cita?',
         text: `Cancelar cita para ${empresa} el día ${dia} a las ${hora}`,
@@ -67,7 +57,6 @@ const ListaCitasAgendadas = () => {
         cancelButtonText: 'No, mantener cita',
       }).then((result) => {
         if (result.isConfirmed) {
-          // Si el usuario confirma, eliminar la cita de la lista de citas agendadas
           const citasActualizadas = citasAgendadas.filter(
             (cita) => cita.empresa !== empresa || cita.dia !== dia || cita.hora !== hora
           );
@@ -81,7 +70,6 @@ const ListaCitasAgendadas = () => {
         }
       });
     } else {
-      // Si no se cumplen los requisitos de anticipación, mostrar un mensaje de error
       Swal.fire({
         title: 'Error',
         text: 'La cita solo puede cancelarse con al menos 3 días de anticipación.',
@@ -93,6 +81,7 @@ const ListaCitasAgendadas = () => {
   return (
     <div className="lista-citas-container">
       <div className="fecha-hora-actual">
+        <FontAwesomeIcon icon={faClock} style={{ marginRight:"1%"}} className="reloj-icono" />
         <span>{`Fecha actual: ${new Date().toLocaleDateString()} - Hora: ${horaActual}`}</span>
       </div>
       <h2>Lista de Citas Agendadas</h2>
@@ -131,7 +120,7 @@ const ListaCitasAgendadas = () => {
                 </td>
                 <td>
                   <button
-                    type="button" // Añadimos este atributo para que el botón no envíe el formulario
+                    type="button"
                     className="btn btn-danger cancelar-button"
                     onClick={() => handleCancelarCita(cita.empresa, cita.dia, cita.hora)}
                   >

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, Button, Table } from 'react-bootstrap';
+import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../css/AgendarCita.css';
 
 function Inicio() {
-  // Datos simulados de la base de datos
   const servicesData = [
     { id: 1, name: 'Servicio 1', duration: '1 hora', price: '$50' },
     { id: 2, name: 'Servicio 2', duration: '2 horas', price: '$80' },
@@ -27,24 +30,61 @@ function Inicio() {
 
   const [selectedService, setSelectedService] = useState(null);
   const [selectedWorker, setSelectedWorker] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(moment().startOf('month').toDate());
 
-  // Función para generar el PDF con los datos seleccionados
-  const handleAgendarCita = () => {
-    // Implementar la lógica para generar el PDF con los datos seleccionados
-    // ...
-    alert('Se agendó la cita correctamente.');
+  const monthsData = {
+    January: {
+      days: [
+        { date: '2023-01-01', schedule: ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'] },
+        { date: '2023-01-02', schedule: ['10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM'] },
+        // Agregar más días y sus horarios disponibles
+      ],
+    },
+    February: {
+      days: [
+        // Datos para febrero
+      ],
+    },
+    // Agregar más meses
+  };
+
+  const localizer = momentLocalizer(moment);
+
+  const handleAgendarCita = (date, time) => {
+    const selectedDateTime = moment(`${date} ${time}`, 'YYYY-MM-DD h:mm A').format('MMMM Do YYYY, h:mm A');
+    alert(`Se agendó la cita para ${selectedDateTime} correctamente.`);
+  };
+
+  const handleMonthChange = (date) => {
+    setSelectedMonth(date);
+  };
+
+  const renderAppointmentButtons = () => {
+    if (selectedService && selectedWorker) {
+      const selectedMonthData = monthsData[moment(selectedMonth).format('MMMM')];
+      const selectedDayData = selectedMonthData.days.find((day) => day.date === moment(selectedMonth).format('YYYY-MM-DD'));
+
+      if (selectedDayData) {
+        return (
+          <div className="appointment-buttons">
+            {selectedDayData.schedule.map((time, index) => (
+              <Button key={index} variant="primary" onClick={() => handleAgendarCita(selectedMonth, time)}>
+                {moment(selectedMonth).format('MMM D, YYYY')} - {time}
+              </Button>
+            ))}
+          </div>
+        );
+      }
+    }
+    return null;
   };
 
   return (
     <form action="">
-      {/* Componente Servicio */}
       <div className="fondoButton">
-        {/* Imagen de la empresa */}
         <Card.Img variant="top" src="url_de_la_imagen" alt="Imagen de la empresa" />
-
-        {/* Información de la empresa */}
         <Card.Body>
-          <Card.Title className="nombreEmpresaa">{companyInfoData.companyName}</Card.Title>
+          <Card.Title className="nombreEmpresa">{companyInfoData.companyName}</Card.Title>
           <Card.Text>{companyInfoData.serviceType}</Card.Text>
           <Card.Text>{companyInfoData.phoneNumber}</Card.Text>
           <Card.Text>{companyInfoData.email}</Card.Text>
@@ -54,7 +94,6 @@ function Inicio() {
         </Card.Body>
       </div>
 
-      {/* Lista de Servicios */}
       <div className="colorServicios">
         <h2 className="letraServicios">SERVICIOS</h2>
       </div>
@@ -89,29 +128,22 @@ function Inicio() {
           </Col>
         ))}
       </Row>
+      <h2 className="letraServicios">Horario de Servicios</h2>
+      <Calendar
+        localizer={localizer}
+        events={[]} // Se vacían los eventos ya que la función getEventsForSelectedMonth fue eliminada
+        startAccessor="start"
+        endAccessor="end"
+        defaultDate={selectedMonth}
+        views={['month']}
+        onNavigate={(date) => handleMonthChange(date)}
+        onSelectEvent={(event) => console.log(event)}
+      />
 
-      {/* Horario de Trabajadores */}
-      <h2 className="letraServicios">Horario</h2>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Trabajador</th>
-            <th>Horario</th>
-          </tr>
-        </thead>
-        <tbody>
-          {workersData.map((worker) => (
-            <tr key={worker.id}>
-              <td>{worker.id}</td>
-              <td>{worker.name}</td>
-              <td>{worker.schedule}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      {renderAppointmentButtons()}
+
       <br />
-      <Button className="AgendarBoton" variant="outline-primary" onClick={handleAgendarCita}>
+      <Button className="AgendarBoton" variant="outline-primary" onClick={() => handleAgendarCita()}>
         Agendar cita
       </Button>
     </form>
@@ -119,4 +151,3 @@ function Inicio() {
 }
 
 export default Inicio;
-// si
