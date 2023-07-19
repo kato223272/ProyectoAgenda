@@ -17,13 +17,13 @@ async function validarInicio(mail, pass, navigate) {
             Swal.fire({
               icon: 'success',
               title: 'Todo correcto',
-              text: 'Iniciando sesión...',
+              text: 'Iniciando sesión. ¡Bienvenido ' + response.data + "!",
               showConfirmButton: true,
               confirmButtonText: 'Entrar'
             }).then(
               function (result) {
                 if (result.isConfirmed) {
-                  navigate('/PrincipalUser');
+                  navegar('/PrincipalUser', {replace:true, state:{NombreU: response.data}});
                 }
               }
             );

@@ -8,7 +8,7 @@ import '../css/CrearCuenta.css';
 import axios from 'axios';
 
 function FormExample() {
-  const navegar = useNavigate();
+  const navigate = useNavigate();
   const [passAux, setPassAux] = useState('');
   const [NombreU, setNombreU] = useState('');
   const [Nombre, setNombre] = useState('');
@@ -31,7 +31,7 @@ function FormExample() {
           }).then(
               function (result){
                   if(result.isConfirmed){
-                      navegar('/PrincipalUser');
+                      navegar('/PrincipalUser', {replace:true, state:{NombreU: objeto.Nombre_U}});
                   }
               }
             );
@@ -188,7 +188,7 @@ function FormExample() {
               Correo: Correo,
               Contraseña: Contraseña
             };
-            registrarUsuario(objeto);
+            registrarUsuario(objeto, navigate, passAux);
           }}
         >
           Crear cuenta
