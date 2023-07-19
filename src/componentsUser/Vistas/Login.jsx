@@ -12,7 +12,7 @@ async function validarInicio(mail, pass, navigate) {
     if (mail.includes('@')) {
       if (/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)) {
         try {
-          const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?correo=' + mail + '&contraseña=' + pass);
+          const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?NombreU=' + mail + '&Contraseña=' + pass);
           if (response.status === 200) {
             Swal.fire({
               icon: 'success',
@@ -23,7 +23,7 @@ async function validarInicio(mail, pass, navigate) {
             }).then(
               function (result) {
                 if (result.isConfirmed) {
-                  navegar('/PrincipalUser', {replace:true, state:{NombreU: response.data}});
+                  navigate('/PrincipalUser', {replace:true, state:{NombreU: response.data}});
                 }
               }
             );
@@ -50,7 +50,7 @@ async function validarInicio(mail, pass, navigate) {
       }
     } else {
       try {
-        const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?correo=' + mail + '&contraseña=' + pass);
+        const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/VerificarLogin?NombreU=' + mail + '&Contraseña=' + pass);
         if (response.status === 200) {
           Swal.fire({
             icon: 'success',
@@ -61,7 +61,7 @@ async function validarInicio(mail, pass, navigate) {
           }).then(
             function (result) {
               if (result.isConfirmed) {
-                navigate('/PrincipalUser');
+                navigate('/PrincipalUser', {replace:true, state:{NombreU: response.data}});
               }
             }
           );
