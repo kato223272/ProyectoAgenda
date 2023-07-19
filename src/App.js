@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import './componentsUser/Componentes/Navbar.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -34,6 +34,7 @@ function App() {
       <Route path="/AgendarCita" element={<AgendarCita/>}/>
       {/* vista proveedor */}
       <Route path="/PrincipalProv" element={<PrincipalProv/>}/>
+      <Route path="*" element={<Navigate to="/" />} />
 
     </Routes>
 
