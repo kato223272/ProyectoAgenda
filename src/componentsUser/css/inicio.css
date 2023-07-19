@@ -1,4 +1,110 @@
-.fondo{
-    background: rgb(89,59,177);
-    background: radial-gradient(circle, rgba(89,59,177,0.9557072829131653) 0%, rgba(251,251,251,1) 0%, rgba(255,255,255,0.9529061624649859) 48%, rgba(218,181,255,0.9557072829131653) 99%);
+/* Estilos del footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 30px 0;
+    margin-top: 40px;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
+  
+  .contact-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info p {
+    margin: 5px 0;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .social-icons h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .social-icons .icon {
+    font-size: 24px;
+    margin: 0 5px;
+    color: #333;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+  }
+  
+  .footer-bottom a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .footer-bottom a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilos de los separadores */
+  .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    margin-bottom: 40px;
+  }
+  
+  .separator .line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0 20px; /* Ajustamos el margen para centrar la línea */
+  }
+  
+  .section-name {
+    font-size: 36px;
+    font-weight: bold;
+    color: #555;
+    margin: 0 20px; /* Espacio entre el separador y el texto */
+  }
+  
+  /* Estilos del texto de bienvenida */
+  .text-section {
+    text-align: center; /* Centrar el texto en el medio */
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del carousel y las tarjetas */
+  .carousel-section,
+  .card-section {
+    margin-bottom: 40px;
+  }
+  /* Estilos para el ícono de flecha hacia abajo */
+.arrow-icon-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.arrow-icon {
+  font-size: 2rem;
+  color: #007bff;
 }

@@ -1,50 +1,135 @@
-.login{
-    border: 10%;
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgb(255, 255, 255);
+    background: radial-gradient(
+      circle,
+      rgba(17, 17, 105, 0.8) 0%,
+      rgba(19, 19, 86, 0.9) 50%
+    );
+    backdrop-filter: blur(5px); /* Agregar efecto de borroso */
+  }
+  .login-content {
     border-radius: 10%;
-    margin-left: 30%;
-    margin-top: 5%;
-    height: 40%;
-    width: 40%;
-    position: center;
+    padding: 3%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid #889ce5; /* Borde resaltado */
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .login-title {
     text-align: center;
-    padding: 1%;
-    background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,238,255,1) 50%);
-}
-.email{
-    width: 65%;
-    margin-left: 20%;
-    margin-top: 2%;
-}
-.password{
-    margin-top: 2%;
-    width: 65%;
-    margin-left: 20%;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  .login-form {
+    padding: 0 15px;
+  }
+  
+  .form-control {
+    width: 100%;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .input-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .botonInicio {
+    background-color: #889ce5;
+    width: 100%;
+  }
+  
+  .registrarse {
+    width: 100%;
+    background-color: #889ce5;
+    margin-top: 10px;
+  }
+  
+  .letraNoCuenta,
+  .letraProv {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .iniciaProve {
+    width: 100%;
+    background-color: #889ce5;
+    margin-top: 10px;
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .login-content {
+      width: 90%; /* Ajustar el ancho para pantallas más pequeñas */
+    }
+  }
+  .linea-separadora {
+    margin: 20px 0;
+    border-top: 1px solid #ccc;
+  }
+  /* Estilos para los botones */
+.botonInicio,
+.registrarse,
+.iniciaProve {
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.botonInicio{
-    background-color: rgb(136, 156, 229);
- 
+.botonInicio {
+  background-color: #337ab7;
 }
-.registrarse{
-    width: 40%;
-    height: 100%;
-    background-color: rgb(136, 156, 229);
-    margin-right: 22%;
+
+.botonInicio:hover {
+  background-color: #1e5dbf;
 }
-.letraNoCuenta{
-    width: 125%;
-    margin-top: 2%;
-    margin-left: 15%;
+
+.registrarse,
+.iniciaProve {
+  background-color: #5cb85c;
 }
-.iniciaProve{
-    width: 50%;
-    height: 93%;
-    background-color: rgb(136, 156, 229);
-    margin-right: 22%;
+
+.registrarse:hover,
+.iniciaProve:hover {
+  background-color: #449d44;
 }
-.letraProv{
-    width: 125%;
-    margin-top: 2%;
-    margin-left: 15%;
+
+/* Estilos para los iconos en los botones */
+.button-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+/* Estilos para el botón de inicio de sesión y registrarse */
+.botonInicio,
+.registrarse,
+.iniciaProve {
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.botonInicio:hover,
+.registrarse:hover,
+.iniciaProve:hover {
+  transform: scale(1.1); /* Efecto de agrandar al pasar el mouse por encima */
 }

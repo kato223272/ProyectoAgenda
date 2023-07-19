@@ -1,0 +1,94 @@
+/* Estilos para el contenedor principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(17, 17, 105, 0.8) 0%, rgba(19, 19, 86, 0.9) 50%);
+    backdrop-filter: blur(5px);
+  }
+  
+  /* Estilos para el formulario de inicio de sesión */
+  .login-form {
+    border-radius: 15px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilos para el título del formulario */
+  .login-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .login-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Estilos para el botón de inicio de sesión */
+  .login-button {
+    background-color: #1e5dbf;
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+  }
+  
+  /* Estilos para el botón de inicio de sesión al pasar el cursor */
+  .login-button:hover {
+    background-color: #1461ae;
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para el mensaje de "¿No tienes una cuenta?" y "Registrarse" */
+  .register-text {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .register-button {
+    background-color: #1e5dbf;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+  }
+  
+  .register-button:hover {
+    background-color: #1461ae;
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .login-form {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

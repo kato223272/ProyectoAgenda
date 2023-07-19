@@ -1,47 +1,65 @@
-.cardCompleta{
-    margin-right: 0%;
-    margin-left: 10%;
-    
-}
-.fondoCard{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(152,103,255,0.9529061624649859) 48%, rgba(82,12,152,0.9557072829131653) 74%);
-    margin-right: 5%;
-    margin-left: 12%;
-}
-.ImagenProvee{
-    width: 45%;
-    margin-left: 20%;
-}
-.NumTel{
-    margin-top: 60%;
+/* CSS */
+.fondoPrincipal {
+  background: linear-gradient(135deg, rgba(26, 63, 118, 0.1), rgba(26, 63, 118, 0.2));
+  padding: 30px 0;
 }
 
-.agendar{
-    background: rgb(128, 98, 250);
-   
-    color: white;
-    border: none;
-    border-radius: 10%;
-    font-size: 90%;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    overflow: hidden;
-}
-.favoritosb{
-    background: rgb(128, 98, 250);
-    width: 50%;
-    color: white;
-    border: none;
-    border-radius: 10%;
-    font-size: 90%;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    overflow: hidden;
-    margin-left: 4%;
+.fondoCard {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
 }
 
+.ImagenProvee {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.nombreEmpresa {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #1a3f76;
+  margin-bottom: 10px;
+}
+
+.especialidad {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.contacto {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.botones-separados {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.agendar,
+.favoritosb {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s ease-in-out, transform 0.3s ease;
+}
+
+.agendar:hover,
+.favoritosb:hover {
+  background: #1a3f76;
+  transform: scale(1.05);
+}

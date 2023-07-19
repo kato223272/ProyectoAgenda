@@ -1,0 +1,91 @@
+.container {
+  max-width: 100%;
+  padding: 2%;
+  /* Ajuste de tamaño de fuente */
+  font-size: 1rem;
+}
+
+.titulo {
+  font-size: 2.5rem;
+}
+
+.texto {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.6; /* Aumentar el espaciado entre líneas */
+}
+
+.btn-custom {
+  font-size: 1.5rem;
+  padding: 1.4rem 2.8rem;
+  letter-spacing: 1px;
+  /* Estilos para el efecto de zoom */
+  transition: transform 0.3s ease;
+}
+
+.btn-custom .icon {
+  font-size: 2.4rem;
+  margin-right: 0.8rem;
+}
+
+/* Estilos para el efecto de sombreado */
+.btn-custom:hover {
+  transform: scale(1.1); /* Aumentar el tamaño en un 10% al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombreado al pasar el mouse */
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos para dispositivos móviles (teléfonos) */
+@media (max-width: 767px) {
+  .titulo {
+    font-size: 2rem; /* Ajuste del tamaño de fuente para teléfonos */
+  }
+
+  .texto {
+    font-size: 1.3rem; /* Ajuste del tamaño de fuente para teléfonos */
+  }
+
+  .btn-custom {
+    font-size: 1.3rem; /* Ajuste del tamaño de fuente para teléfonos */
+    padding: 1.2rem 2.4rem; /* Ajuste del padding para teléfonos */
+  }
+
+  .btn-custom .icon {
+    font-size: 2rem; /* Ajuste del tamaño de fuente para teléfonos */
+  }
+}
+
+/* Animaciones */
+.text-section {
+  animation: fadeInUp 1s ease both; /* Animación de aparición desplazándose hacia arriba */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-section {
+  animation: fadeInRight 1s ease both; /* Animación de aparición desplazándose hacia la derecha */
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,55 +1,49 @@
-import Navbar from '../components/NavbarProvTodas'
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
-import '../css/principal.css'
-function Principal(){
-    return(
-<div>
-<Container>
- <Row>
-   <Col>
-     <div  style={{ width: "80%", marginTop:"3%" }} className="fondoCard">
-       <br />
-       <Card style={{ width: "80%" }} className="cardCompleta">
-         <Row>
-           <Col>
-           <br />
-             <Container>
-               <Image className="ImagenProvee" src={""} rounded />
-             </Container>
-             <br />
-           </Col>
-           <Col>
-             <Card.Body>
-               <Card.Title className="nombreEmpresaa" id="nombreEmpresa">
-                 Nombre de la empresa
-               </Card.Title>
-               <Card.Subtitle id="especialidad" className="">
-                 Especialidad
-               </Card.Subtitle>
-               <br />
-               <Card.Text>Biografia</Card.Text>
-               <Card.Text>Estado</Card.Text>
-               <Card.Text>+52 9611234567</Card.Text>
-               <Card.Text>ID</Card.Text>
-              
-             </Card.Body>
-           </Col>
-         </Row>
-       </Card>
-       <br />
-     </div>
-   </Col>
- </Row>
- </Container>
+import React from 'react';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { AiOutlinePhone, AiOutlineUser, AiOutlineHome, AiOutlineInfoCircle } from 'react-icons/ai';
 
-</div>
- 
+import '../css/Card.css';
 
-    )
+function Principal() {
+  return (
+    <div className="d-flex justify-content-center">
+      <Container>
+        <Row className="justify-content-center">
+          <Col xs={12} sm={10} md={8} lg={6}>
+            <Card className="cardCompleta">
+              <Row>
+                <Col xs={12} sm={6}>
+                  <div className="text-center">
+                    <Image className="ImagenProvee" src={""} roundedCircle />
+                  </div>
+                </Col>
+                <Col xs={12} sm={6}>
+                  <Card.Body>
+                    <Card.Title className="nombreEmpresaa" id="nombreEmpresa">
+                      Nombre de la empresa
+                    </Card.Title>
+                    <Card.Subtitle className="especialidad">Especialidad</Card.Subtitle>
+                    <hr />
+                    <Card.Text className="card-text-bio">Biografía</Card.Text>
+                    <Card.Text>Estado</Card.Text>
+                    <Card.Text className="card-text-contacto">
+                      <AiOutlinePhone className="icono-contacto" /> +52 9611234567
+                    </Card.Text>
+                    <Card.Text className="card-text-contacto">
+                      <AiOutlineUser className="icono-contacto" /> ID
+                    </Card.Text>
+                    <Card.Text className="card-text-contacto">
+                      <AiOutlineHome className="icono-contacto" /> Ciudad
+                    </Card.Text>
+                  </Card.Body>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 }
+
 export default Principal;

@@ -1,55 +1,155 @@
-.historial{
-    margin-left: 5%;
-      width: 10%;
-  }
-  .historialLetra{
-      color: black;
-  }
-  .favoritos{
-      width: 10%;
-     
-  }
-  .favoritosLetra{
-      color: black;
-  
-  }
-  .buscar{
-      width: 25%;
-      /* margin-right: 39%; */
-      margin-left: 5%;
-  }
-  .buscarServicio{
-    
-      border-radius: 5%;
-     caret-color: rgb(153, 146, 246);
-  
-  }
-  .corporacion{
-      /* margin-left: 2.5%; */
-      
-  }
-  .inicioUser{
-      margin-left: 4%;
-  }
-  .navUser{
-    background: rgb(89,59,177);
-background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
-  }
-  .citas{
-      width: 25%;
-  }
-  .citasLetra{
-      color: black;
-  }
-  .iniciar{
-   width: 10%;
-   margin-right: 2.5%;
-  }
-  .iniciarLetra{
-      color: black;
-  }
-.buscar{
-    border-color: white;
-    color: aliceblue;
-    
+/* Navbar.css */
+
+/* Fuente personalizada */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Estilos para el Navbar */
+.navUser {
+  background: linear-gradient(135deg, #004d80, #023763);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
 }
+
+/* Estilos para los enlaces del Navbar */
+.navLinkItem {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: color 0.2s ease;
+}
+
+.navLinkItem svg {
+  margin-right: 8px;
+}
+
+.navLinkItem:hover {
+  color: #66b3ff;
+}
+
+/* Estilos para el enlace activo del Navbar */
+.activeNavLink {
+  color: #66b3ff;
+}
+
+/* Estilos para el buscador */
+.buscarServicioWrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background: #f1f1f1;
+  padding: 5px 10px;
+  margin-right: 20px;
+  transition: background 0.2s ease;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buscarServicioWrapper:hover {
+  background: #e1e1e1;
+}
+
+.buscarServicio {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  font-weight: bold;
+  padding: 8px 16px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.lupaIcon {
+  font-size: 1.2rem;
+  color: #333;
+  margin-right: 5px;
+}
+
+.buscar {
+  border-radius: 20px;
+  background: #007bff;
+  border: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px 16px;
+}
+
+.buscar:hover {
+  background: #0056b3;
+  color: #fff;
+}
+
+/* Estilos para el enlace de cerrar sesión */
+.navLinkSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLinkItem,
+.inicioUser {
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.navLinkItem:hover,
+.inicioUser:hover {
+  color: #66b3ff;
+}
+
+/* Estilos para las letras más grandes */
+.navUser .nav-link,
+.navUser .dropdown-item,
+.navUser .inicioUser {
+  font-size: 135%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+/* Estilos para el efecto al pasar el mouse */
+.navUser .nav-link:hover,
+.navUser .dropdown-item:hover,
+.navUser .inicioUser:hover {
+  color: #66b3ff;
+}
+/* Estilos para dispositivos grandes */
+.navUser .container {
+  padding: 20px 40px;
+}
+
+/* Estilos para dispositivos medianos */
+@media (max-width: 992px) {
+  .navUser .container {
+    padding: 20px;
+  }
+}
+
+/* Estilos para dispositivos pequeños */
+@media (max-width: 768px) {
+  .navUser .container {
+    padding: 15px;
+  }
+  .navbar-toggler {
+    margin-right: 15px;
+  }
+  .navbar-toggler-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .navUser .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navUser .navbar-nav .nav-link {
+    margin: 5px 0;
+  }
+}
+
