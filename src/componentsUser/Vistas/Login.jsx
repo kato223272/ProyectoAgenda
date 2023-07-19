@@ -96,7 +96,7 @@ function BasicExample() {
   return (
     <div className="login-container">
       <div className="login-content">
-        <h1 className="login-title text-center">Iniciar Sesión</h1>
+        <h1 className="login-title text-center">Inicio Sesión</h1>
         <Form className="login-form">
           <div className="input-container">
             <AiOutlineUser className="input-icon" />

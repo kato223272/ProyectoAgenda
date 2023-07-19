@@ -1,89 +1,91 @@
+.container {
+  max-width: 100%;
+  padding: 2%;
+  /* Ajuste de tamaño de fuente */
+  font-size: 1rem;
+}
+
+.titulo {
+  font-size: 2.5rem;
+}
+
+.texto {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.6; /* Aumentar el espaciado entre líneas */
+}
+
 .btn-custom {
-    transition: all 0.3s ease;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    background: linear-gradient(to right, #007bff, #0c84e4);
-    border: none;
-    border-radius: 50px;
-    color: #fff;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    letter-spacing: 1px;
-  }
-  
-  .btn-custom:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-custom .icon {
-    font-size: 24px;
-    margin-right: 8px;
-  }
-  
+  font-size: 1.5rem;
+  padding: 1.4rem 2.8rem;
+  letter-spacing: 1px;
+  /* Estilos para el efecto de zoom */
+  transition: transform 0.3s ease;
+}
+
+.btn-custom .icon {
+  font-size: 2.4rem;
+  margin-right: 0.8rem;
+}
+
+/* Estilos para el efecto de sombreado */
+.btn-custom:hover {
+  transform: scale(1.1); /* Aumentar el tamaño en un 10% al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombreado al pasar el mouse */
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos para dispositivos móviles (teléfonos) */
+@media (max-width: 767px) {
   .titulo {
-    font-size: 42px;
-    font-weight: bold;
-    color: #1a3f76;
-    margin-bottom: 20px;
+    font-size: 2rem; /* Ajuste del tamaño de fuente para teléfonos */
   }
+
   .texto {
-    font-size: 22px;
-    color: #1a3f76;
-    margin-bottom: 10px;
-    line-height: 1.6; /* Aumentar el espaciado entre líneas */
+    font-size: 1.3rem; /* Ajuste del tamaño de fuente para teléfonos */
   }
-  /* ...otros estilos... */
 
-.text-section {
-    animation: fadeInUp 1s ease both; /* Animación de aparición desplazándose hacia arriba */
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
   .btn-custom {
-  
-  
-    /* Efecto de sombreado al pasar el mouse */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.3rem; /* Ajuste del tamaño de fuente para teléfonos */
+    padding: 1.2rem 2.4rem; /* Ajuste del padding para teléfonos */
   }
-  
-  .btn-custom:hover {
-    transform: scale(1.1); /* Aumentar el tamaño en un 10% al pasar el mouse */
-    background: linear-gradient(to right, #007bff, #0c84e4, #007bff); /* Cambiar el color de fondo al pasar el mouse */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombreado al pasar el mouse */
-    color: #fff; /* Cambiar el color del texto al pasar el mouse */
-  }
-  
-  .image-section {
-    animation: fadeInRight 1s ease both; /* Animación de aparición desplazándose hacia la derecha */
-  }
-  
-  @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
 
-  
-  
+  .btn-custom .icon {
+    font-size: 2rem; /* Ajuste del tamaño de fuente para teléfonos */
+  }
+}
+
+/* Animaciones */
+.text-section {
+  animation: fadeInUp 1s ease both; /* Animación de aparición desplazándose hacia arriba */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-section {
+  animation: fadeInRight 1s ease both; /* Animación de aparición desplazándose hacia la derecha */
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

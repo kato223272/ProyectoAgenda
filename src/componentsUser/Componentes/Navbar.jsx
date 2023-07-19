@@ -8,7 +8,7 @@ function NavbarComponent() {
   return (
     <Navbar bg="primary" expand="lg" className="navUser">
       <Container fluid>
-        <Navbar.Brand className="inicioUser" href="/">
+        <Navbar.Brand className="inicioUser" href="/PrincipalUser">
           <FaHome className="casaIcon" /> Inicio
         </Navbar.Brand>
 
@@ -46,7 +46,7 @@ function NavbarComponent() {
           </div>
 
           <Nav className="corporacion me-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link className="navLinkItem" href="/Favoritos">
+            <Nav.Link className="navLinkItem" href="/favoritos">
               <FaHeart /> <span className="icon-text-separator">Favoritos</span>
             </Nav.Link>
             <Nav.Link className="navLinkItem" href="/CitasAgendadasUser">
@@ -56,7 +56,7 @@ function NavbarComponent() {
 
           <div className="navLinkSection">
             <Nav.Link className="navLinkItem" id="IniciarSesion" href="/">
-              <FaUser /> <span href="/" className="icon-text-separator">Cerrar sesión</span>
+              <FaUser /> <span className="icon-text-separator">Cerrar sesión</span>
             </Nav.Link>
           </div>
         </Navbar.Collapse>

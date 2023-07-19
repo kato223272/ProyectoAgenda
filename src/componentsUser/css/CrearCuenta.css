@@ -1,40 +1,126 @@
-.RegistrarDatos{
-    border: 10%;
-    border-radius: 10%;
-    margin-left: 30%;
-    margin-top: 5%;
-    height: 40%;
-    width: 40%;
-    position: center;
+/* Estilos para el contenedor principal */
+.RegistrarDatos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(
+      circle,
+      rgba(17, 17, 105, 0.8) 0%,
+      rgba(19, 19, 86, 0.9) 50%
+    );
+    backdrop-filter: blur(5px);
+  }
+  
+  /* Estilos para el formulario de registro */
+  .RegistrarDatos form {
+    border-radius: 15px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilos para el título del formulario */
+  .RegistrarDatos h1 {
     text-align: center;
-    padding: 1%;
-    background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,238,255,1) 50%);
-}
-.cuadroTextUsuario{
-    width: 60%;
-    margin-left: 10%;
-   
-}
-.formUsuario{
-    margin-left: 47%;
-   width: 50%;
-   margin-top: -6%;
-}
-.cuadroTextNombre{
-    width: 70%;
-    margin-left: 10%;
-}
-.formNombre{
-    width: 70%;
-}
-.botonCrear{
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-}
-.botoncrear:hover{
-    border: 5px solid rgba(104, 43, 43, 0.6);
-    /* background-color: rgb(0, 0, 0);
-    color: black;
-    border-color: black; */
-}
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+    width: 100%;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .RegistrarDatos .form-control {
+    width: 48%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Estilos para los contenedores de los campos */
+  .RegistrarDatos .input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para los íconos en los campos */
+  .RegistrarDatos .input-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #333;
+  }
+  
+  /* Estilos para el botón de crear cuenta */
+  .RegistrarDatos .botonCrear {
+    background-color: #1e5dbf;
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilos para el botón de crear cuenta al pasar el cursor */
+  .RegistrarDatos .botonCrear:hover {
+    background-color: #1461ae;
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para el mensaje de "¿No tienes cuenta?" y "Iniciar sesión" */
+  .RegistrarDatos .letraNoCuenta,
+  .RegistrarDatos .letraProv {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  /* Estilos para la línea separadora */
+  .RegistrarDatos .linea-separadora {
+    width: 100%;
+    margin: 20px 0;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* Estilos para el campo de usuario y nombre en una fila */
+  .RegistrarDatos .formUsuario,
+  .RegistrarDatos .formNombre {
+    width: 48%;
+    margin-right: 4%;
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .RegistrarDatos form {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .RegistrarDatos .form-control {
+      width: 100%;
+    }
+  
+    .RegistrarDatos .formUsuario,
+    .RegistrarDatos .formNombre {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+  

@@ -98,4 +98,13 @@
   .card-section {
     margin-bottom: 40px;
   }
-  
+  /* Estilos para el ícono de flecha hacia abajo */
+.arrow-icon-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.arrow-icon {
+  font-size: 2rem;
+  color: #007bff;
+}
