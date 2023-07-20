@@ -11,7 +11,7 @@ const ListaCitasAgendadas = () => {
       empresa: 'Empresa 1',
       tipoServicio: 'Consulta médica',
       encargado: 'Dr. Juan Pérez',
-      dia: '2023-07-20',
+      dia: '2023-07-26',
       hora: '15:00',
       duracionHoras: 1,
       cantidadPagar: '$50',

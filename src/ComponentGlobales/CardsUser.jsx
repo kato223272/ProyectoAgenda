@@ -14,15 +14,15 @@ function TextExample() {
     <div className="fondoPrincipal">
       <Container>
         <Row className="justify-content-center">
-          <Col xs={12}>
+          <Col xs={20}>
             <div className="fondoCard">
               <Row>
-                <Col xs={12} md={6} className="d-flex justify-content-center align-items-center">
+                <Col xs={15} md={6} className="d-flex justify-content-center align-items-center">
                   <Container>
-                    <Image className="ImagenProvee" src={Spa} rounded fluid />
+                    <Image className="ImagenProvee" src={Spa} />
                   </Container>
                 </Col>
-                <Col xs={12} md={6}>
+                <Col xs={15} md={5}>
                   <Card.Body>
                     <Card.Title className="nombreEmpresa" id="nombreEmpresa">
                       Nombre de la empresa

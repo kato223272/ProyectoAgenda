@@ -1,0 +1,13 @@
+.inicio{
+    width: 10%;
+    background-color: rgb(136, 156, 229);
+    margin-left: 4%;
+}
+.navIni{
+    background: rgb(89,59,177);
+    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
+}
+.LetrasSuperiores{
+    margin-right: 45%;
+    width: 20%;
+}

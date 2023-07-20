@@ -13,10 +13,10 @@
 }
 
 .ImagenProvee {
-  width: 100%;
-  max-height: 250px;
+  width: 160%;
+  max-height: 150%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-bottom: 20px;
 }
 
