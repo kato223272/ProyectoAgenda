@@ -20,26 +20,6 @@
   margin-bottom: 20px;
 }
 
-.nombreEmpresa {
-  text-align: center;
-  font-size: 32px;
-  font-weight: bold;
-  color: #1a3f76;
-  margin-bottom: 10px;
-}
-
-.especialidad {
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-.contacto {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
 .botones-separados {
   display: flex;
   gap: 10px;
