@@ -20,6 +20,7 @@
   margin-bottom: 20px;
 }
 
+
 /* Centra la imagen en el contenedor */
 .ImagenProvee-container {
   display: flex;
@@ -47,6 +48,7 @@
   align-items: center;
   margin-bottom: 15px;
 }
+
 
 .botones-separados {
   display: flex;

@@ -15,23 +15,83 @@ function FormExample() {
   const [Correo, setCorreo] = useState('');
   const [Contraseña, setContraseña] = useState('');
 
-  const registrarUsuario = async (objeto) => {
-    // Implementar la lógica de validación y registro de usuario con base de datos
-    // ...
-
-    // Para simular el registro, se muestra un mensaje de éxito al finalizar
-    Swal.fire({
-      icon: 'success',
-      title: 'Cuenta creada',
-      text: 'Iniciando sesión...',
-      showConfirmButton: true,
-      confirmButtonText: 'Entrar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate('/PrincipalUser');
+  async function registrarUsuario(objeto, navegar, passAux){
+    if(objeto.Nombre_U.trim("") && objeto.Nombre.trim("") && objeto.Correo.trim("") && objeto.Contraseña.trim("")){
+      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objeto.Correo) && !(/\d/.test(objeto.Nombre)) && objeto.Contraseña === passAux){
+        try{
+          const guardar = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/RegistrarUsuario?NombreU=' + objeto.Nombre_U + '&Nombre=' 
+            + objeto.Nombre + '&Correo=' + objeto.Correo + '&Contrase%C3%B1a='+ objeto.Contraseña);
+          if(guardar.status === 201){
+            Swal.fire({
+              icon:'success',
+              title:'¡Cuenta creada!',
+              text:'Iniciando sesión...',
+              showConfirmButton:true,
+              confirmButtonText:'Entrar'
+          }).then(
+              function (result){
+                  if(result.isConfirmed){
+                      navegar('/PrincipalUser', {replace:true, state:{NombreU: objeto.Nombre_U}});
+                  }
+              }
+            );
+          }
+        } catch (error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Entrar'
+          });
+          console.error(error.response.data);
+        }
       }
-    });
-  };
+  
+      else if(!(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objeto.Correo))){
+        Swal.fire({
+          icon:'error',
+          title:'Correo mal escrito',
+          text:'Asegurese de escribir un correo válido',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+      
+      else if(objeto.Contraseña !== passAux){
+        Swal.fire({
+          icon:'error',
+          title:'Contraseñas diferentes',
+          text:'Las contraseñas escritas son diferentes entre si',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+  
+      else if(/\d/.test(objeto.Nombre)){
+        Swal.fire({
+          icon:'error',
+          title:'Nombre imposible',
+          text:'Se detecto numeros en su nombre, intente de nuevo',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+    }
+  
+    else{
+      Swal.fire({
+        icon:'info',
+        title:'Espacios vacíos',
+        text:'Rellene los campos de registro',
+        showConfirmButton:true,
+        confirmButtonText:'Volver a intentarlo'
+      })
+    }
+  }
 
   return (
     <div className="RegistrarDatos">
@@ -128,7 +188,7 @@ function FormExample() {
               Correo: Correo,
               Contraseña: Contraseña
             };
-            registrarUsuario(objeto);
+            registrarUsuario(objeto, navigate, passAux);
           }}
         >
           Crear cuenta

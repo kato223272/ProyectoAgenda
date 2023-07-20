@@ -24,17 +24,20 @@ function TextExample() {
           <Col xs={12}>
             <div className="fondoCard">
               <Row>
+
                 <Col
                   xs={12}
                   md={6}
                   className="d-flex justify-content-center align-items-center"
                 >
                   <Container className="d-flex justify-content-center align-items-center ImagenProvee-container">
+
                     <Image className="ImagenProvee" src={Spa} rounded fluid />
                   </Container>
                 </Col>
                 <Col xs={12} md={6}>
                   <Card.Body>
+
                     <Card.Title
                       className="nombreEmpresa"
                       id="nombreEmpresa"
@@ -101,6 +104,7 @@ function TextExample() {
                         style={{ fontSize: "1.3vw", marginRight: "2%" }}
                       />{" "}
                       +52 961 123 4567
+
                     </div>
                     <div className="botones-separados">
                       <Button
