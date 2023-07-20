@@ -13,11 +13,19 @@
 }
 
 .ImagenProvee {
-  width: 160%;
-  max-height: 150%;
+  width: 100%;
+  height: 250px; /* Establece la altura deseada para la imagen cuadrada */
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-bottom: 20px;
+}
+
+/* Centra la imagen en el contenedor */
+.ImagenProvee-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px; /* Misma altura que se estableció para la imagen */
 }
 
 .nombreEmpresa {
