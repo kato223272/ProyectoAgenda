@@ -5,24 +5,45 @@ import { motion } from "framer-motion";
 import { Element, animateScroll as scroll } from "react-scroll";
 import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los íconos
 import Carousel from "./ComponentGlobales/carousel";
-import CardUser from "./ComponentGlobales/CardsUser";
+import CardUser, { CartaUsuario} from "./ComponentGlobales/CardsUser";
 import TextInicio from "./ComponentGlobales/IniciaSesionText";
 import "./componentsUser/css/inicio.css";
 import Footer from "./ComponentGlobales/Footer.jsx";
+import axios from "axios";
 
 function Inicio() {
   const [scrollPosition, setScrollPosition] = useState(0);
-
+  const [Empresas, setEmpresas] = useState([]);
+  const [Direccion, setDireccion] = useState([]);
+  const [Personal, setPersonal] = useState([]);
   const handleScroll = () => {
     setScrollPosition(window.scrollY);
   };
+
+
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
+    const recibirDatos = async () => {
+      try{
+        const empresas = await axios.get("https://localhost:44310/api/Empresas");
+        if(empresas.status == 200){
+          try{
+            const direcciones  = 0;
+          } catch(errorD){
+
+          }
+        }
+      } catch(errorE){
+
+      }
+    }
   }, []);
+  
 
   return (
     <div className="Fondo">
