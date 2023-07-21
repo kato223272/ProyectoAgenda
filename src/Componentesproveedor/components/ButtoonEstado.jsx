@@ -9,6 +9,10 @@ function DropdownItemTagsExample() {
   const [selectedEstado, setSelectedEstado] = useState(null);
   const [selectedCiudad, setSelectedCiudad] = useState(null);
   const [selectedPais, setSelectedPais] = useState(null);
+  const [isEstadoMenuOpen, setIsEstadoMenuOpen] = useState(false); // Estado para el menú del Estado
+  const [isCiudadMenuOpen, setIsCiudadMenuOpen] = useState(false); // Estado para el menú de la Ciudad
+  const [isPaisMenuOpen, setIsPaisMenuOpen] = useState(false); // Estado para el menú del País
+
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -17,16 +21,19 @@ function DropdownItemTagsExample() {
   const handleEstadoItemClick = (e, estado) => {
     e.preventDefault();
     setSelectedEstado(estado);
+    setIsEstadoMenuOpen(false);
   };
 
   const handleCiudadItemClick = (e, ciudad) => {
     e.preventDefault();
     setSelectedCiudad(ciudad);
+    setIsCiudadMenuOpen(false);
   };
 
   const handlePaisItemClick = (e, pais) => {
     e.preventDefault();
     setSelectedPais(pais);
+    setIsPaisMenuOpen(false); 
   };
  
   // const ciudades = [
@@ -319,7 +326,7 @@ const filteredPaises = paises.filter((pais) =>
 
 return (
   <div style={{ display: 'flex' }}>
-    <Dropdown className='Estado'>
+     <Dropdown className='Estado' show={isEstadoMenuOpen} onToggle={(isOpen) => setIsEstadoMenuOpen(isOpen)}>
       <Dropdown.Toggle className="Estado" variant="primary" id="dropdown-item-button">
         {selectedEstado ? selectedEstado.text : 'Estado'}
       </Dropdown.Toggle>
@@ -348,7 +355,7 @@ return (
       </Dropdown.Menu>
     </Dropdown>
 
-    <Dropdown>
+    <Dropdown show={isCiudadMenuOpen} onToggle={(isOpen) => setIsCiudadMenuOpen(isOpen)}>
       <Dropdown.Toggle className="Ciudad" variant="primary" id="dropdown-item-button">
         {selectedCiudad ? selectedCiudad.text : 'Ciudad'}
       </Dropdown.Toggle>
@@ -377,7 +384,7 @@ return (
       </Dropdown.Menu>
     </Dropdown>
 
-    <Dropdown>
+    <Dropdown show={isPaisMenuOpen} onToggle={(isOpen) => setIsPaisMenuOpen(isOpen)}>
       <Dropdown.Toggle className="Pais" variant="primary" id="dropdown-item-button">
         {selectedPais ? selectedPais.text : 'País'}
       </Dropdown.Toggle>
