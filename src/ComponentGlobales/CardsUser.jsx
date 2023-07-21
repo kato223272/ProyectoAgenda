@@ -130,126 +130,125 @@ function TextExample() {
   );
 }
 
-export function CartaUsuario(
-  Nombre_E,
-  Nombre_Servicio,
-  Localidad,
-  Imagen_64,
-  Descripcion,
-  Num_Telf_E
-) {
-  return (
-    <div className="fondoPrincipal">
-      <Container>
-        <Row className="justify-content-center">
-          <Col xs={12}>
-            <div className="fondoCard">
-              <Row>
-                <Col
-                  xs={12}
-                  md={6}
-                  className="d-flex justify-content-center align-items-center"
-                >
-                  <Container className="d-flex justify-content-center align-items-center">
-                    <Image
-                      className="ImagenProvee"
-                      src={`data:image/jpeg;base64,${Imagen_64}`}
-                      rounded
-                      fluid
-                    />
-                  </Container>
-                </Col>
-                <Col xs={12} md={6}>
-                  <Card.Body>
-                    <Card.Title
-                      className="nombreEmpresa"
-                      id="nombreEmpresa"
-                      style={{
-                        textAlign: "center",
-                        fontSize: "2vw",
-                        fontWeight: "bold",
-                        color: "#1a3f76",
-                        marginBottom: "2%",
-                      }}
-                    >
-                      {Nombre_E}
-                    </Card.Title>
-                    <Card.Subtitle
-                      id="especialidad"
-                      style={{
-                        textAlign: "center",
-                        fontSize: "1.2vw",
-                        marginBottom: "5%",
-                      }}
-                    >
-                      <FaInfo className="icono-especialidad" />{" "}
-                      {Nombre_Servicio}
-                    </Card.Subtitle>
-                    <br />
-                    <Card.Text
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "0.9vw",
-                        fontSize: "110%",
-                      }}
-                    >
-                      <FaUser
-                        className="icono-biografia"
-                        style={{ fontSize: "1.5vw", marginRight: "2%" }}
-                      />{" "}
-                      {Descripcion}
-                    </Card.Text>
-                    <Card.Text
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "0.9vw",
-                        fontSize: "120%",
-                      }}
-                    >
-                      <FaMapMarkerAlt
-                        className="icono-estado"
-                        style={{ fontSize: "1.5vw", marginRight: "2%" }}
-                      />{" "}
-                      {Localidad}
-                    </Card.Text>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "0.9vw",
-                        fontSize: "1.2vw",
-                      }}
-                    >
-                      <FaPhoneAlt
-                        className="icono-telefono"
-                        style={{ fontSize: "1.3vw", marginRight: "2%" }}
-                      />{" "}
-                      {Num_Telf_E}
-                    </div>
-                    <div className="botones-separados">
-                      <Button
-                        className="agendar"
-                        type="submit"
-                        href="/AgendarCita"
+export function CartaUsuario({Nombre_E}) {
+  console.log(Nombre_E);
+  return Nombre_E.map((E) => {
+  const blob = new Blob([E.FotoPerfil], { type: "image/jpeg" });
+  const url = E.FotoPerfil ? URL.createObjectURL(blob) : null;
+
+    return (
+      <div className="fondoPrincipal">
+        <Container>
+          <Row className="justify-content-center">
+            <Col xs={12}>
+              <div className="fondoCard">
+                <Row>
+                  <Col
+                    xs={12}
+                    md={6}
+                    className="d-flex justify-content-center align-items-center"
+                  >
+                    <Container className="d-flex justify-content-center align-items-center">
+                      <Image
+                        className="ImagenProvee"
+                        src={url}
+                        rounded
+                        fluid
+                      />
+                    </Container>
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <Card.Body>
+                      <Card.Title
+                        className="nombreEmpresa"
+                        id="nombreEmpresa"
+                        style={{
+                          textAlign: "center",
+                          fontSize: "2vw",
+                          fontWeight: "bold",
+                          color: "#1a3f76",
+                          marginBottom: "2%",
+                        }}
                       >
-                        <FaCalendarPlus className="icono-agendar" /> Agendar
-                      </Button>
-                      <Button className="favoritosb" onClick="">
-                        <FaStar className="icono-estrella" />
-                        Agregar a favoritos
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Col>
-              </Row>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
+                        {E.Nombre_E}
+                      </Card.Title>
+                      <Card.Subtitle
+                        id="especialidad"
+                        style={{
+                          textAlign: "center",
+                          fontSize: "1.2vw",
+                          marginBottom: "5%",
+                        }}
+                      >
+                        <FaInfo className="icono-especialidad" />{" "}
+                        {E.Nombre_Servicio}
+                      </Card.Subtitle>
+                      <br />
+                      <Card.Text
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "0.9vw",
+                          fontSize: "110%",
+                        }}
+                      >
+                        <FaUser
+                          className="icono-biografia"
+                          style={{ fontSize: "1.5vw", marginRight: "2%" }}
+                        />{" "}
+                        {E.Descripcion}
+                      </Card.Text>
+                      <Card.Text
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "0.9vw",
+                          fontSize: "120%",
+                        }}
+                      >
+                        <FaMapMarkerAlt
+                          className="icono-estado"
+                          style={{ fontSize: "1.5vw", marginRight: "2%" }}
+                        />{" "}
+                        {E.Municipio}
+                      </Card.Text>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginBottom: "0.9vw",
+                          fontSize: "1.2vw",
+                        }}
+                      >
+                        <FaPhoneAlt
+                          className="icono-telefono"
+                          style={{ fontSize: "1.3vw", marginRight: "2%" }}
+                        />{" "}
+                        {E.No_Telf_P}
+                      </div>
+                      <div className="botones-separados">
+                        <Button
+                          className="agendar"
+                          type="submit"
+                          href="/AgendarCita"
+                        >
+                          <FaCalendarPlus className="icono-agendar" /> Agendar
+                        </Button>
+                        <Button className="favoritosb" onClick="">
+                          <FaStar className="icono-estrella" />
+                          Agregar a favoritos
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
+  });
 }
 
 export default TextExample;
