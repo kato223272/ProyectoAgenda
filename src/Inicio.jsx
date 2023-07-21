@@ -3,7 +3,7 @@ import Navbar from "./componentesNoRegistrado/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import { Element, animateScroll as scroll } from "react-scroll";
-import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los íconos
+import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los Ã­conos
 import Carousel from "./ComponentGlobales/carousel";
 import CardUser, { CartaUsuario} from "./ComponentGlobales/CardsUser";
 import TextInicio from "./ComponentGlobales/IniciaSesionText";
@@ -13,9 +13,7 @@ import axios from "axios";
 
 function Inicio() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [Empresas, setEmpresas] = useState([]);
-  const [Direccion, setDireccion] = useState([]);
-  const [Personal, setPersonal] = useState([]);
+  const [EmpresasDLT, setEmpresasDLT] = useState([]);
   const handleScroll = () => {
     setScrollPosition(window.scrollY);
   };
@@ -24,24 +22,23 @@ function Inicio() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    const recibirDatos = async () => {
+      try{
+        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacionTelf");
+        if(empresas.status == 200){
+          const eDLT = empresas.data;
+          setEmpresasDLT(eDLT);
+        }
+      } catch(errorE){
+        console.error("Error en Empresas", errorE.response.data);
+      }
+    }
+
+    recibirDatos();
+    console.log(EmpresasDLT);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-
-    const recibirDatos = async () => {
-      try{
-        const empresas = await axios.get("https://localhost:44310/api/Empresas");
-        if(empresas.status == 200){
-          try{
-            const direcciones  = 0;
-          } catch(errorD){
-
-          }
-        }
-      } catch(errorE){
-
-      }
-    }
   }, []);
   
 
@@ -126,7 +123,7 @@ function Inicio() {
               }}
               transition={{ duration: 1 }}
             >
-              <CardUser />
+              <CartaUsuario Nombre_E={EmpresasDLT} />
             </motion.div>
           </Element>
         </div>
