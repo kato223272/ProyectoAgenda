@@ -95,12 +95,13 @@ function BasicExample() {
 
   return (
     <div className="login-container">
-      <div className="login-content">
-        <h1 className="login-title text-center">Inicio Sesión</h1>
         <Form className="login-form">
           <div className="input-container">
-            <AiOutlineUser className="input-icon" />
+           
             <Form.Group className="mb-3" controlId="formBasicEmail">
+             <br></br>
+            <h1 className="login-title text-center">Inicio Sesión</h1>
+            <AiOutlineUser className="input-icon" />
               <Form.Label className="input-label text-center">Ingresa tu correo o usuario</Form.Label>
               <Form.Control
                 className='email'
@@ -113,18 +114,21 @@ function BasicExample() {
           </div>
 
           <div className="input-container">
-            <AiOutlineLock className="input-icon" />
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label className="input-label text-center">Contraseña</Form.Label>
-              <Form.Control
-                className='password'
-                type="password"
-                placeholder="contraseña"
-                value={pass}
-                onChange={ev => setPass(ev.target.value)}
-              />
-            </Form.Group>
-          </div>
+  
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <div className="password-container">
+    <AiOutlineLock className="input-icon" />
+      <Form.Label className="input-label">Contraseña</Form.Label>
+      <Form.Control
+        className="form-control"
+        type="password"
+        placeholder="Contraseña"
+        value={pass}
+        onChange={(ev) => setPass(ev.target.value)}
+      />
+    </div>
+  </Form.Group>
+</div>
 
           <Button className="botonInicio" variant="primary" type="button" onClick={() => validarInicio(mail, pass, navigate)}>
             Iniciar sesión <AiOutlineArrowRight className="button-icon" />
@@ -143,10 +147,12 @@ function BasicExample() {
             <h6 className="letraProv">¿Deseas ingresar como proveedor?</h6>
             <Link to="/loginProv" className="iniciaProve">
               Iniciar sesión <AiOutlineArrowRight className="button-icon" />
+              
             </Link>
+            <br></br>
           </div>
         </Form>
-      </div>
+    
     </div>
   );
 }
