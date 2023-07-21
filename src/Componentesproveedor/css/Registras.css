@@ -107,4 +107,35 @@ body {
   .crearCuenta .invalid-feedback {
     color: red;
   }
+  .RegistrarDatos1 {
+   
+    transition: transform 0.3s ease;
+  }
   
+  .RegistrarDatos1.zoom {
+    transform: scale(1.1);
+  }
+  .botonCrear {
+    background-color: #1e5dbf;
+    width: 100%;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s ease;
+  }
+  
+  /* Efecto al pasar el mouse por encima */
+  .botonCrear:hover {
+    background-color: #1461ae;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+  .centrarServicios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
