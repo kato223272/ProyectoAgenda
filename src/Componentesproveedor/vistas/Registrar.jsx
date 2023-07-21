@@ -35,6 +35,7 @@ function FormExample() {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
   const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
+  const [altaSAT, setAltaSAT] = useState(null);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -43,6 +44,9 @@ function FormExample() {
   
   const handleCantidadTrabajadoresSelect = (cantidad) => {
     setCantidadTrabajadores(cantidad);
+  };
+   const handleAltaSATSelect = (opcion) => {
+    setAltaSAT(opcion);
   };
   return (
     <div className="RegistrarDatos2">
@@ -293,10 +297,7 @@ function FormExample() {
                 />
               </InputGroup>
             </Form.Group>
-            <br />
-            <br />
-            <br />
-            <br />
+            <br /><br /><br />
             <BotonEstado />
             <br />
           </Row>
@@ -324,7 +325,7 @@ function FormExample() {
                   variant="outline-secondary"
                   title={cantidadTrabajadores || 'Cantidad de trabajadores'}
                 >
-                  {['1', '2', '3', '4','5', '6', '7', '8','9', '10', '11', '12','13', '14', '15', '16'].map((opcion, index) => (
+                  {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'].map((opcion, index) => (
                     <Dropdown.Item
                       key={index}
                       onClick={() => handleCantidadTrabajadoresSelect(opcion)}
@@ -337,8 +338,17 @@ function FormExample() {
             </Form.Group>
             <Form.Group as={Col} md={6}>
               <InputGroup>
-                
-                {/* Opciones para el botón de cantidad de trabajadores */}
+                <InputGroup.Text>
+                  {/* Ícono */}
+                </InputGroup.Text>
+                <DropdownButton
+                  as={InputGroup.Append}
+                  variant="outline-secondary"
+                  title={altaSAT === null ? '¿Está dado de alta en el SAT?' : altaSAT}
+                >
+                  <Dropdown.Item onClick={() => handleAltaSATSelect('Sí')}>Sí</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleAltaSATSelect('No')}>No</Dropdown.Item>
+                </DropdownButton>
               </InputGroup>
             </Form.Group>
           </Row>
