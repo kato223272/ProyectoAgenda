@@ -49,6 +49,7 @@ function TextExample() {
       <Container>
         <Row className="justify-content-center">
           <Col xs={12}>
+
             {currentItems.map((item, index) => (
               <div className="fondoCard" key={index}>
                 <Row>
@@ -108,6 +109,7 @@ function TextExample() {
                           marginBottom: "0.9vw",
                           fontSize: "120%",
                         }}
+
                       >
                         <FaMapMarkerAlt
                           className="icono-estado"
@@ -169,11 +171,7 @@ function TextExample() {
 
 
 export function CartaUsuario({Nombre_E}) {
-  console.log(Nombre_E);
   return Nombre_E.map((E) => {
-  const blob = new Blob([E.FotoPerfil], { type: "image/jpeg" });
-  const url = E.FotoPerfil ? URL.createObjectURL(blob) : null;
-
     return (
       <div className="fondoPrincipal">
         <Container>
@@ -189,9 +187,10 @@ export function CartaUsuario({Nombre_E}) {
                     <Container className="d-flex justify-content-center align-items-center">
                       <Image
                         className="ImagenProvee"
-                        src={url}
+                        src={`data:image/jpeg;base64,${E.fotoPerfil}`}
                         rounded
                         fluid
+                        alt="imagenDeEmpresa"
                       />
                     </Container>
                   </Col>
@@ -207,9 +206,8 @@ export function CartaUsuario({Nombre_E}) {
                           color: "#1a3f76",
                           marginBottom: "2%",
                         }}
-
                       >
-                        {E.Nombre_E}
+                        {E.nombre_E}
                       </Card.Title>
                       <Card.Subtitle
                         id="especialidad"
@@ -219,8 +217,8 @@ export function CartaUsuario({Nombre_E}) {
                           marginBottom: "5%",
                         }}
                       >
-                        <FaInfo className="icono-especialidad" />{" "}
-                        {E.Nombre_Servicio}
+                        <FaInfo className="icono-especialidad" />
+                        {E.nombre_Servicio}
                       </Card.Subtitle>
                       <br />
                       <Card.Text
@@ -234,8 +232,8 @@ export function CartaUsuario({Nombre_E}) {
                         <FaUser
                           className="icono-biografia"
                           style={{ fontSize: "1.5vw", marginRight: "2%" }}
-                        />{" "}
-                        {E.Descripcion}
+                        />
+                        {E.descripcion}
                       </Card.Text>
                       <Card.Text
                         style={{
@@ -248,8 +246,8 @@ export function CartaUsuario({Nombre_E}) {
                         <FaMapMarkerAlt
                           className="icono-estado"
                           style={{ fontSize: "1.5vw", marginRight: "2%" }}
-                        />{" "}
-                        {E.Municipio}
+                        />
+                        {E.municipio}
                       </Card.Text>
                       <div
                         style={{
@@ -262,8 +260,8 @@ export function CartaUsuario({Nombre_E}) {
                         <FaPhoneAlt
                           className="icono-telefono"
                           style={{ fontSize: "1.3vw", marginRight: "2%" }}
-                        />{" "}
-                        {E.No_Telf_P}
+                        />
+                        {E.no_Telf_P}
                       </div>
                       <div className="botones-separados">
                         <Button
