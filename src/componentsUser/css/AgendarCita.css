@@ -1,219 +1,278 @@
-/* AgendarCita.css */
 
-/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Estilos para la tarjeta de la empresa */
-  .fondoButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Contenedor principal */
+.ContenidoTodo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: #f8f8f8; /* Color de fondo aplicado solo al contenedor principal */
+}
+
+/* Estilos para la tarjeta de la empresa */
+.company-card {
+  padding: 30px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.company-card h2 {
+  font-size: 50px;
+  margin-top: 0;
+}
+
+.company-card p {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.company-image-container {
+  max-height: 160px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.company-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para los servicios */
+.services-header {
+  background-color: #f7f7f7;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.service-card {
+  width: 300px;
+  margin: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.service-card label {
+  font-weight: bold;
+}
+
+.service-card small {
+  color: #888;
+}
+
+.service-card input[type="radio"] {
+  display: none;
+}
+
+.service-card label {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+.service-card label:hover {
+  background-color: #0056b3;
+}
+
+.service-card input[type="radio"]:checked + label {
+  background-color: #0056b3;
+}
+
+/* Estilos para el calendario */
+.calendar-container {
+  margin-top: 30px;
+}
+
+.rbc-calendar {
+  font-size: 14px;
+}
+
+.rbc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rbc-toolbar button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.rbc-toolbar button:last-child {
+  margin-right: 0;
+}
+
+.rbc-toolbar button:hover {
+  background-color: #0056b3;
+}
+
+.rbc-toolbar label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.rbc-agenda-time-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.rbc-agenda-time-cell button {
+  cursor: pointer;
+  margin: 2px;
+  width: 60px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.rbc-agenda-time-cell button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Estilos para el formulario */
+.form-container {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-container label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-container select,
+.form-container input[type="radio"],
+.form-container input[type="time"] {
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.form-container .submit-btn {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 20px auto;
+}
+
+.form-container .submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el PDF */
+.pdf-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.pdf-container .pdf-link {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.pdf-container .pdf-link:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos adicionales para mejorar la visualización y responsividad */
+@media (max-width: 768px) {
+  .services-container {
     flex-direction: column;
-    margin: 2% auto;
-    max-width: 800px;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    align-items: center;
   }
-  
-  .fondoButton:hover {
-    transform: scale(1.03);
-  }
-  
-  .nombreEmpresa {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-    color: #333;
-  }
-  
-  .infoEmpresa {
-    font-size: 18px;
-    margin-bottom: 8px;
-    text-align: center;
-    color: #555;
-  }
-  
-  .bioEmpresa {
-    font-size: 16px;
-    text-align: center;
-    color: #777;
-  }
-  
-  /* Estilos para la sección de servicios */
-  .colorServicios {
-    background-color: #a9ceff;
-    padding: 20px 0;
-  }
-  
-  .ServiciosDiv {
-    background: linear-gradient(45deg, #5900b3 0%, #d8c7ff 100%);
-    padding: 16px;
-    text-align: center;
-    border-radius: 8px;
-    margin: 20px auto;
-  }
-  
-  .ServiciosDiv h2 {
-    font-size: 32px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-  
-  .letraServicios {
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para la tabla de horarios */
-  .horariosTable {
-    margin-top: 20px;
+
+  .service-card {
     width: 100%;
-    border-collapse: collapse;
+    margin: 10px 0;
   }
-  
-  .horariosTable th,
-  .horariosTable td {
-    padding: 12px;
-    text-align: center;
+
+  .pdf-container .pdf-link {
+    margin-top: 20px;
   }
-  
-  .horariosTable th {
-    font-size: 18px;
-    font-weight: bold;
-    color: #444;
-    background-color: #f2f2f2;
+}
+
+@media (max-width: 576px) {
+  .header h1 {
+    font-size: 24px;
   }
-  
-  .horariosTable td {
-    font-size: 16px;
-    color: #666;
+
+  .company-card {
+    max-width: 100%;
   }
-  
-  .horariosTable tr:nth-child(even) {
-    background-color: #89d6f7;
+
+  .company-image {
+    max-height: 200px;
   }
-  
-  /* Estilos para el calendario */
-  .rbc-calendar {
-    margin-bottom: 20px;
-    background-color: #c0c6d9;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+  .service-card {
+    width: 100%;
+    margin: 10px 0;
   }
+}
+.ContenidoTodo{
   
-  .rbc-toolbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #8eafce;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-  
-  .rbc-toolbar button {
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .rbc-toolbar button:hover {
-    color: #007bff;
-  }
-  
-  .rbc-month-view {
-    padding: 10px;
-  }
-  
-  .rbc-month-row {
-    display: flex;
-  }
-  
-  .rbc-day-bg {
-    flex: 1;
-    padding: 5px;
-  }
-  
-  .rbc-day-slot {
-    flex: 1;
-    padding: 5px;
-  }
-  
-  .rbc-event {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  
-  /* Estilos para los botones de agendar cita */
-  .appointment-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .appointment-buttons button {
-    margin: 5px;
-  }
-  
-  /* Estilos para el botón de agendar cita */
-  .AgendarBoton {
-    display: block;
-    margin: 20px auto;
-    font-size: 18px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .AgendarBoton:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para dispositivos móviles (teléfonos) */
-  @media (max-width: 767px) {
-    .nombreEmpresa {
-      font-size: 24px;
-    }
-  
-    .infoEmpresa {
-      font-size: 16px;
-    }
-  
-    .bioEmpresa {
-      font-size: 14px;
-    }
-  
-    .letraServicios {
-      font-size: 22px;
-    }
-  
-    .horariosTable th,
-    .horariosTable td {
-      padding: 10px;
-      font-size: 14px;
-    }
-  
-    .AgendarBoton {
-      width: 160px;
-      font-size: 16px;
-      padding: 10px 20px;
-    }
-  }
-  
+}
