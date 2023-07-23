@@ -22,32 +22,30 @@ function FormExample() {
   const [password, setPassword] = useState('');
   const [altPass, setAltPass] = useState('');
   const [nombreLocal, setNombreLocal] = useState('');
-  const [calle1, setCalle1] = useState('');
-  const [calle2, setCalle2] = useState('');
-  const [entreCalle11, setEntreCalle11] = useState('');
-  const [entreCalle12, setEntreCalle12] = useState('');
-  const [entreCalle21, setEntreCalle21] = useState('');
-  const [entreCalle22, setEntreCalle22] = useState('');
+  const [calle, setCalle] = useState(''); // Modificación: Cambio de "calle1" y "calle2" a "calle"
+  const [referencias, setReferencias] = useState(''); // Nueva adición: Campo de "Referencias"
   const [numeroExterior, setNumeroExterior] = useState('');
   const [numeroInterior, setNumeroInterior] = useState('');
-  const [asentamiento, setAsentamiento] = useState('');
-  const [municipio, setMunicipio] = useState('');
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
   const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
   const [altaSAT, setAltaSAT] = useState(null);
+  const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para manejar el envío del formulario
+    //  para manejar el envío del formulario
   };
   
   const handleCantidadTrabajadoresSelect = (cantidad) => {
     setCantidadTrabajadores(cantidad);
   };
-   const handleAltaSATSelect = (opcion) => {
+  
+  const handleAltaSATSelect = (opcion) => {
     setAltaSAT(opcion);
+    setShowDocumentUpload(opcion === 'Sí'); 
   };
+ 
   return (
     <div className="RegistrarDatos2">
       <div className="RegistrarDatos1">
@@ -55,7 +53,7 @@ function FormExample() {
           <Row>
             <Col md={100} className="text-center mb-4">
               <br />
-              <h2>Crear cuenta</h2>
+              <h2>Registrate</h2>
             </Col>
           </Row>
           <Row className="mb-3">
@@ -110,7 +108,7 @@ function FormExample() {
                 </InputGroup.Text>
                 <Form.Control
                   type="text"
-                  placeholder="Nombre del lugar"
+                  placeholder="Nombre de la empresa"
                   value={nombreLocal}
                   onChange={(ev) => setNombreLocal(ev.target.value)}
                   autoComplete="off"
@@ -126,9 +124,9 @@ function FormExample() {
                 </InputGroup.Text>
                 <Form.Control
                   type="text"
-                  placeholder="Calle 1"
-                  value={calle1}
-                  onChange={(ev) => setCalle1(ev.target.value)}
+                  placeholder="Calle"
+                  value={calle}
+                  onChange={(ev) => setCalle(ev.target.value)} // Modificación: Usamos un solo campo para la calle
                   autoComplete="off"
                 />
               </InputGroup>
@@ -140,69 +138,9 @@ function FormExample() {
                 </InputGroup.Text>
                 <Form.Control
                   type="text"
-                  placeholder="Calle 2"
-                  value={calle2}
-                  onChange={(ev) => setCalle2(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Entre Calle 1"
-                  value={entreCalle11}
-                  onChange={(ev) => setEntreCalle11(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Entre Calle 2"
-                  value={entreCalle21}
-                  onChange={(ev) => setEntreCalle21(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Entre Calle 1"
-                  value={entreCalle12}
-                  onChange={(ev) => setEntreCalle12(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Entre Calle 2"
-                  value={entreCalle22}
-                  onChange={(ev) => setEntreCalle22(ev.target.value)}
+                  placeholder="Referencias"
+                  value={referencias}
+                  onChange={(ev) => setReferencias(ev.target.value)} // Nueva adición: Campo de Referencias
                   autoComplete="off"
                 />
               </InputGroup>
@@ -233,36 +171,6 @@ function FormExample() {
                   placeholder="Número interior"
                   value={numeroInterior}
                   onChange={(ev) => setNumeroInterior(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Asentamiento"
-                  value={asentamiento}
-                  onChange={(ev) => setAsentamiento(ev.target.value)}
-                  autoComplete="off"
-                />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group as={Col} md={6}>
-              <InputGroup>
-                <InputGroup.Text>
-                  <BiMap />
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Municipio"
-                  value={municipio}
-                  onChange={(ev) => setMunicipio(ev.target.value)}
                   autoComplete="off"
                 />
               </InputGroup>
@@ -352,6 +260,18 @@ function FormExample() {
               </InputGroup>
             </Form.Group>
           </Row>
+          {showDocumentUpload && (
+            <Row className="mb-3">
+              <Form.Group as={Col} md={12} className="position-relative mb-3">
+                <Form.Label>Subir documento del SAT</Form.Label>
+                {/* Aquí colocas el componente para cargar el archivo */}
+                <Form.Control type="file" name="satDocument" accept=".pdf, .jpg, .png" />
+                <Form.Control.Feedback type="DocumentoInvalido" tooltip>
+                  {/* ... (mensaje en caso de documento inválido) */}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+          )}
           <Row className="mb-3">
             <Col md={12} className="text-center">
               <Button className="botonCrear" type="submit">
