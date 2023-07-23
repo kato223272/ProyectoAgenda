@@ -1,11 +1,10 @@
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
+  background-color: #0b3f69; /* Color de fondo para todo el contenido */
 }
 
-/* Contenedor principal */
 .ContenidoTodo {
   display: flex;
   flex-direction: column;
@@ -13,10 +12,9 @@ body {
   padding: 20px;
   max-width: 1100px;
   margin: 0 auto;
-  background-color: #f8f8f8; /* Color de fondo aplicado solo al contenedor principal */
+  background-color: #fff; /* Color de fondo aplicado solo al contenedor principal */
 }
 
-/* Estilos para la tarjeta de la empresa */
 .company-card {
   padding: 30px;
   background-color: #fff;
@@ -26,6 +24,7 @@ body {
   text-align: center;
   width: 100%;
   margin-bottom: 20px;
+  padding: 40px;
 }
 
 .company-card h2 {
@@ -118,7 +117,7 @@ body {
 }
 
 .rbc-calendar {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .rbc-toolbar {
@@ -272,7 +271,4 @@ body {
     width: 100%;
     margin: 10px 0;
   }
-}
-.ContenidoTodo{
-  
 }
