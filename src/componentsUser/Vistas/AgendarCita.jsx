@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { Row, Col, Card, Button } from 'react-bootstrap';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import { PDFDownloadLink, Document, Page, View, Text, StyleSheet } from '@react-pdf/renderer';
 import '../css/AgendarCita.css';
 
 function Inicio() {
+  const [selectedService, setSelectedService] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedStartTime, setSelectedStartTime] = useState(null);
+  const [selectedEndTime, setSelectedEndTime] = useState(null);
+  const [weeklyViewStart, setWeeklyViewStart] = useState(moment().startOf('week').add(7, 'hours').toDate());
+  const [weeklyViewEnd, setWeeklyViewEnd] = useState(moment().endOf('week').add(20, 'hours').toDate());
+  const [viewMode, setViewMode] = useState(Views.WEEK);
+  const [currentDate, setCurrentDate] = useState(moment().toDate());
+
   const servicesData = [
     { id: 1, name: 'Servicio 1', duration: '1 hora', price: '$50' },
     { id: 2, name: 'Servicio 2', duration: '2 horas', price: '$80' },
@@ -22,68 +34,222 @@ function Inicio() {
     interiorNumber: '123',
   };
 
-  const workersData = [
-    { id: 1, name: 'Trabajador 1', schedule: 'Lun-Vie: 9am-6pm' },
-    { id: 2, name: 'Trabajador 2', schedule: 'Lun-Vie: 8am-5pm' },
-    { id: 3, name: 'Trabajador 3', schedule: 'Lun-Vie: 10am-7pm' },
-  ];
-
-  const [selectedService, setSelectedService] = useState(null);
-  const [selectedWorker, setSelectedWorker] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(moment().startOf('month').toDate());
-
-  const monthsData = {
-    January: {
-      days: [
-        { date: '2023-01-01', schedule: ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'] },
-        { date: '2023-01-02', schedule: ['10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM'] },
-        // Agregar más días y sus horarios disponibles
-      ],
-    },
-    February: {
-      days: [
-        // Datos para febrero
-      ],
-    },
-    // Agregar más meses
-  };
-
   const localizer = momentLocalizer(moment);
 
-  const handleAgendarCita = (date, time) => {
-    const selectedDateTime = moment(`${date} ${time}`, 'YYYY-MM-DD h:mm A').format('MMMM Do YYYY, h:mm A');
-    alert(`Se agendó la cita para ${selectedDateTime} correctamente.`);
-  };
-
-  const handleMonthChange = (date) => {
-    setSelectedMonth(date);
-  };
-
-  const renderAppointmentButtons = () => {
-    if (selectedService && selectedWorker) {
-      const selectedMonthData = monthsData[moment(selectedMonth).format('MMMM')];
-      const selectedDayData = selectedMonthData.days.find((day) => day.date === moment(selectedMonth).format('YYYY-MM-DD'));
-
-      if (selectedDayData) {
-        return (
-          <div className="appointment-buttons">
-            {selectedDayData.schedule.map((time, index) => (
-              <Button key={index} variant="primary" onClick={() => handleAgendarCita(selectedMonth, time)}>
-                {moment(selectedMonth).format('MMM D, YYYY')} - {time}
-              </Button>
-            ))}
-          </div>
-        );
-      }
+  const handleAgendarCita = () => {
+    if (selectedDate && selectedStartTime && selectedEndTime && selectedService) {
+    } else {
+      alert('Por favor, selecciona una fecha, hora de inicio, hora final y servicio para agendar la cita.');
     }
-    return null;
+  };
+
+  const handleCalendarNavigate = (date, view, action) => {
+    setViewMode(view);
+    setCurrentDate(date);
+  };
+
+  const CustomToolbar = ({ label, onView, onNavigate }) => (
+    <div className="rbc-toolbar">
+      <span className="rbc-btn-group">
+        <button type="button" onClick={() => onView(Views.DAY)}>
+          Día
+        </button>
+        <button type="button" onClick={() => onView(Views.WEEK)}>
+          Semana
+        </button>
+      </span>
+      <span className="rbc-toolbar-label">{label}</span>
+      <span className="rbc-btn-group">
+        <button type="button" onClick={() => onNavigate('PREV')}>
+          Anterior
+        </button>
+        <button type="button" onClick={() => onNavigate('NEXT')}>
+          Siguiente
+        </button>
+      </span>
+    </div>
+  );
+
+  const availableTimes = [
+    '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM',
+    '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM'
+  ];
+
+  const TimeSelection = ({ label, value, onChange }) => (
+    <div>
+      <label>{label}</label>
+      <select value={value} onChange={onChange}>
+        <option value="">Seleccione una hora</option>
+        {availableTimes.map((time) => (
+          <option key={time} value={time}>
+            {time}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+
+  const generatePdfDocument = () => {
+    const selectedDateTimeStart = moment(selectedStartTime, 'hh:mm A').format('h:mm A');
+    const selectedDateTimeEnd = moment(selectedEndTime, 'hh:mm A').format('h:mm A');
+    const selectedDateTime = moment(selectedDate).format('MMMM Do YYYY');
+
+    const styles = StyleSheet.create({
+      page: {
+        fontFamily: 'Helvetica',
+        padding: 30,
+      },
+      section: {
+        marginBottom: 20,
+      },
+      header: {
+        fontSize: 24,
+        marginBottom: 10,
+      },
+      label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+      },
+      divider: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        borderBottomStyle: 'solid',
+        marginBottom: 10,
+      },
+      serviceInfo: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 5,
+      },
+      serviceName: {
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
+      serviceDuration: {
+        fontSize: 14,
+      },
+      servicePrice: {
+        fontSize: 14,
+        fontWeight: 'bold',
+      },
+      dateTimeLabel: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 10,
+      },
+      dateTimeValue: {
+        fontSize: 14,
+      },
+      companyInfoSection: {
+        marginBottom: 20,
+      },
+      companyInfoHeader: {
+        fontSize: 24,
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        borderBottomStyle: 'solid',
+      },
+      companyInfoLabel: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+      },
+      companyName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+      },
+      companyAddress: {
+        fontSize: 14,
+      },
+      companyContact: {
+        fontSize: 14,
+        marginBottom: 5,
+      },
+    });
+
+    const pdfContent = (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text style={styles.header}>Comprobante de Cita</Text>
+            <View style={styles.companyInfoSection}>
+              <Text style={styles.companyInfoHeader}>Información de la Empresa:</Text>
+              <Text style={styles.companyInfoLabel}>Nombre de la Empresa:</Text>
+              <Text style={styles.companyName}>{companyInfoData.companyName}</Text>
+              <Text style={styles.companyInfoLabel}>Tipo de Servicio:</Text>
+              <Text>{companyInfoData.serviceType}</Text>
+              <Text style={styles.companyInfoLabel}>Teléfono:</Text>
+              <Text style={styles.companyContact}>{companyInfoData.phoneNumber}</Text>
+              <Text style={styles.companyInfoLabel}>Email:</Text>
+              <Text style={styles.companyContact}>{companyInfoData.email}</Text>
+              <Text style={styles.companyInfoLabel}>Descripción:</Text>
+              <Text>{companyInfoData.bio}</Text>
+              <Text style={styles.companyInfoLabel}>Dirección:</Text>
+              <Text style={styles.companyAddress}>{companyInfoData.address}</Text>
+              <Text style={styles.companyAddress}>Número Interior/Exterior: {companyInfoData.interiorNumber}</Text>
+            </View>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.header}>Información de la Cita:</Text>
+            <View style={styles.serviceInfo}>
+              <Text style={styles.serviceName}>Servicio Seleccionado:</Text>
+              <Text style={styles.serviceName}>{selectedService ? servicesData.find(service => service.id === selectedService)?.name : 'N/A'}</Text>
+            </View>
+            <View style={styles.serviceInfo}>
+              <Text style={styles.serviceDuration}>Duración del Servicio:</Text>
+              <Text style={styles.serviceDuration}>{selectedService ? servicesData.find(service => service.id === selectedService)?.duration : 'N/A'}</Text>
+            </View>
+            <View style={styles.serviceInfo}>
+              <Text style={styles.servicePrice}>Precio del Servicio:</Text>
+              <Text style={styles.servicePrice}>{selectedService ? servicesData.find(service => service.id === selectedService)?.price : 'N/A'}</Text>
+            </View>
+            <View style={styles.divider} />
+            <Text style={styles.dateTimeLabel}>Fecha y Hora de la Cita:</Text>
+            <Text style={styles.dateTimeValue}>{selectedDateTime} - {selectedDateTimeStart} a {selectedDateTimeEnd}</Text>
+          </View>
+        </Page>
+      </Document>
+    );
+
+    return pdfContent;
+  };
+
+  const isButtonDisabled = () => {
+    return moment(selectedEndTime, 'hh:mm A').isBefore(moment(selectedStartTime, 'hh:mm A'));
+  };
+  
+  const getPdfLink = () => {
+    if (!isButtonDisabled() && selectedDate && selectedStartTime && selectedEndTime && selectedService) {
+      return (
+        <PDFDownloadLink
+          document={generatePdfDocument()}
+          fileName={`Cita_${moment(selectedDate).format('YYYY-MM-DD')}.pdf`}
+        >
+          {({ blob, url, loading, error }) => (
+            <Button className="AgendarBoton" variant="outline-primary">
+              {`Generar PDF`}
+            </Button>
+          )}
+        </PDFDownloadLink>
+      );
+    } else {
+      return (
+        <Button className="AgendarBoton" variant="outline-primary" disabled>
+          {`Generar PDF`}
+        </Button>
+      );
+    }
   };
 
   return (
+    <div className='ContenidoTodo'>
     <form action="">
       <div className="fondoButton">
-        <Card.Img variant="top" src="url_de_la_imagen" alt="Imagen de la empresa" />
-        <Card.Body>
+        <Card.Img variant="top" src="url_de_la_imagen" alt="Imagen de la empresa" className="company-image" />
+        <Card.Body className="company-card">
           <Card.Title className="nombreEmpresa">{companyInfoData.companyName}</Card.Title>
           <Card.Text>{companyInfoData.serviceType}</Card.Text>
           <Card.Text>{companyInfoData.phoneNumber}</Card.Text>
@@ -97,12 +263,11 @@ function Inicio() {
       <div className="colorServicios">
         <h2 className="letraServicios">SERVICIOS</h2>
       </div>
-      <Row>
+      <Row className="services-container">
         {servicesData.map((service) => (
           <Col key={service.id}>
-            <div style={{ width: '60%', marginTop: '3%' }} className="fondoButton">
-              <br />
-              <Card style={{ width: '80%' }} className="cardCompleta">
+            <div className="service-card">
+              <Card style={{ width: '100%' }} className="cardCompleta">
                 <Row>
                   <Col>
                     <Card.Body className="radioButton">
@@ -123,7 +288,6 @@ function Inicio() {
                   </Col>
                 </Row>
               </Card>
-              <br />
             </div>
           </Col>
         ))}
@@ -131,22 +295,81 @@ function Inicio() {
       <h2 className="letraServicios">Horario de Servicios</h2>
       <Calendar
         localizer={localizer}
-        events={[]} // Se vacían los eventos ya que la función getEventsForSelectedMonth fue eliminada
+        events={[]}
         startAccessor="start"
         endAccessor="end"
-        defaultDate={selectedMonth}
-        views={['month']}
-        onNavigate={(date) => handleMonthChange(date)}
-        onSelectEvent={(event) => console.log(event)}
+        views={['day', 'week', 'agenda']}
+        defaultView={viewMode}
+        defaultDate={currentDate}
+        min={weeklyViewStart}
+        max={weeklyViewEnd}
+        components={{
+          toolbar: CustomToolbar,
+          agenda: {
+            event: () => null,
+            time: () => (
+              <div className="rbc-agenda-time-cell">
+                {availableTimes.map((time) => (
+                  <Button
+                    key={time}
+                    variant={
+                      selectedStartTime === time || selectedEndTime === time ? 'primary' : 'outline-primary'
+                    }
+                    onClick={() => {
+                      if (!selectedStartTime) {
+                        setSelectedStartTime(time);
+                      } else if (!selectedEndTime) {
+                        setSelectedEndTime(time);
+                      } else {
+                        setSelectedStartTime(time);
+                        setSelectedEndTime(null);
+                      }
+                    }}
+                  >
+                    {time}
+                  </Button>
+                ))}
+              </div>
+            ),
+          },
+        }}
+        onSelectEvent={(event) => {
+          setSelectedDate(event.start);
+          setSelectedStartTime(moment(event.start).format('hh:mm A'));
+          setSelectedEndTime(moment(event.end).format('hh:mm A'));
+        }}
+        onNavigate={handleCalendarNavigate}
       />
 
-      {renderAppointmentButtons()}
+      <div className="time-selection-container">
+        <TimeSelection
+          label="Hora de inicio:"
+          value={selectedStartTime}
+          onChange={(e) => setSelectedStartTime(e.target.value)}
+        />
+        <br />
+        <TimeSelection
+          label="Hora final:"
+          value={selectedEndTime}
+          onChange={(e) => setSelectedEndTime(e.target.value)}
+        />
+        <br />
+      </div>
 
-      <br />
-      <Button className="AgendarBoton" variant="outline-primary" onClick={() => handleAgendarCita()}>
-        Agendar cita
-      </Button>
+      <div className="date-selection-container">
+        <label>Fecha de la cita:</label>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          minDate={new Date()} // Set the minimum date to the current date
+        />
+      </div>
+
+      <div className="pdf-container">
+        {selectedDate && selectedStartTime && selectedEndTime && selectedService && getPdfLink()}
+      </div>
     </form>
+    </div>
   );
 }
 
