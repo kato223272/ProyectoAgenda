@@ -1,363 +1,366 @@
 import React, { useState } from 'react';
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import Buttoon from "../components/ButtoonEstado";
-import Servicios from "../components/TipoDeServicio.jsx"
-import axios from 'axios';
-
-function registrarUsuario(){
-
-}
+import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { AiOutlineMail } from 'react-icons/ai';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { BsBuilding } from 'react-icons/bs';
+import { BiMap } from 'react-icons/bi';
+import { RiUserLine } from 'react-icons/ri';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { AiOutlineFileImage } from 'react-icons/ai';
+import Servicios from '../components/TipoDeServicio';
+import '../css/Registras.css';
+import BotonEstado from '../components/ButtoonEstado';
 
 function FormExample() {
-  const [correo, setCorreo] = useState("");
-  const [password, setPassword] = useState("");
-  const [altPass, setAltPass] = useState("")
-  const [nombreLocal, setNombreLocal] = useState("");
-  const [direccion, setDireccion] = useState([]); //Calle: , entre calle: , tipo calle: , etc
-  const [usuario, setUsuario] = useState([]); //nombre: , num.telefono: , etc.
+  const [correo, setCorreo] = useState('');
+  const [password, setPassword] = useState('');
+  const [altPass, setAltPass] = useState('');
+  const [nombreLocal, setNombreLocal] = useState('');
+  const [calle1, setCalle1] = useState('');
+  const [calle2, setCalle2] = useState('');
+  const [entreCalle11, setEntreCalle11] = useState('');
+  const [entreCalle12, setEntreCalle12] = useState('');
+  const [entreCalle21, setEntreCalle21] = useState('');
+  const [entreCalle22, setEntreCalle22] = useState('');
+  const [numeroExterior, setNumeroExterior] = useState('');
+  const [numeroInterior, setNumeroInterior] = useState('');
+  const [asentamiento, setAsentamiento] = useState('');
+  const [municipio, setMunicipio] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
+  const [altaSAT, setAltaSAT] = useState(null);
 
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // Aquí puedes agregar la lógica para manejar el envío del formulario
+  };
+  
+  const handleCantidadTrabajadoresSelect = (cantidad) => {
+    setCantidadTrabajadores(cantidad);
+  };
+   const handleAltaSATSelect = (opcion) => {
+    setAltaSAT(opcion);
+  };
   return (
-    <div>
-    
-      <body>
-        <div className="RegistrarDatos">
-              <Form noValidate >
-                <Row>
-                  <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Label>Ingrese correo</Form.Label>
-                    <Form.Control type="email" placeholder="Ingresar correo"
-                    value={correo}
-                    onChange={ev => setCorreo(ev.target.value)} />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formContraseña">
-                    <Form.Label>Ingrese contraseña nueva</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña"
-                    value={password}
-                    onChange={ev => setPassword(ev.target.value)} />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formContraseña">
-                    <Form.Label>Ingrese la contraseña de nuevo</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña"
-                    value={altPass}
-                    onChange={ev => setAltPass(ev.target.value)} />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formNombreLugar">
-                    <Form.Label>Ingrese nombre del lugar</Form.Label>
-                    <Form.Control type="email" placeholder="Nombre del lugar"
-                    value={nombreLocal}
-                    onChange={ev => setNombreLocal(ev.target.value)} />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formDireccion">
-                    <Form.Label>Ingrese Dirección</Form.Label>
-                    <Form.Control type="email" placeholder="Dirección"
-                    value={direccion.DireccionLugar} 
-                    onChange={ev => setDireccion((prevState) => {
-                      return([
-                        ...prevState,
-                        direccion.DireccionLugar = ev.target.value
-                      ])
-                    })}/>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formCalle">
-                    <Form.Label>Ingrese calle</Form.Label>
-                    <Form.Control type="email" placeholder="Calle"
-                    value={direccion.Calle} 
-                    onChange={ev => setDireccion((prevState) => {
-                      return([
-                        ...prevState,
-                        direccion.Calle = ev.target.value
-                      ])
-                    })} />
-                  </Form.Group>
-                </Row>
-                <Row className="formNombre">
-                  <Form.Group
-                    as={Col} //FALTA TIPO DE CALLE
-                    md="4"
-                    controlId=""
-                    className="formNombre"
-                  >
-                    <InputGroup >
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Entre calle
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Calle"
-                        className="cuadroTextNombre"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                        value={direccion.Entre_Calle1}
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    
-                    className="position-relative"
-                  ></Form.Group>
-
-                  <Form.Group
-                    className="formUsuario"
-                    as={Col}
-                    md="4"
-                    controlId="ValidacionUser"
-                  >
-                    <InputGroup>
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Entre calle
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Calle"
-                        className="cuadroTextUsuario"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-
-                <Row>
-                  <Form.Group className="mb-3" controlId="formCalle">
-                    <br />
-                    <Form.Label>Ingrese calle</Form.Label>
-                    <Form.Control type="email" placeholder="Calle" />
-                  </Form.Group>
-                </Row>
-
-                <Row className="formNombre">
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="formNombre"
-                  >
-                    <InputGroup >
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Entre calle
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Calle"
-                        className="cuadroTextNombre"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="position-relative"
-                  ></Form.Group>
-
-                  <Form.Group
-                    className="formUsuario"
-                    as={Col}
-                    md="4"
-                    controlId="ValidacionUser"
-                  >
-                    <InputGroup >
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Entre calle
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Calle"
-                        className="cuadroTextUsuario"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
+    <div className="RegistrarDatos2">
+      <div className="RegistrarDatos1">
+        <Form noValidate onSubmit={handleFormSubmit} md={100}>
+          <Row>
+            <Col md={100} className="text-center mb-4">
+              <br />
+              <h2>Crear cuenta</h2>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <AiOutlineMail />
+                </InputGroup.Text>
+                <Form.Control
+                  type="email"
+                  placeholder="Ingresar correo"
+                  value={correo}
+                  onChange={(ev) => setCorreo(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <RiLockPasswordFill />
+                </InputGroup.Text>
+                <Form.Control
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(ev) => setPassword(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <RiLockPasswordFill />
+                </InputGroup.Text>
+                <Form.Control
+                  type="password"
+                  placeholder="Repetir contraseña"
+                  value={altPass}
+                  onChange={(ev) => setAltPass(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BsBuilding />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Nombre del lugar"
+                  value={nombreLocal}
+                  onChange={(ev) => setNombreLocal(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Calle 1"
+                  value={calle1}
+                  onChange={(ev) => setCalle1(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Calle 2"
+                  value={calle2}
+                  onChange={(ev) => setCalle2(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Entre Calle 1"
+                  value={entreCalle11}
+                  onChange={(ev) => setEntreCalle11(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Entre Calle 2"
+                  value={entreCalle21}
+                  onChange={(ev) => setEntreCalle21(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Entre Calle 1"
+                  value={entreCalle12}
+                  onChange={(ev) => setEntreCalle12(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Entre Calle 2"
+                  value={entreCalle22}
+                  onChange={(ev) => setEntreCalle22(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Número exterior"
+                  value={numeroExterior}
+                  onChange={(ev) => setNumeroExterior(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Número interior"
+                  value={numeroInterior}
+                  onChange={(ev) => setNumeroInterior(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Asentamiento"
+                  value={asentamiento}
+                  onChange={(ev) => setAsentamiento(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BiMap />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Municipio"
+                  value={municipio}
+                  onChange={(ev) => setMunicipio(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <RiUserLine />
+                </InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Nombre"
+                  value={nombre}
+                  onChange={(ev) => setNombre(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <FaPhoneAlt />
+                </InputGroup.Text>
+                <Form.Control
+                  type="tel"
+                  placeholder="Número de teléfono"
+                  value={telefono}
+                  onChange={(ev) => setTelefono(ev.target.value)}
+                  autoComplete="off"
+                />
+              </InputGroup>
+            </Form.Group>
+            <br /><br /><br />
+            <BotonEstado />
+            <br />
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={12} className="position-relative mb-3">
+              <Form.Label>Selecciona una imagen para tu logo</Form.Label>
+              {/* Restricción de archivos a imágenes */}
+              <Form.Control type="file" name="file" accept="image/*" />
+              <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                 <br />
-                <Row className="formNombre">
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="formNombre"
-                  >
-                    <InputGroup>
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Nombre
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Nombre"
-                        className="cuadroTextNombre"
-                        aria-describedby="inputGroupPrepend"
-                        name="username"
-                        
-                      
-                      />
-                      <Form.Control.Feedback type="invalid" tooltip>
-                   
-                      </Form.Control.Feedback>
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="position-relative"
-                  >
-                    <Form.Control.Feedback tooltip>bien</Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group
-                    className="formUsuario"
-                    as={Col}
-                    md="4"
-                    controlId="ValidacionUser"
-                  >
-                    {/* <Form.Label className='letrasUsuario'>Usuario nuevo</Form.Label> */}
-                    <InputGroup>
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Num.
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Número de teléfono"
-                        className="cuadroTextUsuario"
-                        aria-describedby="inputGroupPrepend"
-                        name="Numero"
-                     
-                      />
-                      <Form.Control.Feedback type="invalid" tooltip>
-                    
-                      </Form.Control.Feedback>
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                  <Form.Group
-                    as={Col}
-                    md="6"
-                    controlId=""
-                    className="position-relative"
-                  ></Form.Group>
-                  <Form.Group
-                    as={Col}
-                    md="3"
-                    controlId=""
-                    className="position-relative"
-                  ></Form.Group>
-                  <Form.Group
-                    as={Col}
-                    md="3"
-                    controlId=""
-                    className="position-relative"
-                  ></Form.Group>
-                </Row>
-
-                <Form.Group className="mb-3" controlId="">
-                    <Form.Label>Ingrese localidad</Form.Label>
-                    <Form.Control type="" placeholder="localidad" />
-                  </Form.Group>
-
-                <Buttoon></Buttoon>
-
-                <Form.Group className="mb-3" controlId="">
-                    <Form.Label>Ingrese Asentamiento</Form.Label>
-                    <Form.Control type="" placeholder="Asentamiento" />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="">
-                    <Form.Label>Ingrese Municipio</Form.Label>
-                    <Form.Control type="" placeholder="Municipio" />
-                  </Form.Group>
-                  
-                  <br />
-
-                  <Row className="formNombre">
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="formNombre"
-                  >
-                    <InputGroup >
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Numero exterior
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Exterior"
-                        className="cuadroTextNombre"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group
-                    as={Col}
-                    md="4"
-                    controlId=""
-                    className="position-relative"
-                  ></Form.Group>
-
-                  <Form.Group
-                    className="formUsuario"
-                    as={Col}
-                    md="4"
-                    controlId="ValidacionUser"
-                  >
-                    <InputGroup >
-                      <InputGroup.Text id="inputGroupPrepend">
-                        Numero interior
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Interior"
-                        className="cuadroTextUsuario"
-                        aria-describedby="inputGroupPrepend"
-                        name="Calle"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-
-                <br />
-
-                <Form.Group className="position-relative mb-3">
-                  <Form.Label>Selecciona una imagen para tu logo</Form.Label>
-                  <Form.Control
-                    type="file"
-                  
-                    name="file"
-                   
-                  />
-                  <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                  <br />
-                  <Servicios></Servicios>
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Button className="botonCrear" type="submit" href='/PrincipalProv' >
-                  Crear cuenta
-                </Button>
-              </Form>
-         
-        
-        </div>
-      </body>
-      <footer></footer>
+                <div className="centrarServicios">
+                  <Servicios />
+                </div>
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  <BsBuilding />
+                </InputGroup.Text>
+                <DropdownButton
+                  as={InputGroup.Append}
+                  variant="outline-secondary"
+                  title={cantidadTrabajadores || 'Cantidad de trabajadores'}
+                >
+                  {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'].map((opcion, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={() => handleCantidadTrabajadoresSelect(opcion)}
+                    >
+                      {opcion}
+                    </Dropdown.Item>
+                  ))}
+                </DropdownButton>
+              </InputGroup>
+            </Form.Group>
+            <Form.Group as={Col} md={6}>
+              <InputGroup>
+                <InputGroup.Text>
+                  {/* Ícono */}
+                </InputGroup.Text>
+                <DropdownButton
+                  as={InputGroup.Append}
+                  variant="outline-secondary"
+                  title={altaSAT === null ? '¿Está dado de alta en el SAT?' : altaSAT}
+                >
+                  <Dropdown.Item onClick={() => handleAltaSATSelect('Sí')}>Sí</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleAltaSATSelect('No')}>No</Dropdown.Item>
+                </DropdownButton>
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Col md={12} className="text-center">
+              <Button className="botonCrear" type="submit">
+                Crear cuenta
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </div>
     </div>
   );
 }

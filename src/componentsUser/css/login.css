@@ -1,86 +1,62 @@
-
+/* Estilos para el contenedor principal */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: rgb(255, 255, 255);
-    background: radial-gradient(
-      circle,
-      rgba(17, 17, 105, 0.8) 0%,
-      rgba(19, 19, 86, 0.9) 50%
-    );
-    backdrop-filter: blur(5px); /* Agregar efecto de borroso */
-  }
-  .login-content {
-    border-radius: 10%;
-    padding: 3%;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 2px solid #889ce5; /* Borde resaltado */
-    width: 90%;
-    max-width: 400px;
-  }
-  
-  .login-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 28px;
-  }
-  
-  .login-form {
-    padding: 0 15px;
-  }
-  
-  .form-control {
-    width: 100%;
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .input-icon {
-    font-size: 20px;
-    margin-right: 10px;
-  }
-  
-  .botonInicio {
-    background-color: #889ce5;
-    width: 100%;
-  }
-  
-  .registrarse {
-    width: 100%;
-    background-color: #889ce5;
-    margin-top: 10px;
-  }
-  
-  .letraNoCuenta,
-  .letraProv {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .iniciaProve {
-    width: 100%;
-    background-color: #889ce5;
-    margin-top: 10px;
-  }
-  
-  /* Estilos para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .login-content {
-      width: 90%; /* Ajustar el ancho para pantallas más pequeñas */
-    }
-  }
-  .linea-separadora {
-    margin: 20px 0;
-    border-top: 1px solid #ccc;
-  }
-  /* Estilos para los botones */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(
+    circle,
+    rgba(17, 17, 105, 0.8) 0%,
+    rgba(19, 19, 86, 0.9) 50%
+  );
+  backdrop-filter: blur(5px); /* Agregar efecto de borroso */
+}
+
+/* Estilos para el contenido del formulario */
+.login-content {
+  border-radius: 10%;
+  padding: 3%;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid #889ce5; /* Borde resaltado */
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Estilos para el título del formulario */
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* Estilos para el formulario */
+.login-form {
+  padding: 0 15px;
+}
+
+/* Estilos para los campos de entrada */
+.form-control {
+  width: 100%;
+  font-size: 20px; /* Ajustamos el tamaño de fuente */
+  padding: 11px; /* Ajustamos el padding para dar más espacio vertical */
+}
+
+/* Estilos para el contenedor de íconos y campos de entrada */
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Estilos para los íconos */
+.input-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  flex-shrink: 0; /* Evita que el ícono cambie de tamaño */
+}
+
+/* Estilos para los botones */
 .botonInicio,
 .registrarse,
 .iniciaProve {
@@ -91,10 +67,13 @@
   padding: 12px 24px;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  max-width: 300px;
 }
 
 .botonInicio {
@@ -120,16 +99,21 @@
   font-size: 18px;
   margin-right: 8px;
 }
-/* Estilos para el botón de inicio de sesión y registrarse */
-.botonInicio,
-.registrarse,
-.iniciaProve {
-  font-weight: bold;
-  transition: transform 0.2s ease;
-}
 
+/* Estilos para el botón de inicio de sesión y registrarse */
 .botonInicio:hover,
 .registrarse:hover,
 .iniciaProve:hover {
-  transform: scale(1.1); /* Efecto de agrandar al pasar el mouse por encima */
+  transform: scale(1.1);
+}
+
+/* Estilos para el texto debajo de los botones */
+.letraNoCuenta,
+.letraProv {
+  text-align: center;
+  margin-top: 10px;
+}
+.linea-separadora {
+  margin: 20px 0;
+  border-top: 3px solid #ffffff; /* Cambiamos el color a blanco (#ffffff) y aumentamos la altura a 3px */
 }
