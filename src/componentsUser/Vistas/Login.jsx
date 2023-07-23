@@ -5,6 +5,7 @@ import { FaUserPlus } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../css/login.css';
+import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 import axios from 'axios';
 
 async function validarInicio(mail, pass, navigate) {
@@ -94,6 +95,8 @@ function BasicExample() {
   const [pass, setPass] = useState('');
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="login-container">
         <Form className="login-form">
           <div className="input-container">
@@ -154,6 +157,7 @@ function BasicExample() {
         </Form>
     
     </div>
+    </>
   );
 }
 
