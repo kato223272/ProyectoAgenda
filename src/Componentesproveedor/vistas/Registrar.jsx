@@ -269,7 +269,9 @@ function FormExample() {
               <Form.Group as={Col} md={12} className="position-relative mb-3">
                 <Form.Label>Subir documento del SAT</Form.Label>
                 {/* Aquí colocas el componente para cargar el archivo */}
+
                 <Form.Control type="file" name="satDocument" accept=".pdf, .jpg, .png, image/*" />
+
                 <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                   {/* ... (mensaje en caso de documento inválido) */}
                 </Form.Control.Feedback>
