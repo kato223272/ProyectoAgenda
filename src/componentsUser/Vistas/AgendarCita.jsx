@@ -106,17 +106,28 @@ function Inicio() {
       header: {
         fontSize: 24,
         marginBottom: 10,
+        textAlign: 'center',
       },
-      label: {
-        fontSize: 16,
+      companyInfoSection: {
+        marginBottom: 20,
+      },
+      companyName: {
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
       },
-      divider: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-        borderBottomStyle: 'solid',
-        marginBottom: 10,
+      companyContact: {
+        fontSize: 14,
+        marginBottom: 5,
+      },
+      companyAddress: {
+        fontSize: 14,
+        marginBottom: 5,
+      },
+      companyInfoLabel: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 3,
       },
       serviceInfo: {
         display: 'flex',
@@ -135,6 +146,12 @@ function Inicio() {
         fontSize: 14,
         fontWeight: 'bold',
       },
+      divider: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        borderBottomStyle: 'solid',
+        marginBottom: 10,
+      },
       dateTimeLabel: {
         fontSize: 16,
         fontWeight: 'bold',
@@ -143,76 +160,48 @@ function Inicio() {
       dateTimeValue: {
         fontSize: 14,
       },
-      companyInfoSection: {
-        marginBottom: 20,
-      },
-      companyInfoHeader: {
-        fontSize: 24,
-        marginBottom: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-        borderBottomStyle: 'solid',
-      },
-      companyInfoLabel: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 5,
-      },
-      companyName: {
-        fontSize: 18,
-        fontWeight: 'bold',
-      },
-      companyAddress: {
-        fontSize: 14,
-      },
-      companyContact: {
-        fontSize: 14,
-        marginBottom: 5,
-      },
     });
 
     const pdfContent = (
       <Document>
-        <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text style={styles.header}>Comprobante de Cita</Text>
-            <View style={styles.companyInfoSection}>
-              <Text style={styles.companyInfoHeader}>Información de la Empresa:</Text>
-              <Text style={styles.companyInfoLabel}>Nombre de la Empresa:</Text>
-              <Text style={styles.companyName}>{companyInfoData.companyName}</Text>
-              <Text style={styles.companyInfoLabel}>Tipo de Servicio:</Text>
-              <Text>{companyInfoData.serviceType}</Text>
-              <Text style={styles.companyInfoLabel}>Teléfono:</Text>
-              <Text style={styles.companyContact}>{companyInfoData.phoneNumber}</Text>
-              <Text style={styles.companyInfoLabel}>Email:</Text>
-              <Text style={styles.companyContact}>{companyInfoData.email}</Text>
-              <Text style={styles.companyInfoLabel}>Descripción:</Text>
-              <Text>{companyInfoData.bio}</Text>
-              <Text style={styles.companyInfoLabel}>Dirección:</Text>
-              <Text style={styles.companyAddress}>{companyInfoData.address}</Text>
-              <Text style={styles.companyAddress}>Número Interior/Exterior: {companyInfoData.interiorNumber}</Text>
-            </View>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.header}>Comprobante de Cita</Text>
+          <View style={styles.divider} />
+          <View style={styles.companyInfoSection}>
+            <Text style={styles.companyInfoLabel}>Nombre de la Empresa:</Text>
+            <Text style={styles.companyName}>{companyInfoData.companyName}</Text>
+            <Text style={styles.companyInfoLabel}>Tipo de Servicio:</Text>
+            <Text>{companyInfoData.serviceType}</Text>
+            <Text style={styles.companyInfoLabel}>Teléfono:</Text>
+            <Text style={styles.companyContact}>{companyInfoData.phoneNumber}</Text>
+            <Text style={styles.companyInfoLabel}>Email:</Text>
+            <Text style={styles.companyContact}>{companyInfoData.email}</Text>
+            <Text style={styles.companyInfoLabel}>Dirección:</Text>
+            <Text style={styles.companyAddress}>{companyInfoData.address}</Text>
+            <Text style={styles.companyAddress}>Número Interior/Exterior: {companyInfoData.interiorNumber}</Text>
           </View>
-          <View style={styles.section}>
-            <Text style={styles.header}>Información de la Cita:</Text>
-            <View style={styles.serviceInfo}>
-              <Text style={styles.serviceName}>Servicio Seleccionado:</Text>
-              <Text style={styles.serviceName}>{selectedService ? servicesData.find(service => service.id === selectedService)?.name : 'N/A'}</Text>
-            </View>
-            <View style={styles.serviceInfo}>
-              <Text style={styles.serviceDuration}>Duración del Servicio:</Text>
-              <Text style={styles.serviceDuration}>{selectedService ? servicesData.find(service => service.id === selectedService)?.duration : 'N/A'}</Text>
-            </View>
-            <View style={styles.serviceInfo}>
-              <Text style={styles.servicePrice}>Precio del Servicio:</Text>
-              <Text style={styles.servicePrice}>{selectedService ? servicesData.find(service => service.id === selectedService)?.price : 'N/A'}</Text>
-            </View>
-            <View style={styles.divider} />
-            <Text style={styles.dateTimeLabel}>Fecha y Hora de la Cita:</Text>
-            <Text style={styles.dateTimeValue}>{selectedDateTime} - {selectedDateTimeStart} a {selectedDateTimeEnd}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.header}>Información de la Cita:</Text>
+          <View style={styles.serviceInfo}>
+            <Text style={styles.serviceName}>Servicio Seleccionado:</Text>
+            <Text style={styles.serviceName}>{selectedService ? servicesData.find(service => service.id === selectedService)?.name : 'N/A'}</Text>
           </View>
-        </Page>
-      </Document>
+          <View style={styles.serviceInfo}>
+            <Text style={styles.serviceDuration}>Duración del Servicio:</Text>
+            <Text style={styles.serviceDuration}>{selectedService ? servicesData.find(service => service.id === selectedService)?.duration : 'N/A'}</Text>
+          </View>
+          <View style={styles.serviceInfo}>
+            <Text style={styles.servicePrice}>Precio del Servicio:</Text>
+            <Text style={styles.servicePrice}>{selectedService ? servicesData.find(service => service.id === selectedService)?.price : 'N/A'}</Text>
+          </View>
+          <View style={styles.divider} />
+          <Text style={styles.dateTimeLabel}>Fecha y Hora de la Cita:</Text>
+          <Text style={styles.dateTimeValue}>{selectedDateTime} - {selectedDateTimeStart} a {selectedDateTimeEnd}</Text>
+        </View>
+      </Page>
+    </Document>
     );
 
     return pdfContent;
@@ -223,10 +212,16 @@ function Inicio() {
   };
   
   const getPdfLink = () => {
-    if (!isButtonDisabled() && selectedDate && selectedStartTime && selectedEndTime && selectedService) {
+    if (
+      selectedService &&
+      selectedDate &&
+      selectedStartTime &&
+      selectedEndTime &&
+      !isButtonDisabled()
+    ) {
       return (
         <PDFDownloadLink
-          document={generatePdfDocument()}
+          document={generatePdfDocument(selectedService, selectedDate, selectedStartTime, selectedEndTime)}
           fileName={`Cita_${moment(selectedDate).format('YYYY-MM-DD')}.pdf`}
         >
           {({ blob, url, loading, error }) => (
@@ -246,8 +241,9 @@ function Inicio() {
   };
 
   return (
-    <div >
-    <form action="" className='ContenidoTodo'>
+    <div className='fondo'>
+    <div className='ContenidoTodo'>
+    <form action=""   >
       <div className="fondoButton">
         
         <Card.Body className="company-card">
@@ -370,6 +366,7 @@ function Inicio() {
         {selectedDate && selectedStartTime && selectedEndTime && selectedService && getPdfLink()}
       </div>
     </form>
+    </div>
     </div>
   );
 }
