@@ -241,6 +241,7 @@ function Inicio() {
   };
 
   return (
+    <div className='fondo'>
     <div className='ContenidoTodo'>
     <form action=""   >
       <div className="fondoButton">
@@ -365,6 +366,7 @@ function Inicio() {
         {selectedDate && selectedStartTime && selectedEndTime && selectedService && getPdfLink()}
       </div>
     </form>
+    </div>
     </div>
   );
 }
