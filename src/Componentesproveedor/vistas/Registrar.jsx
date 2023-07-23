@@ -22,8 +22,8 @@ function FormExample() {
   const [password, setPassword] = useState('');
   const [altPass, setAltPass] = useState('');
   const [nombreLocal, setNombreLocal] = useState('');
-  const [calle, setCalle] = useState(''); // Modificación: Cambio de "calle1" y "calle2" a "calle"
-  const [referencias, setReferencias] = useState(''); // Nueva adición: Campo de "Referencias"
+  const [calle, setCalle] = useState('');
+  const [referencias, setReferencias] = useState(''); 
   const [numeroExterior, setNumeroExterior] = useState('');
   const [numeroInterior, setNumeroInterior] = useState('');
   const [nombre, setNombre] = useState('');

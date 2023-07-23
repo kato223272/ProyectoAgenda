@@ -176,8 +176,6 @@ export function CartaUsuario({ Nombre_E }) {
   return (
     <div>
       {Nombre_E.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((E, index) => {
-        const blob = new Blob([E.FotoPerfil], { type: "image/jpeg" });
-        const url = E.FotoPerfil ? URL.createObjectURL(blob) : null;
 
         return (
           <div className="fondoPrincipal" key={index}>
@@ -194,9 +192,10 @@ export function CartaUsuario({ Nombre_E }) {
                         <Container className="d-flex justify-content-center align-items-center">
                           <Image
                             className="ImagenProvee"
-                            src={url}
+                            src={`data:image/jpeg;base64,${E.fotoPerfil}`}
                             rounded
                             fluid
+                            alt="imagenDeEmpresa"
                           />
                         </Container>
                       </Col>
@@ -213,7 +212,7 @@ export function CartaUsuario({ Nombre_E }) {
                               marginBottom: "2%",
                             }}
                           >
-                            {E.Nombre_E}
+                            {E.nombre_E}
                           </Card.Title>
                           <Card.Subtitle
                             id="especialidad"
@@ -224,7 +223,7 @@ export function CartaUsuario({ Nombre_E }) {
                             }}
                           >
                             <FaInfo className="icono-especialidad" />
-                            {E.Nombre_Servicio}
+                            {E.nombre_Servicio}
                           </Card.Subtitle>
                           <br />
                           <Card.Text
@@ -239,7 +238,7 @@ export function CartaUsuario({ Nombre_E }) {
                               className="icono-biografia"
                               style={{ fontSize: "1.5vw", marginRight: "2%" }}
                             />
-                            {E.Descripcion}
+                            {E.descripcion}
                           </Card.Text>
                           <Card.Text
                             style={{
@@ -253,7 +252,7 @@ export function CartaUsuario({ Nombre_E }) {
                               className="icono-estado"
                               style={{ fontSize: "1.5vw", marginRight: "2%" }}
                             />
-                            {E.Municipio}
+                            {E.municipio}
                           </Card.Text>
                           <div
                             style={{
@@ -267,7 +266,7 @@ export function CartaUsuario({ Nombre_E }) {
                               className="icono-telefono"
                               style={{ fontSize: "1.3vw", marginRight: "2%" }}
                             />
-                            {E.No_Telf_P}
+                            {E.no_Telf_E}
                           </div>
                           <div className="botones-separados">
                             <Button

@@ -24,7 +24,7 @@ function Inicio() {
     window.addEventListener("scroll", handleScroll);
     const recibirDatos = async () => {
       try{
-        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacionTelf");
+        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacion");
         if(empresas.status == 200){
           const eDLT = empresas.data;
           setEmpresasDLT(eDLT);
