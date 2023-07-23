@@ -18,6 +18,8 @@ function Inicio() {
   const [viewMode, setViewMode] = useState(Views.WEEK);
   const [currentDate, setCurrentDate] = useState(moment().toDate());
 
+
+
   const servicesData = [
     { id: 1, name: 'Servicio 1', duration: '1 hora', price: '$50' },
     { id: 2, name: 'Servicio 2', duration: '2 horas', price: '$80' },
