@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import '../css/login.css';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 import axios from 'axios';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 async function validarInicio(mail, pass, navigate) {
   if (mail.trim() !== '' && pass.trim() !== '') {
@@ -157,6 +158,7 @@ function BasicExample() {
         </Form>
     
     </div>
+    <Footer></Footer>
     </>
   );
 }

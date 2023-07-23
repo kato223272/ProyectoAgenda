@@ -17,6 +17,7 @@ import Servicios from '../components/TipoDeServicio';
 import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 function FormExample() {
   const [correo, setCorreo] = useState('');
@@ -288,6 +289,7 @@ function FormExample() {
         </Form>
       </div>
     </div>
+    <Footer></Footer>
     </>
   );
 }

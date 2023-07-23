@@ -224,7 +224,7 @@ export function CartaUsuario({ Nombre_E }) {
                             }}
                           >
                             <FaInfo className="icono-especialidad" />
-                            {E.Nombre_Servicio}
+                            {E.nombre_Servicio}
                           </Card.Subtitle>
                           <br />
                           <Card.Text
@@ -239,7 +239,7 @@ export function CartaUsuario({ Nombre_E }) {
                               className="icono-biografia"
                               style={{ fontSize: "1.5vw", marginRight: "2%" }}
                             />
-                            {E.Descripcion}
+                            {E.descripcion}
                           </Card.Text>
                           <Card.Text
                             style={{
@@ -267,7 +267,7 @@ export function CartaUsuario({ Nombre_E }) {
                               className="icono-telefono"
                               style={{ fontSize: "1.3vw", marginRight: "2%" }}
                             />
-                            {E.No_Telf_P}
+                            {E.no_Telf_P}
                           </div>
                           <div className="botones-separados">
                             <Button
