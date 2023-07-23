@@ -135,7 +135,7 @@ export function CartaUsuario({Nombre_E}) {
   return Nombre_E.map((E) => {
   const blob = new Blob([E.FotoPerfil], { type: "image/jpeg" });
   const url = E.FotoPerfil ? URL.createObjectURL(blob) : null;
-
+  console.log(E);
     return (
       <div className="fondoPrincipal">
         <Container>
