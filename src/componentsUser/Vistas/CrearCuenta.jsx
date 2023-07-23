@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import '../css/CrearCuenta.css';
 import axios from 'axios';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 function FormExample() {
   const navigate = useNavigate();
@@ -198,6 +199,7 @@ function FormExample() {
         </Button>
       </Form>
     </div>
+    <Footer></Footer>
     </>
   );
 }

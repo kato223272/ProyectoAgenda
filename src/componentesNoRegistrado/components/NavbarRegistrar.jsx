@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaUser, FaUserTie } from 'react-icons/fa';
+import Logo from '../../ComponentGlobales/img/AplyCH logo.png'
 import '../components/NavbarRegistrar.css';
 
 function NavbarComponent() {
@@ -20,6 +21,7 @@ function NavbarComponent() {
             </button>
           </li>
         )}
+        
         <li>
           <Link to="/loginUser">
             <button className="nav-btn">
@@ -35,6 +37,7 @@ function NavbarComponent() {
           </Link>
         </li>
       </ul>
+      <img src={Logo} alt="Ejemplo" style={{ width: '100px' }} />
     </nav>
   );
 }

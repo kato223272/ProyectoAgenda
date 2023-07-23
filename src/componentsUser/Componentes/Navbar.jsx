@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown, FormControl, Button } from 'react-bootstrap';
-import { AiOutlineSearch } from 'react-icons/ai'; // Importa el icono de lupa
+import { AiOutlineSearch, AiOutlineLogout} from 'react-icons/ai'; // Importa el icono de lupa
 import { FaUser, FaHeart, FaCalendarAlt, FaHome, FaClipboardList, FaHistory } from 'react-icons/fa'; // Importa iconos de Font Awesome
 import '../../componentsUser/css/Navbar.css';
 import Logo from '../../ComponentGlobales/img/AplyCH logo.png'
@@ -58,7 +58,7 @@ function NavbarComponent() {
 
           <div className="navLinkSection">
             <Nav.Link className="navLinkItem" id="IniciarSesion" href="/">
-              <FaUser /> <span className="icon-text-separator">Cerrar sesión</span>
+            <AiOutlineLogout className="nav-icon" /><span className="icon-text-separator">Cerrar sesión</span>
             </Nav.Link>
           </div>
         </Navbar.Collapse>
