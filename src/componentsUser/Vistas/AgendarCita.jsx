@@ -29,7 +29,6 @@ function Inicio() {
     serviceType: 'Tipo de Servicio',
     phoneNumber: '+52 961 123 4567',
     email: 'correo@empresa.com',
-    bio: 'Somos una empresa dedicada a brindar...',
     address: 'Dirección de la Empresa',
     interiorNumber: '123',
   };
@@ -245,10 +244,10 @@ function Inicio() {
   };
 
   return (
-    <div className='ContenidoTodo'>
-    <form action="">
+    <div >
+    <form action="" className='ContenidoTodo'>
       <div className="fondoButton">
-        <Card.Img variant="top" src="url_de_la_imagen" alt="Imagen de la empresa" className="company-image" />
+        
         <Card.Body className="company-card">
           <Card.Title className="nombreEmpresa">{companyInfoData.companyName}</Card.Title>
           <Card.Text>{companyInfoData.serviceType}</Card.Text>
