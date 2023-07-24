@@ -12,6 +12,7 @@ import AgendarCita from './componentsUser/Vistas/AgendarCita.jsx'
 import LoginProv from './Componentesproveedor/vistas/LoginProv.jsx'
 import CrearCuentaUser from './componentsUser/Vistas/CrearCuenta.jsx';
 import CrearCuentaProov from './Componentesproveedor/vistas/Registrar.jsx';
+import ListaDeClientes from './Componentesproveedor/vistas/ListaDeClientes.jsx';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
       <Route path="/AgendarCita" element={<AgendarCita/>}/>
       {/* vista proveedor */}
       <Route path="/PrincipalProv" element={<PrincipalProv/>}/>
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="/ListaDeClientes" element={<ListaDeClientes/>} />
 
     </Routes>
 

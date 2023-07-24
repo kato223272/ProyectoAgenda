@@ -23,7 +23,7 @@ function NavbarProv() {
               Editar perfil
             </Nav.Link>
 
-            <Nav.Link href="">
+            <Nav.Link href="/ListaDeClientes">
               <AiOutlineCalendar className="nav-icon" />
               Lista de clientes
             </Nav.Link>
