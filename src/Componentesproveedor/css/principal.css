@@ -1,37 +1,97 @@
 /* Estilos para el icono del horario */
 .icono-horario {
-    margin-right: 10px;
-  }
-  
-  /* Estilos para la tabla de horario */
-  .horario-table {
-    margin-top: 20px;
-  }
-  
-  .horario-table table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .horario-table th,
-  .horario-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .horario-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .horario-table td {
-    font-size: 14px;
-  }
-  
-  /* Estilos para las celdas ocupadas */
-  .horario-table td.ocupado {
-    background-color: #f44336;
-    color: #fff;
-  }
-  
+  margin-right: 10px;
+}
+
+/* Estilos para la tabla de horario */
+.horario-table {
+  margin-top: 20px;
+}
+
+.horario-table table {
+  border-collapse: collapse;
+  width: 80%; /* Ajusta el ancho de la tabla */
+  margin: 0 auto; /* Centra la tabla horizontalmente */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra a la tabla */
+  border-radius: 8px; /* Agrega bordes redondeados */
+}
+
+.horario-table th,
+.horario-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.horario-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.horario-table td {
+  font-size: 14px;
+}
+
+/* Estilos para las celdas ocupadas */
+.horario-table td.ocupado {
+  background-color: #f44336;
+  color: #fff;
+}
+
+/* Estilos adicionales para la página */
+/* Ajustar el tamaño de la fuente del título */
+.horario-header .LetraHorario {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center; /* Centrar el texto */
+}
+
+/* Estilos para el rango de fechas */
+.fecha-semana p {
+  font-size: 16px;
+  text-align: center; /* Centrar el texto */
+}
+
+/* Estilos para la tarjeta */
+.Card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center; /* Centrar el contenido de la tarjeta */
+}
+
+/* Efectos en las letras */
+.LetraHorario {
+  display: inline-block;
+  position: relative;
+  margin-left: 42%;
+  cursor: pointer; 
+}
+
+.LetraHorario::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #007bff; /* Color del efecto */
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.LetraHorario:hover::after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+/* Estilos para la división entre la card y la tabla */
+.division {
+  width: 80%;
+  height: 2px;
+  background-color: #ddd;
+  margin: 20px auto; /* Centrar la división horizontalmente */
+}
