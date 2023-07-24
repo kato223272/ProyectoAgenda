@@ -1,0 +1,106 @@
+/* Estilos para el contenedor principal */
+.Contenidos {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilos para la tabla */
+.tablita {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.tablita th,
+.tablita td {
+    border: 1px solid #d0d0d0;
+    padding: 12px;
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+.tablita th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+}
+
+.tablita tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.tablita tr.cita-futura {
+    background-color: #e5f9e5; /* Color verde para citas futuras */
+}
+
+.tablita tr.cita-pasada {
+    background-color: #ffe6e6; /* Color rojo para citas pasadas */
+}
+
+.tablita tr:hover {
+    background-color: #f3f3f3;
+}
+
+/* Estilos para la hora y fecha actual */
+.datetime {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    font-size: 1.3rem;
+    margin-right: 8px;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Estilos para el título */
+h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+/* Estilos para las celdas con iconos */
+td svg {
+    vertical-align: middle;
+}
+
+/* Estilos para las indicaciones de colores */
+.indication-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.indicator {
+    display: flex;
+    align-items: center;
+}
+
+.indicator .circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.indicator span {
+    font-size: 14px;
+}
+
+.cita-futura .circle {
+    background-color: #4caf50;
+}
+
+.cita-pasada .circle {
+    background-color: #f44336;
+}
