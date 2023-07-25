@@ -38,7 +38,7 @@ function FormExample() {
     event.preventDefault();
     //  para manejar el envío del formulario
   };
-  
+  const [rfc, setRFC] = useState('');
   const handleCantidadTrabajadoresSelect = (cantidad) => {
     setCantidadTrabajadores(cantidad);
   };
@@ -255,30 +255,37 @@ function FormExample() {
                   {/* Ícono */}
                 </InputGroup.Text>
                 <DropdownButton
-                  as={InputGroup.Append}
-                  variant="outline-secondary"
-                  title={altaSAT === null ? '¿Está dado de alta en el SAT?' : altaSAT}
-                >
-                  <Dropdown.Item onClick={() => handleAltaSATSelect('Sí')}>Sí</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleAltaSATSelect('No')}>No</Dropdown.Item>
-                </DropdownButton>
-              </InputGroup>
-            </Form.Group>
-          </Row>
-          {showDocumentUpload && (
-            <Row className="mb-3">
-              <Form.Group as={Col} md={12} className="position-relative mb-3">
-                <Form.Label>Subir documento del SAT</Form.Label>
-                {/* Aquí colocas el componente para cargar el archivo */}
+              as={InputGroup.Append}
+              variant="outline-secondary"
+              title={altaSAT === null ? '¿Está dado de alta en el SAT?' : altaSAT}
+            >
+              <Dropdown.Item onClick={() => setAltaSAT('Sí')}>Sí</Dropdown.Item>
+              <Dropdown.Item onClick={() => setAltaSAT('No')}>No</Dropdown.Item>
+            </DropdownButton>
+          </InputGroup>
+        </Form.Group>
+      
+        {altaSAT === 'Sí' && (
+          
+          <Form.Group as={Col} md={6}>
+            <InputGroup>
+            
+            
 
-                <Form.Control type="file" name="satDocument" accept=".pdf, .jpg, .png, image/*" />
-
-                <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                  {/* ... (mensaje en caso de documento inválido) */}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-          )}
+              <Form.Control
+                type="text"
+                placeholder="RFC"
+                value={rfc}
+                onChange={(ev) => setRFC(ev.target.value)}
+                autoComplete="off"
+                style={{ marginBottom: '20px' }} 
+                className="margen-inferior-rfc" 
+              />
+            </InputGroup>
+          </Form.Group>
+        )}
+        </Row>
+  
           <Row className="mb-3">
             <Col md={12} className="text-center">
               <Button className="botonCrear" type="submit">
