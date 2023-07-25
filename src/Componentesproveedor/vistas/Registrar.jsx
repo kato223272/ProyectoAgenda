@@ -12,6 +12,9 @@ import { BsBuilding } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { RiUserLine } from 'react-icons/ri';
 import { FaPhoneAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+
 import Servicios from '../components/TipoDeServicio';
 import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
@@ -23,13 +26,14 @@ function FormExample() {
   const [password, setPassword] = useState('');
   const [altPass, setAltPass] = useState('');
   const [nombreLocal, setNombreLocal] = useState('');
-  const [calle, setCalle] = useState(''); // Modificación: Cambio de "calle1" y "calle2" a "calle"
-  const [referencias, setReferencias] = useState(''); // Nueva adición: Campo de "Referencias"
+  const [calle, setCalle] = useState('');
+  const [referencias, setReferencias] = useState(''); 
   const [numeroExterior, setNumeroExterior] = useState('');
   const [numeroInterior, setNumeroInterior] = useState('');
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
   const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
+  const [rfc, setRFC] = useState('');
   const [altaSAT, setAltaSAT] = useState(null);
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
@@ -40,10 +44,10 @@ function FormExample() {
     event.preventDefault();
     //  para manejar el envío del formulario
   };
-  const [rfc, setRFC] = useState('');
   const handleCantidadTrabajadoresSelect = (cantidad) => {
     setCantidadTrabajadores(cantidad);
   };
+
 
 
   const handleServiceSelect = (selectedService) => {
@@ -54,6 +58,172 @@ function FormExample() {
   const handleStateSelect = (selectedState) => {
     setEstadoSeleccionado(selectedState);
   };
+
+  const registrarEmpresa = async (objED, navegar, altPass) =>{
+    if(objED.Correo.trim("") && objED.Password.trim("") && objED.Nombre_E.trim("") && objED.Nombre_Servicio.trim("") && 
+    objED.Nombre.trim("") && objED.No_Telf_E.trim("") && objED.Calle.trim("") && objED.N_Exterior.trim("") && 
+    objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
+      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && 
+      objED.RFC.trim("")){
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ objED.RFC +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response.data);
+        }
+      }
+
+      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("")){
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response.data);
+        }
+      }
+
+      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E)){
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response.data);
+        }
+      }
+
+      else if(!(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo))){
+        Swal.fire({
+          icon:'error',
+          title:'Correo mal escrito',
+          text:'Asegurese de escribir un correo válido',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+      
+      else if(objED.Contraseña !== altPass){
+        Swal.fire({
+          icon:'error',
+          title:'Contraseñas diferentes',
+          text:'Las contraseñas escritas son diferentes entre si',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+  
+      else if(/\d/.test(objED.Nombre)){
+        Swal.fire({
+          icon:'error',
+          title:'Nombre imposible',
+          text:'Se detecto numeros en su nombre, intente de nuevo',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+
+      else if(!(/\d/.test(objED.No_Telf_E))){
+        Swal.fire({
+          icon:'error',
+          title:'Número de teléfono con letras',
+          text:'Se detecto letras en el campo de Teléfono, intente de nuevo',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+    }
+
+    else{
+      Swal.fire({
+        icon:'info',
+        title:'Espacios vacíos',
+        text:'Rellene los campos de registro',
+        showConfirmButton:true,
+        confirmButtonText:'Volver a intentarlo'
+      })
+    }
+  }
  
   return (
     <>
@@ -276,9 +446,6 @@ function FormExample() {
           
           <Form.Group as={Col} md={6}>
             <InputGroup>
-            
-            
-
               <Form.Control
                 type="text"
                 placeholder="RFC"
@@ -295,7 +462,23 @@ function FormExample() {
   
           <Row className="mb-3">
             <Col md={12} className="text-center">
-              <Button className="botonCrear" type="submit">
+              <Button className="botonCrear" type="button"
+                onClick={ev => {
+                  const Objeto = {
+                    Correo: correo,
+                    Password: password,
+                    //Nombre_Servicio: <Aquí ingresas el nombre de la constante de Servicio>
+                    Nombre_E: nombreLocal,
+                    Nombre: nombre,
+                    No_Telf_E: telefono,
+                    Calle: calle,
+                    N_Exterior: numeroExterior,
+                    N_Interior: numeroInterior,
+                    /*Pais: Localizacion.Pais,
+                    Estado: Localizacion.Estado, <Ingresas las propiedades del arreglo> 
+                    Municipio: Localizacion.Municipio*/
+                  }
+                }}>
                 Crear cuenta
               </Button>
             </Col>
@@ -307,5 +490,6 @@ function FormExample() {
     </>
   );
 }
+
 
 export default FormExample;

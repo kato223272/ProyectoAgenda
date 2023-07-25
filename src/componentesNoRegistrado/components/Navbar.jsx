@@ -25,11 +25,11 @@ function NavbarComponent() {
               <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<><FaHistory /> Historial</>} id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Elemento 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Elemento 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Elemento 3</NavDropdown.Item>
+              <NavDropdown.Item href="#action3" style={{color:"black"}}>Elemento 1</NavDropdown.Item>
+              <NavDropdown.Item href="#action4" style={{color:"black"}} >Elemento 2</NavDropdown.Item>
+              <NavDropdown.Item href="#action4" style={{color:"black"}}>Elemento 3</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Elemento 4</NavDropdown.Item>
+              <NavDropdown.Item href="#action5" style={{color:"black"}}>Elemento 4</NavDropdown.Item>
             </NavDropdown>
           </Nav>
 

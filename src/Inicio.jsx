@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Element, animateScroll as scroll } from "react-scroll";
 import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los Ã­conos
 import Carousel from "./ComponentGlobales/carousel";
-import CardUser, { CartaUsuario} from "./ComponentGlobales/CardsUser";
+import {CartaUsuario} from "./ComponentGlobales/CardsUser";
 import TextInicio from "./ComponentGlobales/IniciaSesionText";
 import "./componentsUser/css/inicio.css";
 import Footer from "./ComponentGlobales/Footer.jsx";
@@ -24,7 +24,7 @@ function Inicio() {
     window.addEventListener("scroll", handleScroll);
     const recibirDatos = async () => {
       try{
-        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacionTelf");
+        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacion");
         if(empresas.status == 200){
           const eDLT = empresas.data;
           setEmpresasDLT(eDLT);
