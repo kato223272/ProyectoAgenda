@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { AiOutlinePhone, AiOutlineUser, AiOutlineHome, AiOutlineInfoCircle } from 'react-icons/ai';
+import { Location } from 'react-router';
 
 import '../css/Card.css';
 
@@ -8,8 +9,8 @@ function Principal() {
   return (
     <div className="d-flex justify-content-center">
       <Container>
-        <Row className="justify-content-center">
-          <Col xs={12} sm={10} md={8} lg={6}>
+        <Row className="justify-content-center" >
+          <Col xs={12} sm={10} md={8} lg={6} style={{width: "100%"}}>
             <Card className="cardCompleta">
               <Row>
                 <Col xs={12} sm={6}>

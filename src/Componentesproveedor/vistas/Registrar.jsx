@@ -21,6 +21,7 @@ import BotonEstado from '../components/ButtoonEstado';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 import Footer from '../../ComponentGlobales/Footer.jsx';
 import { useNavigate } from 'react-router';
+import { da } from 'date-fns/locale';
 
 function FormExample() {
   const navegar = useNavigate();
@@ -38,7 +39,6 @@ function FormExample() {
   const [rfc, setRFC] = useState('');
   const [altaSAT, setAltaSAT] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
-  const [dataForm, setDataForm] = useState();
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
   const [servicioSeleccionado, setServicioSeleccionado] = useState(''); // Estado para almacenar el servicio seleccionado
@@ -53,11 +53,10 @@ function FormExample() {
   };
 
   const handleImagenUpload = async (e) =>{
-    console.log(e.target.files[0]);
     var formData = new FormData();
     const file = e.target.files[0];
+    console.log(file);
     formData.append("imagen", file, file.name);
-    console.log(formData);
     try{
       const base64 = await axios.post("https://localhost:44310/api/Empresas/RecibirImagenBase64", formData);
       if(base64.status === 200){
@@ -86,25 +85,55 @@ function FormExample() {
     if(tipo === "Municipio"){
       estadoSeleccionado.Municipio = selectedState;
     }
-    console.log(estadoSeleccionado);
   };
 
+  const b64toBlob = (b64Data, contentType='', sliceSize=4096) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
   const registrarEmpresa = async (objED, navegar, altPass) =>{
+    console.log(objED);
+    const blob = b64toBlob(objED.FotoPerfil, 'image/png');
+    const file = new File([blob], "image");
+    var formData = new FormData();
+    formData.append("imagen", file, file.name);
+    console.log(file);
+    console.log(formData);
+
     const correoValido = /^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo);
     const nombreValido = !(/\d/.test(objED.Nombre));
     const passValido = objED.Password === altPass;
-    const numeroValido = (/\d/.test(objED.No_Telf_E) && objED.No_Telf_E.length !== 10);
+    const numeroValido = (/\d/.test(objED.No_Telf_E) && objED.No_Telf_E.length === 10);
+    console.log(numeroValido);
     if(objED.Correo.trim("") && objED.Password.trim("") && objED.Nombre_E.trim("") && objED.Nombre_Servicio.trim("") && 
     objED.Nombre.trim("") && objED.No_Telf_E.trim("") && objED.Calle.trim("") && objED.N_Exterior.trim("") && 
     objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
+      console.log("if principal");
       if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") && 
-      objED.RFC.trim("") && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
+      objED.RFC.trim("") && objED.N_Interior.trim("")){
+        console.log("if principal-1");
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
             objED.RFC + "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -115,7 +144,22 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{
+                          Correo: objED.Correo,
+                          Password: objED.Password,
+                          Nombre_Servicio: objED.Nombre_Servicio,
+                          Nombre_E: objED.Nombre_E,
+                          Nombre: objED.Nombre,
+                          No_Telf_E: objED.No_Telf_E,
+                          Calle: objED.Calle,
+                          N_Exterior: objED.N_Exterior,
+                          N_Interior: objED.N_Interior,
+                          Pais: objED.Pais,
+                          Estado: objED.Estado, 
+                          Municipio: objED.Municipio,
+                          Referencias: objED.Referencias,
+                          RFC: objED.RFC,
+                          FotoPerfil: objED.dataForm}});
                     }
                 }
               );
@@ -133,13 +177,13 @@ function FormExample() {
       }
 
       else if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") 
-      && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
+       && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -150,7 +194,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -167,14 +211,14 @@ function FormExample() {
         }
       }
 
-      else if(correoValido && nombreValido && passValido && numeroValido && objED.FotoPerfil.trim("") 
+      else if(correoValido && nombreValido && passValido && numeroValido  
       && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo + "&RFC=" + objED.RFC +
-            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -185,7 +229,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -209,7 +253,7 @@ function FormExample() {
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -238,13 +282,190 @@ function FormExample() {
       }
 
       else if(correoValido && nombreValido
+        && passValido && numeroValido && objED.N_Interior.trim("") ){
+          try{
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E  +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+      }
+
+      else if(correoValido && nombreValido
+        && passValido && numeroValido  && objED.RFC.trim("")){
+          console.log("if principal-7");
+          console.log("if principal-6");
+          try{
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Exterior="+ objED.N_Exterior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+        }
+
+      else if(correoValido && nombreValido
+      && passValido && numeroValido ){
+        console.log("if principal-7");
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio, formData);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
+        }
+      }
+
+      else if(correoValido && nombreValido
+        && passValido && numeroValido && objED.N_Interior.trim("")){
+          try{
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Interior=" + objED.N_Interior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+        }
+
+        else if(correoValido && nombreValido
+          && passValido && numeroValido && objED.RFC.trim("")){
+            try{
+              const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+                + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+                "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+                "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+                "&RFC=" + objED.RFC);
+                if(response.status === 201){
+                  Swal.fire({
+                    icon:'success',
+                    title:'¡Cuenta creada!',
+                    text:'Iniciando sesión...',
+                    showConfirmButton:true,
+                    confirmButtonText:'Entrar'
+                }).then(
+                    function (result){
+                        if(result.isConfirmed){
+                            navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        }
+                    }
+                  );
+                }
+            } catch(error){
+              Swal.fire({
+                icon:'error',
+                title:'¡Error!',
+                text:'Hubo un problema con el sistema, intente de nuevo.',
+                showConfirmButton:true,
+                confirmButtonText:'Reintentar'
+              });
+              console.error(error.response);
+            }
+          }
+
+      else if(correoValido && nombreValido
       && passValido && numeroValido){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&N_Exterior="+ objED.N_Exterior);
+            "&N_Exterior="+ objED.N_Exterior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -594,8 +815,9 @@ function FormExample() {
                     Municipio: estadoSeleccionado.Municipio,
                     Referencias: referencias,
                     RFC: rfc,
-                    FotoPerfil: imageUrl
+                    FotoPerfil: imageUrl.data
                   }
+                  console.log(Objeto);
                   registrarEmpresa(Objeto, navegar, altPass);
                 }}>
                 Crear cuenta
