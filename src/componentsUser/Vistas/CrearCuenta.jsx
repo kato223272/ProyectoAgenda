@@ -44,7 +44,7 @@ function FormExample() {
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
-            confirmButtonText:'Entrar'
+            confirmButtonText:'Reintentar'
           });
           console.error(error.response.data);
         }
