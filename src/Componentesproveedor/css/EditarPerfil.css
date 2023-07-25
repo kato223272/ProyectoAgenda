@@ -1,4 +1,6 @@
-/* Estilos específicos para el componente EditProfileEmpresa */
+/* Importaciones y definición del componente permanecen igual */
+
+/* Estilos actualizados específicos para el componente EditProfileEmpresa */
 .edit-profile-empresa-container {
   font-family: Arial, sans-serif;
   max-width: 600px;
@@ -46,9 +48,26 @@
   background-color: #f2f2f2;
 }
 
-/* Estilos específicos para los horarios */
-.edit-profile-empresa-container .table-container {
-  overflow-x: auto;
+/* Estilos para separaciones */
+.edit-profile-empresa-container hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/* Estilos para los botones de guardar cambios y botones de editar */
+.edit-profile-empresa-container button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.edit-profile-empresa-container button:hover {
+  background-color: #45a049;
 }
 
 /* Estilos específicos para los servicios */
@@ -80,17 +99,6 @@
 
 .edit-profile-empresa-container .service-item button:hover {
   background-color: #d32f2f;
-}
-
-/* Estilos para el botón de guardar cambios y botones de editar */
-.edit-profile-empresa-container button {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 10px;
 }
 
 /* Estilos específicos para el formulario en pantallas pequeñas */
