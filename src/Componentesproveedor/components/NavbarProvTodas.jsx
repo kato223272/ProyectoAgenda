@@ -18,7 +18,7 @@ function NavbarProv() {
               Inicio
             </Nav.Link>
 
-            <Nav.Link href="">
+            <Nav.Link href="/EditarPerfil">
               <AiOutlineUser className="nav-icon" />
               Editar perfil
             </Nav.Link>

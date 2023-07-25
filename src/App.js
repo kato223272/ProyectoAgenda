@@ -13,7 +13,7 @@ import LoginProv from './Componentesproveedor/vistas/LoginProv.jsx'
 import CrearCuentaUser from './componentsUser/Vistas/CrearCuenta.jsx';
 import CrearCuentaProov from './Componentesproveedor/vistas/Registrar.jsx';
 import ListaDeClientes from './Componentesproveedor/vistas/ListaDeClientes.jsx';
-
+import EditarPerfil from './Componentesproveedor/vistas/EditarPerfil.jsx';
 function App() {
   return (
    
@@ -36,7 +36,7 @@ function App() {
       {/* vista proveedor */}
       <Route path="/PrincipalProv" element={<PrincipalProv/>}/>
       <Route path="/ListaDeClientes" element={<ListaDeClientes/>} />
-
+      <Route path="/EditarPerfil" element={<EditarPerfil/>} />
     </Routes>
 
   </Router>
