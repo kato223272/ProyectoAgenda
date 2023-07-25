@@ -165,7 +165,7 @@ function FormExample() {
         });
       }
       
-      else if(objED.Contraseña !== passAux){
+      else if(objED.Contraseña !== altPass){
         Swal.fire({
           icon:'error',
           title:'Contraseñas diferentes',
