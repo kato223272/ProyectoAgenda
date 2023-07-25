@@ -215,17 +215,17 @@ function FormExample() {
             <br />
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md={12} className="position-relative mb-3">
-              <Form.Label>Selecciona una imagen para tu logo</Form.Label>
-              {/* Restricción de archivos a imágenes */}
-              <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
-              <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                <br />
-                <div className="centrarServicios">
-                  <Servicios />
-                </div>
-              </Form.Control.Feedback>
-            </Form.Group>
+              <Form.Group as={Col} md={12} className="position-relative mb-3">
+                <Form.Label>Selecciona una imagen para tu logo</Form.Label>
+                {/* Restricción de archivos a imágenes */}
+                <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
+                <Form.Control.Feedback type="DocumentoInvalido" tooltip>
+                  <br />
+                  <div className="centrarServicios">
+                    <Servicios />
+                  </div>
+                </Form.Control.Feedback>
+              </Form.Group>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md={6}>
