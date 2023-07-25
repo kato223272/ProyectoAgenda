@@ -10,10 +10,10 @@
 
 .horario-table table {
   border-collapse: collapse;
-  width: 80%; /* Ajusta el ancho de la tabla */
-  margin: 0 auto; /* Centra la tabla horizontalmente */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra a la tabla */
-  border-radius: 8px; /* Agrega bordes redondeados */
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .horario-table th,
@@ -43,13 +43,13 @@
 .horario-header .LetraHorario {
   font-size: 20px;
   margin-bottom: 10px;
-  text-align: center; /* Centrar el texto */
+  text-align: center;
 }
 
 /* Estilos para el rango de fechas */
 .fecha-semana p {
   font-size: 16px;
-  text-align: center; /* Centrar el texto */
+  text-align: center;
 }
 
 /* Estilos para la tarjeta */
@@ -59,7 +59,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  text-align: center; /* Centrar el contenido de la tarjeta */
+  text-align: center;
 }
 
 /* Efectos en las letras */
@@ -67,7 +67,7 @@
   display: inline-block;
   position: relative;
   margin-left: 42%;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .LetraHorario::after {
@@ -93,5 +93,5 @@
   width: 80%;
   height: 2px;
   background-color: #ddd;
-  margin: 20px auto; /* Centrar la división horizontalmente */
+  margin: 20px auto;
 }
