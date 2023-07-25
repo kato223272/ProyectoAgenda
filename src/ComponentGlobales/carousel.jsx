@@ -16,7 +16,7 @@ function CarouselComponent() {
           />
         </div>
         <Carousel.Caption>
-          <h3 className="titulo">Descubre Nuestros Servicios</h3>
+          <h3 className="titulo" style={{ color: '#36947f' }}>Descubre Nuestros Servicios</h3>
           <p className="descripcion" style={{ color: '#000' }}>Explora nuestra amplia gama de servicios para encontrar el que mejor se ajuste a tus necesidades.</p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -29,7 +29,7 @@ function CarouselComponent() {
           />
         </div>
         <Carousel.Caption>
-          <h3 className="titulo">Agenda Citas Fácilmente</h3>
+          <h3 className="titulo" style={{ color: '#36947f' }}>Agenda Citas Fácilmente</h3>
           <p className="descripcion" style={{ color: '#000' }}>Con un simple click, podrás agendar tus citas de manera rápida y conveniente.</p>
         </Carousel.Caption>
       </Carousel.Item>

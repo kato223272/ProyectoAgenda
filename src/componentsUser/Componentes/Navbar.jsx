@@ -58,7 +58,7 @@ function NavbarComponent() {
 
           <div className="navLinkSection">
             <Nav.Link className="navLinkItem" id="IniciarSesion" href="/">
-            <AiOutlineLogout className="nav-icon" /><span className="icon-text-separator">Cerrar sesión</span>
+            <AiOutlineLogout className="nav-icon cerrar" /><span className="icon-text-separator">Cerrar sesión</span>
             </Nav.Link>
           </div>
         </Navbar.Collapse>
