@@ -56,7 +56,7 @@ function Principal() {
   }, [fechaActual]);
 
   return (
-    <div>
+    <div className="principal-page">
       <Navbar />
       <br />
       <Card />
