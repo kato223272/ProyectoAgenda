@@ -12,7 +12,6 @@ import { BsBuilding } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { RiUserLine } from 'react-icons/ri';
 import { FaPhoneAlt } from 'react-icons/fa';
-import { AiOutlineFileImage } from 'react-icons/ai';
 import Servicios from '../components/TipoDeServicio';
 import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
@@ -34,6 +33,9 @@ function FormExample() {
   const [altaSAT, setAltaSAT] = useState(null);
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
+  const [servicioSeleccionado, setServicioSeleccionado] = useState(''); // Estado para almacenar el servicio seleccionado
+  const [estadoSeleccionado, setEstadoSeleccionado] = useState(''); // Estado para almacenar el estado seleccionado
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     //  para manejar el envío del formulario
@@ -42,10 +44,15 @@ function FormExample() {
   const handleCantidadTrabajadoresSelect = (cantidad) => {
     setCantidadTrabajadores(cantidad);
   };
+
+
+  const handleServiceSelect = (selectedService) => {
+    setServicioSeleccionado(selectedService);
+  };
+
   
-  const handleAltaSATSelect = (opcion) => {
-    setAltaSAT(opcion);
-    setShowDocumentUpload(opcion === 'Sí'); 
+  const handleStateSelect = (selectedState) => {
+    setEstadoSeleccionado(selectedState);
   };
  
   return (
@@ -211,7 +218,7 @@ function FormExample() {
               </InputGroup>
             </Form.Group>
             <br /><br /><br />
-            <BotonEstado />
+            <BotonEstado onStateSelect={handleStateSelect}/>
             <br />
           </Row>
           <Row className="mb-3">
@@ -222,7 +229,7 @@ function FormExample() {
                 <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                   <br />
                   <div className="centrarServicios">
-                    <Servicios />
+                    <Servicios onServiceSelect={handleServiceSelect}/>
                   </div>
                 </Form.Control.Feedback>
               </Form.Group>
