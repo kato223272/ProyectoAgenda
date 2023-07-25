@@ -90,17 +90,20 @@ function FormExample() {
   };
 
   const registrarEmpresa = async (objED, navegar, altPass) =>{
+    const correoValido = /^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo);
+    const nombreValido = !(/\d/.test(objED.Nombre));
+    const passValido = objED.Password === altPass;
+    const numeroValido = (/\d/.test(objED.No_Telf_E) && objED.No_Telf_E.length !== 10);
     if(objED.Correo.trim("") && objED.Password.trim("") && objED.Nombre_E.trim("") && objED.Nombre_Servicio.trim("") && 
     objED.Nombre.trim("") && objED.No_Telf_E.trim("") && objED.Calle.trim("") && objED.N_Exterior.trim("") && 
     objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
-      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && 
+      if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") && 
       objED.RFC.trim("") && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ objED.RFC +
-            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
+            objED.RFC + "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
             if(response.status === 201){
               Swal.fire({
@@ -129,9 +132,8 @@ function FormExample() {
         }
       }
 
-      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && objED.FotoPerfil.trim("")
-      && objED.N_Interior.trim("")){
+      else if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") 
+      && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
@@ -165,14 +167,14 @@ function FormExample() {
         }
       }
 
-      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
+      else if(correoValido && nombreValido && passValido && numeroValido && objED.FotoPerfil.trim("") 
+      && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
-            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo + "&RFC=" + objED.RFC +
             "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -200,14 +202,49 @@ function FormExample() {
         }
       }
 
-      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.N_Interior.trim("")){
+      else if(correoValido && nombreValido
+      && passValido && numeroValido && objED.N_Interior.trim("") && objED.RFC.trim("")){
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
+        }
+      }
+
+      else if(correoValido && nombreValido
+      && passValido && numeroValido){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&N_Exterior="+ objED.N_Exterior);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -235,7 +272,7 @@ function FormExample() {
         }
       }
 
-      else if(!(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo))){
+      else if(!(correoValido)){
         Swal.fire({
           icon:'error',
           title:'Correo mal escrito',
@@ -246,7 +283,7 @@ function FormExample() {
         });
       }
       
-      else if(objED.Password !== altPass){
+      else if(!passValido){
         Swal.fire({
           icon:'error',
           title:'Contraseñas diferentes',
