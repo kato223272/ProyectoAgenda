@@ -19,9 +19,26 @@ function NavbarComponent() {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="menuIzquierda me-auto my-2 my-lg-0" navbarScroll>
             <NavDropdown title={<><FaClipboardList /> Corporación</>} id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Psicología</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Estética</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Barbería</NavDropdown.Item>
+              <NavDropdown.Item href="">Psicología</NavDropdown.Item>
+              <NavDropdown.Item href="">Estética</NavDropdown.Item>
+              <NavDropdown.Item href="">Barbería</NavDropdown.Item>
+              <NavDropdown.Item href="">Masajes</NavDropdown.Item>
+              <NavDropdown.Item href="">Terapía física</NavDropdown.Item>
+              <NavDropdown.Item href="">Fisioterapia</NavDropdown.Item>
+              <NavDropdown.Item href="">Odontologia</NavDropdown.Item>
+              <NavDropdown.Item href="">Dermatología</NavDropdown.Item>
+              <NavDropdown.Item href="">Quiropráctica</NavDropdown.Item>
+              <NavDropdown.Item href="">podología</NavDropdown.Item>
+              <NavDropdown.Item href="">Terapia ocupacional</NavDropdown.Item>
+              <NavDropdown.Item href="">Terapia de lenguaje</NavDropdown.Item>
+              <NavDropdown.Item href="">Médicina general</NavDropdown.Item>
+              <NavDropdown.Item href="">Ginecología</NavDropdown.Item>
+              <NavDropdown.Item href="">Oftalmología</NavDropdown.Item>
+              <NavDropdown.Item href="">Cirugía plástica</NavDropdown.Item>
+              <NavDropdown.Item href="">Acupuntura</NavDropdown.Item>
+              <NavDropdown.Item href="">Homeopatía</NavDropdown.Item>
+              <NavDropdown.Item href="">Endocrinología</NavDropdown.Item>
+              <NavDropdown.Item href="">Pediatría</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>

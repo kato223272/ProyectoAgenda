@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import '../css/EditarPerfil.css';
 import Navbar from '../components/NavbarProvTodas';
 import Footer from '../../ComponentGlobales/Footer.jsx';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 const EditProfileEmpresa = () => {
   const [empresaInfo, setEmpresaInfo] = useState({
     nombre: '',
@@ -28,7 +31,7 @@ const EditProfileEmpresa = () => {
   const [showEditBiografia, setShowEditBiografia] = useState(false);
   const [showEditDireccion, setShowEditDireccion] = useState(false);
   const [showEditReferencias, setShowEditReferencias] = useState(false);
-
+  const [trabajadorInfo, setTrabajadorInfo] = useState([]);
 
   const duracionOptions = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -90,11 +93,56 @@ for (let hora = 0; hora < 24; hora++) {
   horasOptions.push(`${horaStr}:00`);
 }
 
+const handleAgregarTrabajador = () => {
+  setTrabajadorInfo([
+    ...trabajadorInfo,
+    {
+      horarios: {
+        lunes: { inicio: '', fin: '', labora: true },
+        martes: { inicio: '', fin: '', labora: true },
+        miercoles: { inicio: '', fin: '', labora: true },
+        jueves: { inicio: '', fin: '', labora: true },
+        viernes: { inicio: '', fin: '', labora: true },
+        sábado: { inicio: '', fin: '', labora: true },
+        domingo: { inicio: '', fin: '', labora: true },
+      },
+    },
+  ]);
+};
+
+const handleEliminarTrabajador = (index) => {
+  const nuevosTrabajadores = [...trabajadorInfo];
+  nuevosTrabajadores.splice(index, 1);
+  setTrabajadorInfo(nuevosTrabajadores);
+};
+
+const handleHorarioTrabajadorChange = (trabajadorIndex, dia, field, value) => {
+  const nuevosTrabajadores = [...trabajadorInfo];
+  nuevosTrabajadores[trabajadorIndex].horarios[dia][field] = value;
+  setTrabajadorInfo(nuevosTrabajadores);
+};
+
+const handleLaboraChangeTrabajador = (trabajadorIndex, dia, value) => {
+  const nuevosTrabajadores = [...trabajadorInfo];
+  nuevosTrabajadores[trabajadorIndex].horarios[dia].labora = value;
+  setTrabajadorInfo(nuevosTrabajadores);
+};
+
 
   return (
     <>
     <Navbar />
     <div className="edit-profile-empresa-container">
+    <h1>Cambiar logo de la empresa</h1>
+    <Form.Group as={Col} md={12} className="position-relative mb-3">
+              <Form.Label>Selecciona una imagen para tu logo</Form.Label>
+              {/* Restricción de archivos a imágenes */}
+              <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
+              <Form.Control.Feedback type="DocumentoInvalido" tooltip>
+                <br />
+               
+              </Form.Control.Feedback>
+            </Form.Group>
       <h1>Editar Perfil de Empresa</h1>
       <div className="edit-button-container">
         <h2>Datos Generales</h2>
@@ -206,7 +254,7 @@ for (let hora = 0; hora < 24; hora++) {
       </div>
 
       <div>
-        <h2>Horario General</h2>
+        <h2>Horario</h2>
         <div className="table-container">
           <table>
             <thead>
@@ -258,7 +306,7 @@ for (let hora = 0; hora < 24; hora++) {
           </table>
         </div>
       </div>
-
+    <div>
       <div>
       <h2>Servicios</h2>
           {empresaInfo.servicios.map((servicio, index) => (
@@ -292,6 +340,83 @@ for (let hora = 0; hora < 24; hora++) {
             Agregar Servicio
           </button>
                 </div>
+                <div>
+                </div>
+        <h2>Horarios para Trabajadores</h2>
+        {trabajadorInfo.map((trabajador, index) => (
+          <div key={index}>
+            <h3>Trabajador {index + 1}</h3>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Día</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de fin</th>
+                    <th>Labora</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(trabajador.horarios).map((dia) => (
+                    <tr key={dia}>
+                      <td>{dia}</td>
+                      <td>
+                        <select
+                          value={trabajador.horarios[dia].inicio}
+                          onChange={(e) =>
+                            handleHorarioTrabajadorChange(
+                              index,
+                              dia,
+                              'inicio',
+                              e.target.value
+                            )
+                          }
+                        >
+                          {horasOptions.map((hora) => (
+                            <option key={hora} value={hora}>
+                              {hora}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                      <td>
+                        <select
+                          value={trabajador.horarios[dia].fin}
+                          onChange={(e) =>
+                            handleHorarioTrabajadorChange(
+                              index,
+                              dia,
+                              'fin',
+                              e.target.value
+                            )
+                          }
+                        >
+                          {horasOptions.map((hora) => (
+                            <option key={hora} value={hora}>
+                              {hora}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={trabajador.horarios[dia].labora}
+                          onChange={(e) =>
+                            handleLaboraChangeTrabajador(index, dia, e.target.checked)
+                          }
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <button onClick={() => handleEliminarTrabajador(index)}>Eliminar Trabajador</button>
+          </div>
+        ))}
+        <button onClick={handleAgregarTrabajador}>Agregar Trabajador</button>
+      </div>
 
         <button>Guardar Cambios Generales</button>
       </div>
