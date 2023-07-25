@@ -140,3 +140,7 @@ body {
     justify-content: center;
     align-items: center;
   }
+  .margen-inferior-rfc {
+    margin-bottom: 20%;
+    margin-top:10%;
+  }
