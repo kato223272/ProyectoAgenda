@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../css/Buttoon.css';
 
-function DropdownItemTagsExample() {
+function DropdownItemTagsExample({handleServiceSelect}) {
   const [searchText, setSearchText] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -94,12 +94,12 @@ function DropdownItemTagsExample() {
     { id: 69, text: 'Servicio de Reparación de Electrónicos o Dispositivos' },
     { id: 70, text: 'Consulta con Asesor de Estilo Personal o Moda' },
     { id: 71, text: 'Servicio de Reparación y Mantenimiento de Automóviles' },
-    { id: 70, text: 'Estilista de cabello' },
-    { id: 70, text: 'Manicurista' },
-    { id: 70, text: 'Peluquero/a canino' },
-    { id: 70, text: 'extensiones de pestañas' },
-    { id: 70, text: 'Diseño y realización de tatuajes' },
-    { id: 70, text: 'Depilación'},
+    { id: 72, text: 'Estilista de cabello' },
+    { id: 73, text: 'Manicurista' },
+    { id: 74, text: 'Peluquero/a canino' },
+    { id: 75, text: 'extensiones de pestañas' },
+    { id: 76, text: 'Diseño y realización de tatuajes' },
+    { id: 77, text: 'Depilación'},
   ];
   useEffect(() => {
     // Filtro de servicios en función del texto de búsqueda
@@ -133,7 +133,10 @@ function DropdownItemTagsExample() {
             <Dropdown.Item
               key={servicio.id}
               as="button"
-              onClick={(e) => handleItemClick(e, servicio)}
+              onClick={(e) => {
+                handleItemClick(e, servicio);
+                handleServiceSelect(servicio.text);
+              }}
             >
               {servicio.text}
             </Dropdown.Item>
