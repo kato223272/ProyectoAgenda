@@ -12,7 +12,8 @@ import { BsBuilding } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { RiUserLine } from 'react-icons/ri';
 import { FaPhoneAlt } from 'react-icons/fa';
-import { AiOutlineFileImage } from 'react-icons/ai';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 import Servicios from '../components/TipoDeServicio';
 import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
@@ -48,8 +49,29 @@ function FormExample() {
     setShowDocumentUpload(opcion === 'Sí'); 
   };
 
-  const registrarEmpresa = () =>{
-    
+  const registrarEmpresa = (objED, navegar, altPass) =>{
+    if(objED.Correo.trim("") && objED.Password.trim("") && objED.Nombre_E.trim("") && objED.Nombre_Servicio.trim("") && 
+    objED.Nombre.trim("") && objED.No_Telf_E.trim("") && objED.Calle.trim("") && objED.N_Exterior.trim("") && 
+    objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
+      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E)){
+        try{
+          
+        } catch(error){
+
+        }
+      }
+    }
+
+    else{
+      Swal.fire({
+        icon:'info',
+        title:'Espacios vacíos',
+        text:'Rellene los campos de registro',
+        showConfirmButton:true,
+        confirmButtonText:'Volver a intentarlo'
+      })
+    }
   }
  
   return (
@@ -285,7 +307,8 @@ function FormExample() {
           )}
           <Row className="mb-3">
             <Col md={12} className="text-center">
-              <Button className="botonCrear" type="submit">
+              <Button className="botonCrear" type="button"
+                >
                 Crear cuenta
               </Button>
             </Col>
@@ -297,5 +320,6 @@ function FormExample() {
     </>
   );
 }
+
 
 export default FormExample;
