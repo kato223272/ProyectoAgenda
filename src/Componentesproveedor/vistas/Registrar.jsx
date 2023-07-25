@@ -20,8 +20,10 @@ import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 import Footer from '../../ComponentGlobales/Footer.jsx';
+import { useNavigate } from 'react-router';
 
 function FormExample() {
+  const navegar = useNavigate();
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [altPass, setAltPass] = useState('');
@@ -35,10 +37,12 @@ function FormExample() {
   const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
   const [rfc, setRFC] = useState('');
   const [altaSAT, setAltaSAT] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [dataForm, setDataForm] = useState();
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
   const [servicioSeleccionado, setServicioSeleccionado] = useState(''); // Estado para almacenar el servicio seleccionado
-  const [estadoSeleccionado, setEstadoSeleccionado] = useState(''); // Estado para almacenar el estado seleccionado
+  const [estadoSeleccionado, setEstadoSeleccionado] = useState([]); // Estado para almacenar el estado seleccionado
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -48,6 +52,21 @@ function FormExample() {
     setCantidadTrabajadores(cantidad);
   };
 
+  const handleImagenUpload = async (e) =>{
+    console.log(e.target.files[0]);
+    var formData = new FormData();
+    const file = e.target.files[0];
+    formData.append("imagen", file, file.name);
+    console.log(formData);
+    try{
+      const base64 = await axios.post("https://localhost:44310/api/Empresas/RecibirImagenBase64", formData);
+      if(base64.status === 200){
+        setImageUrl(base64);
+      }
+    } catch(error){
+        console.error(error.response);
+    }
+  }
 
 
   const handleServiceSelect = (selectedService) => {
@@ -55,8 +74,19 @@ function FormExample() {
   };
 
   
-  const handleStateSelect = (selectedState) => {
-    setEstadoSeleccionado(selectedState);
+  const handleStateSelect = (selectedState, tipo) => {
+    if(tipo === "Estado"){
+      estadoSeleccionado.Estado = selectedState;
+    }
+
+    if(tipo === "Pais"){
+      estadoSeleccionado.Pais = selectedState;
+    }
+
+    if(tipo === "Municipio"){
+      estadoSeleccionado.Municipio = selectedState;
+    }
+    console.log(estadoSeleccionado);
   };
 
   const registrarEmpresa = async (objED, navegar, altPass) =>{
@@ -65,11 +95,11 @@ function FormExample() {
     objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
       if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
       && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && 
-      objED.RFC.trim("")){
+      objED.RFC.trim("") && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ objED.RFC +
+            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ objED.RFC +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
             if(response.status === 201){
@@ -95,16 +125,17 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
         }
       }
 
       else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("")){
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && objED.FotoPerfil.trim("")
+      && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
             if(response.status === 201){
@@ -130,16 +161,16 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
         }
       }
 
       else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E)){
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.FotoPerfil.trim("") && objED.N_Interior.trim("")){
         try{
           const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Pass="+ objED.Password + "&FotoPerfil=" + objED.FotoPerfil +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
             if(response.status === 201){
@@ -165,7 +196,42 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
+        }
+      }
+
+      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
+      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.N_Interior.trim("")){
+        try{
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
         }
       }
 
@@ -180,7 +246,7 @@ function FormExample() {
         });
       }
       
-      else if(objED.Contraseña !== altPass){
+      else if(objED.Password !== altPass){
         Swal.fire({
           icon:'error',
           title:'Contraseñas diferentes',
@@ -207,6 +273,17 @@ function FormExample() {
           icon:'error',
           title:'Número de teléfono con letras',
           text:'Se detecto letras en el campo de Teléfono, intente de nuevo',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+
+      else if(objED.No_Telf_E.length !== 10){
+        Swal.fire({
+          icon:'error',
+          title:'Número de teléfono con más o menos de 10 dígitos',
+          text:'Se detecto un número de teléfono imposible, asegúrese de escribir sin (+52) y solo dígitos',
           showConfirmButton:false,
           showDenyButton:true,
           denyButtonText:'Volver a intentarlo'
@@ -388,18 +465,18 @@ function FormExample() {
               </InputGroup>
             </Form.Group>
             <br /><br /><br />
-            <BotonEstado onStateSelect={handleStateSelect}/>
+            <BotonEstado handleStateSelect={handleStateSelect}/>
             <br />
           </Row>
           <Row className="mb-3">
               <Form.Group as={Col} md={12} className="position-relative mb-3">
                 <Form.Label>Selecciona una imagen para tu logo</Form.Label>
                 {/* Restricción de archivos a imágenes */}
-                <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
+                <Form.Control type="file" name="file" accept="image/*, .jpg, .png" onChange={e => handleImagenUpload(e)} />
                 <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                   <br />
                   <div className="centrarServicios">
-                    <Servicios onServiceSelect={handleServiceSelect}/>
+                    <Servicios handleServiceSelect={handleServiceSelect}/>
                   </div>
                 </Form.Control.Feedback>
               </Form.Group>
@@ -464,20 +541,25 @@ function FormExample() {
             <Col md={12} className="text-center">
               <Button className="botonCrear" type="button"
                 onClick={ev => {
+
                   const Objeto = {
                     Correo: correo,
                     Password: password,
-                    //Nombre_Servicio: <Aquí ingresas el nombre de la constante de Servicio>
+                    Nombre_Servicio: servicioSeleccionado,
                     Nombre_E: nombreLocal,
                     Nombre: nombre,
                     No_Telf_E: telefono,
                     Calle: calle,
                     N_Exterior: numeroExterior,
                     N_Interior: numeroInterior,
-                    /*Pais: Localizacion.Pais,
-                    Estado: Localizacion.Estado, <Ingresas las propiedades del arreglo> 
-                    Municipio: Localizacion.Municipio*/
+                    Pais: estadoSeleccionado.Pais,
+                    Estado: estadoSeleccionado.Estado, 
+                    Municipio: estadoSeleccionado.Municipio,
+                    Referencias: referencias,
+                    RFC: rfc,
+                    FotoPerfil: imageUrl
                   }
+                  registrarEmpresa(Objeto, navegar, altPass);
                 }}>
                 Crear cuenta
               </Button>
