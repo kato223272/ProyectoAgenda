@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import '../css/EditarPerfil.css';
 import Navbar from '../components/NavbarProvTodas';
 import Footer from '../../ComponentGlobales/Footer.jsx';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Servicios from '../components/TipoDeServicio';
+
+
 const EditProfileEmpresa = () => {
   const [empresaInfo, setEmpresaInfo] = useState({
     nombre: '',
@@ -24,7 +24,7 @@ const EditProfileEmpresa = () => {
     },
     servicios: [],
   });
-  
+
   const [showEditNombre, setShowEditNombre] = useState(false);
   const [showEditEspecialidad, setShowEditEspecialidad] = useState(false);
   const [showEditTelefono, setShowEditTelefono] = useState(false);
@@ -32,8 +32,13 @@ const EditProfileEmpresa = () => {
   const [showEditDireccion, setShowEditDireccion] = useState(false);
   const [showEditReferencias, setShowEditReferencias] = useState(false);
   const [trabajadorInfo, setTrabajadorInfo] = useState([]);
+  const [showLogoDialog, setShowLogoDialog] = useState(false);
+  const [isChangingLogo, setIsChangingLogo] = useState(false);
+
+  const [logoPreviewSrc, setLogoPreviewSrc] = useState(null);
 
   const duracionOptions = [1, 2, 3, 4, 5, 6, 7, 8];
+ 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -128,21 +133,53 @@ const handleLaboraChangeTrabajador = (trabajadorIndex, dia, value) => {
   setTrabajadorInfo(nuevosTrabajadores);
 };
 
-
+const handleLogoSelected = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setLogoPreviewSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+    setShowLogoDialog(false);
+  }; 
+  
+ 
+  const handleShowLogoDialog = () => {
+    setShowLogoDialog((prevShowLogoDialog) => {
+      if (prevShowLogoDialog && isChangingLogo) {
+       
+        setIsChangingLogo(false);
+        return false;
+      } else {
+       
+        setIsChangingLogo(true);
+        return true;
+      }
+    });
+  };
   return (
     <>
     <Navbar />
     <div className="edit-profile-empresa-container">
-    <h1>Cambiar logo de la empresa</h1>
-    <Form.Group as={Col} md={12} className="position-relative mb-3">
-              <Form.Label>Selecciona una imagen para tu logo</Form.Label>
-              {/* Restricción de archivos a imágenes */}
-              <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
-              <Form.Control.Feedback type="DocumentoInvalido" tooltip>
-                <br />
-               
-              </Form.Control.Feedback>
-            </Form.Group>
+      <h1>Cambiar logo de la empresa</h1>
+      {/* Botón para cambiar el logo de la empresa */}
+      <button onClick={handleShowLogoDialog}>
+        {isChangingLogo ? 'Cancelar Cambiar Logo' : 'Cambiar Logo'}
+      </button>
+
+      {/* Cuadro de diálogo para seleccionar la imagen del logo */}
+      {showLogoDialog && (
+        <div className="logo-dialog-container">
+          <input
+            type="file"
+            onChange={handleLogoSelected}
+            accept="image/*, .jpg, .png"
+          />
+        </div>
+      )}
+
       <h1>Editar Perfil de Empresa</h1>
       <div className="edit-button-container">
         <h2>Datos Generales</h2>
@@ -167,12 +204,7 @@ const handleLaboraChangeTrabajador = (trabajadorIndex, dia, value) => {
         <label>Especialidad:</label>
         {showEditEspecialidad ? (
           <>
-            <input
-              type="text"
-              name="especialidad"
-              value={empresaInfo.especialidad}
-              onChange={handleInputChange}
-            />
+           <Servicios></Servicios>
             <button onClick={() => setShowEditEspecialidad(false)} className={`edit-button ${showEditNombre ? "active" : ""}`}>Guardar Cambios</button>
           </>
         ) : (
@@ -423,7 +455,7 @@ const handleLaboraChangeTrabajador = (trabajadorIndex, dia, value) => {
       <Footer />
     </>
   );
-};
+                        };
 
 
 export default EditProfileEmpresa;

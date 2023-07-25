@@ -28,7 +28,7 @@ function NavbarProv() {
               Lista de clientes
             </Nav.Link>
 
-            <Nav.Link href="">
+            <Nav.Link href="/IngresosGenerados">
               <AiOutlineCalendar className="nav-icon" />
               Ingresos generados
             </Nav.Link>
