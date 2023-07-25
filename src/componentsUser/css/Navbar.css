@@ -25,7 +25,7 @@
 }
 
 .navLinkItem svg {
-  margin-right: 8px;
+  margin-right: 5px;
 }
 
 .navLinkItem:hover {
@@ -44,7 +44,7 @@
   border-radius: 20px;
   background: #f1f1f1;
   padding: 5px 10px;
-  margin-right: 20px;
+  margin-right: 10px;
   transition: background 0.2s ease;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -153,3 +153,6 @@
   }
 }
 
+.nav-icon{
+  color:red;
+}

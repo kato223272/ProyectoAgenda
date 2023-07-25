@@ -3,10 +3,11 @@ import { Navbar, Container, Nav, NavDropdown, FormControl, Button } from 'react-
 import { AiOutlineSearch } from 'react-icons/ai'; // Importa el icono de lupa
 import { FaUser, FaHeart, FaCalendarAlt, FaHome, FaClipboardList, FaHistory } from 'react-icons/fa'; // Importa iconos de Font Awesome
 import '../../componentsUser/css/Navbar.css';
-
+import Logo from '../../ComponentGlobales/img/AplyCH logo.png'
 function NavbarComponent() {
   return (
     <Navbar bg="primary" expand="lg" className="navUser">
+      <img src={Logo} alt="Ejemplo" style={{ width: '110px' }} />
       <Container fluid>
         <Navbar.Brand className="inicioUser" href="/">
           <FaHome className="casaIcon" /> Inicio
@@ -24,11 +25,11 @@ function NavbarComponent() {
               <NavDropdown.Item href="#action5">Todos</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title={<><FaHistory /> Historial</>} id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Elemento 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Elemento 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Elemento 3</NavDropdown.Item>
+              <NavDropdown.Item href="#action3" style={{color:"black"}}>Elemento 1</NavDropdown.Item>
+              <NavDropdown.Item href="#action4" style={{color:"black"}} >Elemento 2</NavDropdown.Item>
+              <NavDropdown.Item href="#action4" style={{color:"black"}}>Elemento 3</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Elemento 4</NavDropdown.Item>
+              <NavDropdown.Item href="#action5" style={{color:"black"}}>Elemento 4</NavDropdown.Item>
             </NavDropdown>
           </Nav>
 

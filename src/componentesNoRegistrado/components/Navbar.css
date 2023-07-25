@@ -17,38 +17,3 @@
     width: 25%;
     margin-left: 5%;
 }
-.buscarServicio{
-  
-    border-radius: 5%;
-   caret-color: rgb(153, 146, 246);
-
-}
-.corporacion{
-    /* margin-left: 2.5%; */
-    
-}
-.inicio{
-    margin-left: 4%;
-}
-.nav{
-    background: rgb(89,59,177);
-    background: linear-gradient(0deg, rgba(89,59,177,0.9557072829131653) 0%, rgba(216,199,255,1) 43%, rgba(182,147,255,0.9529061624649859) 56%, rgba(82,12,152,0.9557072829131653) 86%);
-}
-.citas{
-    width: 25%;
-}
-.citasLetra{
-    color: black;
-}
-.iniciar{
- width: 10%;
- margin-right: 2.5%;
-}
-.iniciarLetra{
-    color: black;
-}
-/* .buscar{
-    border-color: black;
-    color: black;
-    
-} */

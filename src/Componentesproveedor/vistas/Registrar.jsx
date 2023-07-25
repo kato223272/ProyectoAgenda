@@ -16,6 +16,8 @@ import { AiOutlineFileImage } from 'react-icons/ai';
 import Servicios from '../components/TipoDeServicio';
 import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
+import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 function FormExample() {
   const [correo, setCorreo] = useState('');
@@ -45,11 +47,18 @@ function FormExample() {
     setAltaSAT(opcion);
     setShowDocumentUpload(opcion === 'Sí'); 
   };
+
+  const registrarEmpresa = () =>{
+    
+  }
  
   return (
+    <>
+     <Navbar></Navbar>
     <div className="RegistrarDatos2">
-      <div className="RegistrarDatos1">
-        <Form noValidate onSubmit={handleFormSubmit} md={100}>
+     
+      <div className="RegistrarDatos1" noValidate autoComplete="off">
+        <Form noValidate onSubmit={handleFormSubmit} md={100} >
           <Row>
             <Col md={100} className="text-center mb-4">
               <br />
@@ -213,7 +222,7 @@ function FormExample() {
             <Form.Group as={Col} md={12} className="position-relative mb-3">
               <Form.Label>Selecciona una imagen para tu logo</Form.Label>
               {/* Restricción de archivos a imágenes */}
-              <Form.Control type="file" name="file" accept="image/*" />
+              <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
               <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                 <br />
                 <div className="centrarServicios">
@@ -265,7 +274,9 @@ function FormExample() {
               <Form.Group as={Col} md={12} className="position-relative mb-3">
                 <Form.Label>Subir documento del SAT</Form.Label>
                 {/* Aquí colocas el componente para cargar el archivo */}
-                <Form.Control type="file" name="satDocument" accept=".pdf, .jpg, .png" />
+
+                <Form.Control type="file" name="satDocument" accept=".pdf, .jpg, .png, image/*" />
+
                 <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                   {/* ... (mensaje en caso de documento inválido) */}
                 </Form.Control.Feedback>
@@ -282,6 +293,8 @@ function FormExample() {
         </Form>
       </div>
     </div>
+    <Footer></Footer>
+    </>
   );
 }
 

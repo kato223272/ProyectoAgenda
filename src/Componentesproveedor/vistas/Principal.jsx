@@ -2,7 +2,8 @@ import React from 'react';
 import Navbar from '../components/NavbarProvTodas';
 import Card from '../components/Card';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { format, startOfWeek, endOfWeek } from 'date-fns'; // Importamos las funciones de date-fns
+import { format, startOfWeek, endOfWeek } from 'date-fns'; 
+import Footer from '../../ComponentGlobales/Footer.jsx';
 import '../css/principal.css';
 
 function Principal() {
@@ -70,7 +71,10 @@ function Principal() {
             ))}
           </tbody>
         </table>
+        
       </div>
+      <br></br><br></br>
+      <Footer></Footer>
     </div>
   );
 }

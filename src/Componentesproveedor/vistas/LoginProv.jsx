@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import '../css/LoginProv.css';
 import axios from 'axios';
+import Footer from '../../ComponentGlobales/Footer.jsx';
+import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 
 function BasicExample() {
   const navigate = useNavigate();
@@ -67,6 +69,8 @@ function BasicExample() {
   };
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="login-container">
       <Form className="login-form">
         <h1 className="login-title">Inicio de sesión proveedor </h1>
@@ -111,7 +115,10 @@ function BasicExample() {
           </Row>
         </div>
       </Form>
+      
     </div>
+   <Footer></Footer> 
+    </>
   );
 }
 

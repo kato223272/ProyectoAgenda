@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import '../css/CrearCuenta.css';
 import axios from 'axios';
+import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
+import Footer from '../../ComponentGlobales/Footer.jsx';
 
 function FormExample() {
   const navigate = useNavigate();
@@ -94,6 +96,8 @@ function FormExample() {
   }
 
   return (
+    <>
+    <Navbar></Navbar>
     <div className="RegistrarDatos">
       <Form noValidate autoComplete="off">
         <h1>Crear una cuenta</h1>
@@ -195,6 +199,8 @@ function FormExample() {
         </Button>
       </Form>
     </div>
+    <Footer></Footer>
+    </>
   );
 }
 
