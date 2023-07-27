@@ -264,7 +264,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -299,7 +299,7 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
                       }
                   }
                 );
@@ -336,7 +336,7 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
                       }
                   }
                 );
@@ -371,7 +371,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -406,7 +406,7 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
                       }
                   }
                 );
@@ -441,7 +441,7 @@ function FormExample() {
                 }).then(
                     function (result){
                         if(result.isConfirmed){
-                            navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                            navegar('/PrincipalProv', {replace:true, state:{objED}});
                         }
                     }
                   );
@@ -476,7 +476,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );

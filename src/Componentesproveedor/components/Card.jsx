@@ -5,7 +5,7 @@ import { Location } from 'react-router';
 
 import '../css/Card.css';
 
-function Principal() {
+function Principal({objEmpresa}) {
   return (
     <div className="d-flex justify-content-center">
       <Container>
@@ -21,14 +21,14 @@ function Principal() {
                 <Col xs={12} sm={6}>
                   <Card.Body>
                     <Card.Title className="nombreEmpresaa" id="nombreEmpresa">
-                      Nombre de la empresa
+                      {objEmpresa.nombre_E}
                     </Card.Title>
-                    <Card.Subtitle className="especialidad">Especialidad</Card.Subtitle>
+                    <Card.Subtitle className="especialidad">{objEmpresa.Nombre_Servicio}</Card.Subtitle>
                     <hr />
                     <Card.Text className="card-text-bio">Biografía</Card.Text>
                     <Card.Text>Estado</Card.Text>
                     <Card.Text className="card-text-contacto">
-                      <AiOutlinePhone className="icono-contacto" /> +52 9611234567
+                      <AiOutlinePhone className="icono-contacto" /> {objEmpresa.no_Telf_E}
                     </Card.Text>
                     <Card.Text className="card-text-contacto">
                       <AiOutlineUser className="icono-contacto" /> ID
