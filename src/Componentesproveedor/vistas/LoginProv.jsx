@@ -14,7 +14,7 @@ async function validarInicio(mail, pass, navigate) {
     if (mail.includes('@')) {
       if (/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)) {
         try {
-          const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
+          const response = await axios.post('https://localhost:44310/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
           if (response.status === 200) {
             const obj = response.data;
             Swal.fire({
@@ -26,7 +26,8 @@ async function validarInicio(mail, pass, navigate) {
             }).then(
               function (result) {
                 if (result.isConfirmed) {
-                  navigate('/PrincipalProv', {replace:true, state:{obj}});
+                  localStorage.setItem("Empresa", JSON.stringify(obj));
+                  navigate('/PrincipalProv');
                 }
               }
             );
@@ -53,7 +54,7 @@ async function validarInicio(mail, pass, navigate) {
       }
     } else {
       try {
-        const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
+        const response = await axios.post('https://localhost:44310/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
         if (response.status === 200) {
           const obj = response.data;
           Swal.fire({
@@ -65,7 +66,8 @@ async function validarInicio(mail, pass, navigate) {
           }).then(
             function (result) {
               if (result.isConfirmed) {
-                navigate('/PrincipalProv', {replace:true, state:{obj}});
+                localStorage.setItem("Empresa", JSON.stringify(obj));
+                navigate('/PrincipalProv');
               }
             }
           );

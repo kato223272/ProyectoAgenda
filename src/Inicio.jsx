@@ -34,6 +34,14 @@ function Inicio() {
       }
     }
 
+    if(localStorage.getItem("Empresa") !== null){
+      localStorage.removeItem("Empresa");
+    }
+
+    if(localStorage.getItem("Usuario") !== null){
+      localStorage.removeItem("Usuario");
+    }
+
     recibirDatos();
     console.log(EmpresasDLT);
     return () => {

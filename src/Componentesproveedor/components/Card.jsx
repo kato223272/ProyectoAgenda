@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { AiOutlinePhone, AiOutlineUser, AiOutlineHome, AiOutlineInfoCircle } from 'react-icons/ai';
-import { Location } from 'react-router';
 
 import '../css/Card.css';
 
@@ -15,7 +14,7 @@ function Principal({objEmpresa}) {
               <Row>
                 <Col xs={12} sm={6}>
                   <div className="text-center">
-                    <Image className="ImagenProvee" src={""} roundedCircle />
+                    <Image className="ImagenProvee" src={`data:image/jpeg;base64,${objEmpresa.fotoPerfil}`} roundedCircle />
                   </div>
                 </Col>
                 <Col xs={12} sm={6}>
@@ -23,18 +22,18 @@ function Principal({objEmpresa}) {
                     <Card.Title className="nombreEmpresaa" id="nombreEmpresa">
                       {objEmpresa.nombre_E}
                     </Card.Title>
-                    <Card.Subtitle className="especialidad">{objEmpresa.Nombre_Servicio}</Card.Subtitle>
+                    <Card.Subtitle className="especialidad">{objEmpresa.nombre_Servicio}</Card.Subtitle>
                     <hr />
-                    <Card.Text className="card-text-bio">Biografía</Card.Text>
-                    <Card.Text>Estado</Card.Text>
+                    <Card.Text className="card-text-bio">{objEmpresa.descripcion}</Card.Text>
+                    <Card.Text>{objEmpresa.estado}</Card.Text>
                     <Card.Text className="card-text-contacto">
                       <AiOutlinePhone className="icono-contacto" /> {objEmpresa.no_Telf_E}
                     </Card.Text>
                     <Card.Text className="card-text-contacto">
-                      <AiOutlineUser className="icono-contacto" /> ID
+                      <AiOutlineUser className="icono-contacto" /> {objEmpresa.nombre}
                     </Card.Text>
                     <Card.Text className="card-text-contacto">
-                      <AiOutlineHome className="icono-contacto" /> Ciudad
+                      <AiOutlineHome className="icono-contacto" /> {objEmpresa.municipio}
                     </Card.Text>
                   </Card.Body>
                 </Col>

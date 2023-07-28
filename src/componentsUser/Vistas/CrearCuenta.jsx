@@ -24,6 +24,7 @@ function FormExample() {
           const guardar = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Usuarios/RegistrarUsuario?NombreU=' + objeto.Nombre_U + '&Nombre=' 
             + objeto.Nombre + '&Correo=' + objeto.Correo + '&Contrase%C3%B1a='+ objeto.Contraseña);
           if(guardar.status === 201){
+            console.log(guardar.data);
             Swal.fire({
               icon:'success',
               title:'¡Cuenta creada!',
@@ -39,14 +40,25 @@ function FormExample() {
             );
           }
         } catch (error){
-          Swal.fire({
-            icon:'error',
-            title:'¡Error!',
-            text:'Hubo un problema con el sistema, intente de nuevo.',
-            showConfirmButton:true,
-            confirmButtonText:'Reintentar'
-          });
-          console.error(error.response.data);
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title:'Cuenta ya existente',
+              text:"Él correo o 'Username' ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+
+          else{
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
         }
       }
   

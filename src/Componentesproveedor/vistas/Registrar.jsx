@@ -62,8 +62,7 @@ function FormExample() {
       if(base64.status === 200){
         setImageUrl(base64);
       }
-    } catch(error){
-        console.error(error.response);
+    } catch(error){        
     }
   }
 
@@ -87,7 +86,7 @@ function FormExample() {
     }
   };
 
-  const b64toBlob = (b64Data, contentType='', sliceSize=4096) => {
+  const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
   
@@ -108,13 +107,15 @@ function FormExample() {
   }
 
   const registrarEmpresa = async (objED, navegar, altPass) =>{
-    console.log(objED);
-    const blob = b64toBlob(objED.FotoPerfil, 'image/png');
-    const file = new File([blob], "image");
     var formData = new FormData();
-    formData.append("imagen", file, file.name);
-    console.log(file);
-    console.log(formData);
+    if(objED.FotoPerfil !== null || objED.FotoPerfil.length === 0){
+      const blob = b64toBlob(objED.FotoPerfil, 'image/png');
+      const file = new File([blob], "image");      
+      formData.append("imagen", file, file.name);
+    }
+    else{      
+      formData.append("imagen", "", undefined);
+    }
 
     const correoValido = /^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo);
     const nombreValido = !(/\d/.test(objED.Nombre));
@@ -144,35 +145,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{
-                          Correo: objED.Correo,
-                          Password: objED.Password,
-                          Nombre_Servicio: objED.Nombre_Servicio,
-                          Nombre_E: objED.Nombre_E,
-                          Nombre: objED.Nombre,
-                          No_Telf_E: objED.No_Telf_E,
-                          Calle: objED.Calle,
-                          N_Exterior: objED.N_Exterior,
-                          N_Interior: objED.N_Interior,
-                          Pais: objED.Pais,
-                          Estado: objED.Estado, 
-                          Municipio: objED.Municipio,
-                          Referencias: objED.Referencias,
-                          RFC: objED.RFC,
-                          FotoPerfil: objED.dataForm}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
@@ -194,20 +191,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
@@ -229,20 +237,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
@@ -264,20 +283,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
@@ -299,7 +329,8 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                          localStorage.setItem("Empresa", JSON.stringify(objED));
+                          navegar('/PrincipalProv');
                       }
                   }
                 );
@@ -311,8 +342,7 @@ function FormExample() {
               text:'Hubo un problema con el sistema, intente de nuevo.',
               showConfirmButton:true,
               confirmButtonText:'Reintentar'
-            });
-            console.error(error.response);
+            });            
           }
       }
 
@@ -336,7 +366,8 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                          localStorage.setItem("Empresa", JSON.stringify(objED));
+                          navegar('/PrincipalProv');
                       }
                   }
                 );
@@ -348,8 +379,7 @@ function FormExample() {
               text:'Hubo un problema con el sistema, intente de nuevo.',
               showConfirmButton:true,
               confirmButtonText:'Reintentar'
-            });
-            console.error(error.response);
+            });            
           }
         }
 
@@ -371,20 +401,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
@@ -406,7 +447,8 @@ function FormExample() {
               }).then(
                   function (result){
                       if(result.isConfirmed){
-                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                          localStorage.setItem("Empresa", JSON.stringify(objED));
+                          navegar('/PrincipalProv');
                       }
                   }
                 );
@@ -418,8 +460,7 @@ function FormExample() {
               text:'Hubo un problema con el sistema, intente de nuevo.',
               showConfirmButton:true,
               confirmButtonText:'Reintentar'
-            });
-            console.error(error.response);
+            });            
           }
         }
 
@@ -441,7 +482,8 @@ function FormExample() {
                 }).then(
                     function (result){
                         if(result.isConfirmed){
-                            navegar('/PrincipalProv', {replace:true, state:{objED}});
+                            localStorage.setItem("Empresa", JSON.stringify(objED));
+                            navegar('/PrincipalProv');
                         }
                     }
                   );
@@ -453,8 +495,7 @@ function FormExample() {
                 text:'Hubo un problema con el sistema, intente de nuevo.',
                 showConfirmButton:true,
                 confirmButtonText:'Reintentar'
-              });
-              console.error(error.response);
+              });              
             }
           }
 
@@ -476,20 +517,31 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        localStorage.setItem("Empresa", JSON.stringify(objED));
+                        navegar('/PrincipalProv');
                     }
                 }
               );
             }
         } catch(error){
-          Swal.fire({
+          if(error.response.status === 409){
+            Swal.fire({
+              icon:'error',
+              title: 'Cuenta ya existente',
+              text:"Él correo o nombre de empresa ya existe. Introduzca nuevos valores.",
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+          }
+          else{
+            Swal.fire({
             icon:'error',
             title:'¡Error!',
             text:'Hubo un problema con el sistema, intente de nuevo.',
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
-          });
-          console.error(error.response);
+          });          
+          }
         }
       }
 
