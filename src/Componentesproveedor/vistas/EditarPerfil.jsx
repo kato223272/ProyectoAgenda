@@ -12,7 +12,7 @@ function eliminarCuenta(navegar){
   const empresa = JSON.parse(localStorage.getItem("Empresa"));
   try{
     console.log(empresa);
-    const eliminado = axios.delete("https://localhost:44310/api/Empresas/EliminarEmpresa?id="+ empresa.nombre_E +"&id2="+ empresa.nombre_Servicio);
+    const eliminado = axios.delete("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/EliminarEmpresa?id="+ empresa.nombre_E +"&id2="+ empresa.nombre_Servicio);
       Swal.fire({
         icon:'success',
         title:'¡Cuenta eliminada!',

@@ -58,7 +58,7 @@ function FormExample() {
     console.log(file);
     formData.append("imagen", file, file.name);
     try{
-      const base64 = await axios.post("https://localhost:44310/api/Empresas/RecibirImagenBase64", formData);
+      const base64 = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RecibirImagenBase64", formData);
       if(base64.status === 200){
         setImageUrl(base64);
       }
@@ -133,7 +133,7 @@ function FormExample() {
       objED.RFC.trim("") && objED.N_Interior.trim("")){
         console.log("if principal-1");
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
             objED.RFC + "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -179,7 +179,7 @@ function FormExample() {
       else if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") 
        && objED.N_Interior.trim("")){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -225,7 +225,7 @@ function FormExample() {
       else if(correoValido && nombreValido && passValido && numeroValido  
       && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo + "&RFC=" + objED.RFC +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -271,7 +271,7 @@ function FormExample() {
       else if(correoValido && nombreValido
       && passValido && numeroValido && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -317,7 +317,7 @@ function FormExample() {
       else if(correoValido && nombreValido
         && passValido && numeroValido && objED.N_Interior.trim("") ){
           try{
-            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E  +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -353,7 +353,7 @@ function FormExample() {
         && passValido && numeroValido  && objED.RFC.trim("")){          
           console.log("if principal-6");
           try{
-            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -389,7 +389,7 @@ function FormExample() {
       else if(correoValido && nombreValido
       && passValido && numeroValido ){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio, formData);
@@ -435,7 +435,7 @@ function FormExample() {
       else if(correoValido && nombreValido
         && passValido && numeroValido && objED.N_Interior.trim("")){
           try{
-            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -470,7 +470,7 @@ function FormExample() {
         else if(correoValido && nombreValido
           && passValido && numeroValido && objED.RFC.trim("")){
             try{
-              const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
                 + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
                 "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
                 "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
@@ -505,7 +505,7 @@ function FormExample() {
       else if(correoValido && nombreValido
       && passValido && numeroValido){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
