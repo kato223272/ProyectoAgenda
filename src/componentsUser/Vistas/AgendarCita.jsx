@@ -175,11 +175,8 @@ function Inicio() {
             <Text>{companyInfoData.serviceType}</Text>
             <Text style={styles.companyInfoLabel}>Teléfono:</Text>
             <Text style={styles.companyContact}>{companyInfoData.phoneNumber}</Text>
-            <Text style={styles.companyInfoLabel}>Email:</Text>
-            <Text style={styles.companyContact}>{companyInfoData.email}</Text>
             <Text style={styles.companyInfoLabel}>Dirección:</Text>
             <Text style={styles.companyAddress}>{companyInfoData.address}</Text>
-            <Text style={styles.companyAddress}>Número Interior/Exterior: {companyInfoData.interiorNumber}</Text>
           </View>
         </View>
         <View style={styles.section}>

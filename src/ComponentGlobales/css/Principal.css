@@ -1,3 +1,47 @@
-.LetraHorario{
-    
-}
+
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .appear-fade-up {
+    animation: fadeInUp 1s ease;
+  }
+  
+  .appear-fade-right {
+    animation: fadeInRight 1s ease;
+  }
+  
+  /* Ajusta el retraso para que los elementos aparezcan uno por uno */
+  #carousel.visible {
+    animation-delay: 0.3s;
+  }
+  
+  #card.visible {
+    animation-delay: 0.6s;
+  }
+  
+  .visible {
+    opacity: 1;
+  }
+  
+  .invisible {
+    opacity: 0;
+  }

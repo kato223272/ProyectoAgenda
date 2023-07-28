@@ -1,53 +1,137 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Navbar from '../Componentes/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel from '../../ComponentGlobales/carousel';
-import Card from '../../ComponentGlobales/CardsUser';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { motion } from "framer-motion";
+import { Element, animateScroll as scroll } from "react-scroll";
+import { FaRegSmileBeam, FaCompass, FaArrowDown } from "react-icons/fa"; // Importamos los Ã­conos
+import Carousel from "../../ComponentGlobales/carousel";
+import {CartaUsuario} from "../../ComponentGlobales/CardsUser";
 import '../css/Principal.css';
-import Footer from '../../ComponentGlobales/Footer.jsx';
+import Footer from "../../ComponentGlobales/Footer.jsx";
+import axios from "axios";
 
 function Inicio() {
-  const [showCarousel, setShowCarousel] = useState(false);
-  const [showCard, setShowCard] = useState(false);
-
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [EmpresasDLT, setEmpresasDLT] = useState([]);
   const handleScroll = () => {
-    const carouselElement = document.getElementById('carousel');
-    const cardElement = document.getElementById('card');
-
-    if (carouselElement) {
-      const carouselPosition = carouselElement.getBoundingClientRect().top;
-      setShowCarousel(carouselPosition < window.innerHeight * 0.7); // Adjust the threshold value as needed
-    }
-
-    if (cardElement) {
-      const cardPosition = cardElement.getBoundingClientRect().top;
-      setShowCard(cardPosition < window.innerHeight * 0.7); // Adjust the threshold value as needed
-    }
+    setScrollPosition(window.scrollY);
   };
 
-  // Attach the scroll event listener when the component mounts
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    const recibirDatos = async () => {
+      try{
+        const empresas = await axios.get("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/ConseguirEmpresaDescripcionLocalizacion");
+        if(empresas.status == 200){
+          const eDLT = empresas.data;
+          setEmpresasDLT(eDLT);
+        }
+      } catch(errorE){
+        console.error("Error en Empresas", errorE.response.data);
+      }
+    }
+
+    recibirDatos();
+    console.log(EmpresasDLT);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
 
   return (
-    <form action="">
+    <div className="Fondo">
       <Navbar />
-      <br />
-      <div id="carousel" className={`appear-fade-up ${showCarousel ? 'visible' : ''}`}>
-        <Carousel />
-      </div>
-      <br />
-      <br />
-      <div id="card" className={`appear-fade-right ${showCard ? 'visible' : ''}`}>
-        <Card />
-      </div>
-      <Footer></Footer>
-    </form>
+      <form action="">
+        <div className="container-fluid text-section">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+      
+          </motion.div>
+          {/* Icono de flecha hacia abajo */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{
+              opacity: scrollPosition > 0 ? 0 : 1,
+              y: scrollPosition > 0 ? -20 : 0,
+            }}
+            transition={{ duration: 1 }}
+            className="arrow-icon-container"
+          >
+            <FaArrowDown className="arrow-icon" />
+          </motion.div>
+          {/* Separador "Bienvenido" */}
+          <div className="separator">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{
+                opacity: scrollPosition > 0 ? 1 : 0,
+                y: scrollPosition > 0 ? 0 : 50,
+              }}
+              transition={{ duration: 1 }}
+            >
+              <div className="line"></div>
+              <div className="section-name">Bienvenido</div>
+              <div className="line"></div>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="container-fluid carousel-section">
+          <Element name="carousel">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{
+                opacity: scrollPosition > 100 ? 1 : 0,
+                y: scrollPosition > 100 ? 0 : 50,
+              }}
+              transition={{ duration: 1 }}
+            >
+              <Carousel />
+            </motion.div>
+          </Element>
+          {/* Separador "Descubre" */}
+          <div className="separator">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{
+                opacity: scrollPosition > 100 ? 1 : 0,
+                y: scrollPosition > 100 ? 0 : 50,
+              }}
+              transition={{ duration: 1 }}
+            >
+              <div className="line"></div>
+              <div className="section-name">Descubre</div>
+              <div className="line"></div>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="container-fluid card-section">
+          <Element name="card">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{
+                opacity: scrollPosition > 400 ? 1 : 0,
+                y: scrollPosition > 400 ? 0 : 50,
+              }}
+              transition={{ duration: 1 }}
+            >
+              <CartaUsuario Nombre_E={EmpresasDLT} />
+            </motion.div>
+          </Element>
+        </div>
+      </form>
+      <Footer />
+    </div>
   );
 }
 
 export default Inicio;
+
+
