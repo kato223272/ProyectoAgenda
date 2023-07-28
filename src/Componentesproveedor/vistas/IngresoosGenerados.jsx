@@ -53,7 +53,7 @@ const IngresosView = () => {
   }, []);
 
   return (
-    <div>
+    <div className="ingresos-view">
       <Navbar></Navbar>
       <div className="container">
         <h1>Vista de Ingresos</h1>

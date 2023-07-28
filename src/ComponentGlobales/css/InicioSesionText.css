@@ -1,8 +1,10 @@
+/* CSS actualizado para el componente InicioText */
+
 .container {
   max-width: 100%;
   padding: 2%;
   /* Ajuste de tamaño de fuente */
-  font-size: 1rem;
+  font-size: 1.2rem; /* Incrementamos el tamaño de fuente para que las letras ocupen más espacio */
 }
 
 .titulo {
@@ -37,6 +39,7 @@
 .image-section img {
   max-width: 100%;
   height: auto;
+  margin-right: 2rem; /* Ajustamos el margen derecho para separar la imagen del texto */
 }
 
 /* Estilos para dispositivos móviles (teléfonos) */
@@ -56,6 +59,12 @@
 
   .btn-custom .icon {
     font-size: 2rem; /* Ajuste del tamaño de fuente para teléfonos */
+  }
+
+  .image-section img {
+    margin-right: 10%; 
+    margin-bottom: 1rem;
+   
   }
 }
 
