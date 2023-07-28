@@ -4,7 +4,7 @@ import '../css/Buttoon.css';
 
 //prueba
 
-function DropdownItemTagsExample() {
+function DropdownItemTagsExample({handleStateSelect}) {
   const [searchText, setSearchText] = useState('');
   const [selectedEstado, setSelectedEstado] = useState(null);
   const [selectedCiudad, setSelectedCiudad] = useState(null);
@@ -35,7 +35,6 @@ function DropdownItemTagsExample() {
     setSelectedPais(pais);
     setIsPaisMenuOpen(false); 
   };
- 
   // const ciudades = [
   //   //CIUDADES DE NUEVO LEÓN
   //   { id: 1, text: 'Abasolo' },
@@ -344,7 +343,10 @@ return (
             <Dropdown.Item
               key={estado.id}
               as="button"
-              onClick={(e) => handleEstadoItemClick(e, estado)}
+              onClick={(e) => {
+                handleEstadoItemClick(e, estado)
+                handleStateSelect(estado.text, "Estado");
+              }}
             >
               {estado.text}
             </Dropdown.Item>
@@ -373,7 +375,9 @@ return (
             <Dropdown.Item
               key={ciudad.id}
               as="button"
-              onClick={(e) => handleCiudadItemClick(e, ciudad)}
+              onClick={(e) => {
+                handleCiudadItemClick(e, ciudad)
+                handleStateSelect(ciudad.text, "Municipio");}}
             >
               {ciudad.text}
             </Dropdown.Item>
@@ -402,7 +406,9 @@ return (
             <Dropdown.Item
               key={pais.id}
               as="button"
-              onClick={(e) => handlePaisItemClick(e, pais)}
+              onClick={(e) => {
+                handlePaisItemClick(e, pais)
+                handleStateSelect(pais.text, "Pais");}}
             >
               {pais.text}
             </Dropdown.Item>

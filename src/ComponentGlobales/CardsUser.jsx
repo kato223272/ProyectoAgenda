@@ -225,21 +225,7 @@ export function CartaUsuario({ Nombre_E }) {
                             <FaInfo className="icono-especialidad" />
                             {E.nombre_Servicio}
                           </Card.Subtitle>
-                          <br />
-                          <Card.Text
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              marginBottom: "0.9vw",
-                              fontSize: "110%",
-                            }}
-                          >
-                            <FaUser
-                              className="icono-biografia"
-                              style={{ fontSize: "1.5vw", marginRight: "2%" }}
-                            />
-                            {E.descripcion}
-                          </Card.Text>
+                          <br />                          
                           <Card.Text
                             style={{
                               display: "flex",

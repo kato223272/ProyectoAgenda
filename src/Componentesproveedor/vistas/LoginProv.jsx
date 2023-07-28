@@ -9,64 +9,95 @@ import axios from 'axios';
 import Footer from '../../ComponentGlobales/Footer.jsx';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 
-function BasicExample() {
-  const navigate = useNavigate();
-  const [mail, setMail] = useState('');
-  const [pass, setPass] = useState('');
-
-  const validarInicio = async () => {
-    if (mail.trim('') && pass.trim('')) {
+async function validarInicio(mail, pass, navigate) {
+  if (mail.trim() !== '' && pass.trim() !== '') {
+    if (mail.includes('@')) {
       if (/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(mail)) {
         try {
-          const response = await axios.post(
-            'http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?correo=' +
-              mail +
-              '&contraseña=' +
-              pass
-          );
+          const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
           if (response.status === 200) {
+            const obj = response.data;
             Swal.fire({
               icon: 'success',
               title: 'Todo correcto',
-              text: 'Iniciando sesión...',
+              text: 'Iniciando sesión. ¡Bienvenido ' + response.data.nombre + "!",
               showConfirmButton: true,
-              confirmButtonText: 'Entrar',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                navigate('/PrincipalUser');
+              confirmButtonText: 'Entrar'
+            }).then(
+              function (result) {
+                if (result.isConfirmed) {
+                  navigate('/PrincipalProv', {replace:true, state:{obj}});
+                }
               }
-            });
+            );
           }
         } catch (error) {
           Swal.fire({
             icon: 'error',
-            title: 'Contraseña incorrecta',
-            text: 'Asegúrese de escribir correctamente su contraseña.',
+            title: 'Usuario no encontrado',
+            text: 'Asegúrese de escribir correctamente su usuario y contraseña.',
             showConfirmButton: false,
             showDenyButton: true,
-            denyButtonText: 'Volver a intentarlo',
+            denyButtonText: 'Volver a intentarlo'
           });
         }
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Correo inválido',
-          text: 'Asegúrese de escribir correctamente su correo electrónico.',
+          text: 'Ingrese un correo electrónico válido.',
           showConfirmButton: false,
           showDenyButton: true,
-          denyButtonText: 'Volver a intentarlo',
+          denyButtonText: 'Volver a intentarlo'
         });
       }
     } else {
-      Swal.fire({
-        icon: 'info',
-        title: 'Espacios vacíos',
-        text: 'Rellene los campos de ingreso',
-        showConfirmButton: true,
-        confirmButtonText: 'Volver a intentarlo',
-      });
+      try {
+        const response = await axios.post('http://jeshuabd-001-site1.dtempurl.com/api/Empresas/VerificarLogin?Nombre_E=' + mail + '&Password=' + pass);
+        if (response.status === 200) {
+          const obj = response.data;
+          Swal.fire({
+            icon: 'success',
+            title: 'Todo correcto',
+            text: 'Iniciando sesión. ¡Bienvenido ' + response.data.nombre + "!",
+            showConfirmButton: true,
+            confirmButtonText: 'Entrar'
+          }).then(
+            function (result) {
+              if (result.isConfirmed) {
+                navigate('/PrincipalProv', {replace:true, state:{obj}});
+              }
+            }
+          );
+        }
+      } catch (error) {
+        console.log(error.response.data);
+        Swal.fire({
+          icon: 'error',
+          title: 'Usuario no encontrado',
+          text: 'Asegúrese de escribir correctamente su usuario y contraseña.',
+          showConfirmButton: false,
+          showDenyButton: true,
+          denyButtonText: 'Volver a intentarlo'
+        });
+      }
     }
-  };
+  } else {
+    Swal.fire({
+      icon: 'info',
+      title: 'Espacios vacíos',
+      text: 'Rellene los campos de ingreso',
+      showConfirmButton: true,
+      confirmButtonText: 'Volver a intentarlo'
+    });
+  }
+}
+
+
+function BasicExample() {
+  const navigate = useNavigate();
+  const [mail, setMail] = useState('');
+  const [pass, setPass] = useState('');
 
   return (
     <>
@@ -76,11 +107,11 @@ function BasicExample() {
         <h1 className="login-title">Inicio de sesión proveedor </h1>
         <Form.Group controlId="formBasicEmail">
           <Form.Label className="login-label">
-            <AiOutlineMail className="login-icon" /> Ingresa tu correo
+            <AiOutlineMail className="login-icon" /> Ingresa tu usuario/correo
           </Form.Label>
           <Form.Control
             className="login-input"
-            type="email"
+            type="user"
             placeholder="correo/usuario"
             value={mail}
             onChange={(ev) => setMail(ev.target.value)}
@@ -98,7 +129,7 @@ function BasicExample() {
             onChange={(ev) => setPass(ev.target.value)}
           />
         </Form.Group>
-        <Button className="login-button" variant="primary" type="button" onClick={validarInicio}>
+        <Button className="login-button" variant="primary" type="button" onClick={() => validarInicio(mail, pass, navigate)}>
           Iniciar sesión
         </Button>
         <br /> <br />
