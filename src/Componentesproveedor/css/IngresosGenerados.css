@@ -1,39 +1,33 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-  }
-  
-  p {
-    margin-bottom: 10px;
-  }
-  
-  /* Estilos de la gráfica */
-  #ingresosChart {
-    margin-bottom: 30px;
-  }
-  
-  /* Estilos de referencia */
-  .referencia {
-    font-style: italic;
-    font-size: 12px;
-    color: #888;
-  }
-  
-  /* Estilos para la fecha y hora actual */
-  .fecha-actual {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
+/* Estilos para la vista de Ingresos */
+.ingresos-view {
+  font-family: Arial, sans-serif;
+}
+
+.ingresos-view .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.ingresos-view h1 {
+  margin-bottom: 20px;
+}
+
+.ingresos-view p {
+  margin-bottom: 10px;
+}
+
+.ingresos-view #ingresosChart {
+  margin-bottom: 30px;
+}
+
+.ingresos-view .referencia {
+  font-style: italic;
+  font-size: 12px;
+  color: #888;
+}
+
+.ingresos-view .fecha-actual {
+  font-size: 18px;
+  font-weight: bold;
+}
