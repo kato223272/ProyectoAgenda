@@ -25,7 +25,7 @@ function InicioText() {
           </Button>
         </div>
         <div className="col-md-6 order-md-1 image-section">
-          <Image src={ChicaAnimadaCalendario} alt="Imagen" fluid style={{ maxWidth: '500px' }} />
+          <Image src={ChicaAnimadaCalendario} alt="Imagen" fluid style={{ maxWidth: '400px' }} />
         </div>
       </div>
     </div>

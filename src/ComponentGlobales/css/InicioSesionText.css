@@ -39,7 +39,9 @@
 .image-section img {
   max-width: 100%;
   height: auto;
-  margin-right: 2rem; /* Ajustamos el margen derecho para separar la imagen del texto */
+
+  margin-right: 2rem; 
+
 }
 
 /* Estilos para dispositivos móviles (teléfonos) */

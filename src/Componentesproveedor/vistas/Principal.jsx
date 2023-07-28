@@ -5,8 +5,11 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { format, startOfWeek, endOfWeek, isMonday } from 'date-fns';
 import Footer from '../../ComponentGlobales/Footer.jsx';
 import '../css/principal.css';
+import { useLocation } from 'react-router';
 
 function Principal() {
+  const location = useLocation();
+  const [objEmpresa, setObjEmpresa] = useState(location.state.obj);
   // Datos de disponibilidad simulados (algunas horas ocupadas) para el horario general
   const disponibilidadGeneral = [
     { dia: 'Lunes', horas: ['08:00', '09:00', '10:00', '13:00'] },
@@ -40,6 +43,9 @@ function Principal() {
   const [disponibilidadTrabajadoresState, setDisponibilidadTrabajadoresState] = useState(disponibilidadTrabajadores);
 
   useEffect(() => {
+    if (location.state.obj.nombre_E !== undefined){
+      console.log("hola");
+    }
     // Verificar si es lunes para actualizar la disponibilidad general
     if (isMonday(fechaActual)) {
       // Datos de disponibilidad general actualizados para una nueva semana (algunas horas ocupadas)
@@ -59,7 +65,7 @@ function Principal() {
     <div className="principal-page">
       <Navbar />
       <br />
-      <Card />
+      <Card objEmpresa={objEmpresa} />
       <br />
       <div className="division"></div>
       <br />

@@ -20,8 +20,11 @@ import '../css/Registras.css';
 import BotonEstado from '../components/ButtoonEstado';
 import Navbar from '../../componentesNoRegistrado/components/NavbarRegistrar';
 import Footer from '../../ComponentGlobales/Footer.jsx';
+import { useNavigate } from 'react-router';
+import { da } from 'date-fns/locale';
 
 function FormExample() {
+  const navegar = useNavigate();
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [altPass, setAltPass] = useState('');
@@ -35,10 +38,11 @@ function FormExample() {
   const [cantidadTrabajadores, setCantidadTrabajadores] = useState('');
   const [rfc, setRFC] = useState('');
   const [altaSAT, setAltaSAT] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
   const [servicioSeleccionado, setServicioSeleccionado] = useState(''); // Estado para almacenar el servicio seleccionado
-  const [estadoSeleccionado, setEstadoSeleccionado] = useState(''); // Estado para almacenar el estado seleccionado
+  const [estadoSeleccionado, setEstadoSeleccionado] = useState([]); // Estado para almacenar el estado seleccionado
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -48,6 +52,20 @@ function FormExample() {
     setCantidadTrabajadores(cantidad);
   };
 
+  const handleImagenUpload = async (e) =>{
+    var formData = new FormData();
+    const file = e.target.files[0];
+    console.log(file);
+    formData.append("imagen", file, file.name);
+    try{
+      const base64 = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RecibirImagenBase64", formData);
+      if(base64.status === 200){
+        setImageUrl(base64);
+      }
+    } catch(error){
+        console.error(error.response);
+    }
+  }
 
 
   const handleServiceSelect = (selectedService) => {
@@ -55,23 +73,67 @@ function FormExample() {
   };
 
   
-  const handleStateSelect = (selectedState) => {
-    setEstadoSeleccionado(selectedState);
+  const handleStateSelect = (selectedState, tipo) => {
+    if(tipo === "Estado"){
+      estadoSeleccionado.Estado = selectedState;
+    }
+
+    if(tipo === "Pais"){
+      estadoSeleccionado.Pais = selectedState;
+    }
+
+    if(tipo === "Municipio"){
+      estadoSeleccionado.Municipio = selectedState;
+    }
   };
 
+  const b64toBlob = (b64Data, contentType='', sliceSize=4096) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
   const registrarEmpresa = async (objED, navegar, altPass) =>{
+    console.log(objED);
+    const blob = b64toBlob(objED.FotoPerfil, 'image/png');
+    const file = new File([blob], "image");
+    var formData = new FormData();
+    formData.append("imagen", file, file.name);
+    console.log(file);
+    console.log(formData);
+
+    const correoValido = /^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo);
+    const nombreValido = !(/\d/.test(objED.Nombre));
+    const passValido = objED.Password === altPass;
+    const numeroValido = (/\d/.test(objED.No_Telf_E) && objED.No_Telf_E.length === 10);
+    console.log(numeroValido);
     if(objED.Correo.trim("") && objED.Password.trim("") && objED.Nombre_E.trim("") && objED.Nombre_Servicio.trim("") && 
     objED.Nombre.trim("") && objED.No_Telf_E.trim("") && objED.Calle.trim("") && objED.N_Exterior.trim("") && 
     objED.Pais.trim("") && objED.Estado.trim("") && objED.Municipio.trim("")){
-      if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("") && 
-      objED.RFC.trim("")){
+      console.log("if principal");
+      if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") && 
+      objED.RFC.trim("") && objED.N_Interior.trim("")){
+        console.log("if principal-1");
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ objED.RFC +
-            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
+            objED.RFC + "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -82,7 +144,22 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{
+                          Correo: objED.Correo,
+                          Password: objED.Password,
+                          Nombre_Servicio: objED.Nombre_Servicio,
+                          Nombre_E: objED.Nombre_E,
+                          Nombre: objED.Nombre,
+                          No_Telf_E: objED.No_Telf_E,
+                          Calle: objED.Calle,
+                          N_Exterior: objED.N_Exterior,
+                          N_Interior: objED.N_Interior,
+                          Pais: objED.Pais,
+                          Estado: objED.Estado, 
+                          Municipio: objED.Municipio,
+                          Referencias: objED.Referencias,
+                          RFC: objED.RFC,
+                          FotoPerfil: objED.dataForm}});
                     }
                 }
               );
@@ -95,18 +172,18 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
         }
       }
 
-      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E) && objED.Referencias.trim("")){
+      else if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") 
+       && objED.N_Interior.trim("")){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -117,7 +194,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -130,18 +207,18 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
         }
       }
 
-      else if(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo) && !(/\d/.test(objED.Nombre))
-      && objED.Password === altPass && /\d/.test(objED.No_Telf_E)){
+      else if(correoValido && nombreValido && passValido && numeroValido  
+      && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
-          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
-            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
-            "&Pass="+ objED.Password +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo + "&RFC=" + objED.RFC +
+            "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
-            "&Referencias="+ "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior);
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
             if(response.status === 201){
               Swal.fire({
                 icon:'success',
@@ -152,7 +229,7 @@ function FormExample() {
             }).then(
                 function (result){
                     if(result.isConfirmed){
-                        navegar('/PrincipalProv', {replace:true, state:{NombreE: objED.Nombre_E}});
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
                     }
                 }
               );
@@ -165,11 +242,258 @@ function FormExample() {
             showConfirmButton:true,
             confirmButtonText:'Reintentar'
           });
-          console.error(error.response.data);
+          console.error(error.response);
         }
       }
 
-      else if(!(/^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo))){
+      else if(correoValido && nombreValido
+      && passValido && numeroValido && objED.N_Interior.trim("") && objED.RFC.trim("")){
+        try{
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
+        }
+      }
+
+      else if(correoValido && nombreValido
+        && passValido && numeroValido && objED.N_Interior.trim("") ){
+          try{
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E  +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+      }
+
+      else if(correoValido && nombreValido
+        && passValido && numeroValido  && objED.RFC.trim("")){
+          console.log("if principal-7");
+          console.log("if principal-6");
+          try{
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Exterior="+ objED.N_Exterior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+        }
+
+      else if(correoValido && nombreValido
+      && passValido && numeroValido ){
+        console.log("if principal-7");
+        try{
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio, formData);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
+        }
+      }
+
+      else if(correoValido && nombreValido
+        && passValido && numeroValido && objED.N_Interior.trim("")){
+          try{
+            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+              "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+              "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+              "&N_Interior=" + objED.N_Interior, formData);
+              if(response.status === 201){
+                Swal.fire({
+                  icon:'success',
+                  title:'¡Cuenta creada!',
+                  text:'Iniciando sesión...',
+                  showConfirmButton:true,
+                  confirmButtonText:'Entrar'
+              }).then(
+                  function (result){
+                      if(result.isConfirmed){
+                          navegar('/PrincipalProv', {replace:true, state:{objED}});
+                      }
+                  }
+                );
+              }
+          } catch(error){
+            Swal.fire({
+              icon:'error',
+              title:'¡Error!',
+              text:'Hubo un problema con el sistema, intente de nuevo.',
+              showConfirmButton:true,
+              confirmButtonText:'Reintentar'
+            });
+            console.error(error.response);
+          }
+        }
+
+        else if(correoValido && nombreValido
+          && passValido && numeroValido && objED.RFC.trim("")){
+            try{
+              const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+                + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+                "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+                "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+                "&RFC=" + objED.RFC);
+                if(response.status === 201){
+                  Swal.fire({
+                    icon:'success',
+                    title:'¡Cuenta creada!',
+                    text:'Iniciando sesión...',
+                    showConfirmButton:true,
+                    confirmButtonText:'Entrar'
+                }).then(
+                    function (result){
+                        if(result.isConfirmed){
+                            navegar('/PrincipalProv', {replace:true, state:{objED}});
+                        }
+                    }
+                  );
+                }
+            } catch(error){
+              Swal.fire({
+                icon:'error',
+                title:'¡Error!',
+                text:'Hubo un problema con el sistema, intente de nuevo.',
+                showConfirmButton:true,
+                confirmButtonText:'Reintentar'
+              });
+              console.error(error.response);
+            }
+          }
+
+      else if(correoValido && nombreValido
+      && passValido && numeroValido){
+        try{
+          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
+            "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
+            "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
+            "&N_Exterior="+ objED.N_Exterior, formData);
+            if(response.status === 201){
+              Swal.fire({
+                icon:'success',
+                title:'¡Cuenta creada!',
+                text:'Iniciando sesión...',
+                showConfirmButton:true,
+                confirmButtonText:'Entrar'
+            }).then(
+                function (result){
+                    if(result.isConfirmed){
+                        navegar('/PrincipalProv', {replace:true, state:{objED}});
+                    }
+                }
+              );
+            }
+        } catch(error){
+          Swal.fire({
+            icon:'error',
+            title:'¡Error!',
+            text:'Hubo un problema con el sistema, intente de nuevo.',
+            showConfirmButton:true,
+            confirmButtonText:'Reintentar'
+          });
+          console.error(error.response);
+        }
+      }
+
+      else if(!(correoValido)){
         Swal.fire({
           icon:'error',
           title:'Correo mal escrito',
@@ -180,7 +504,7 @@ function FormExample() {
         });
       }
       
-      else if(objED.Contraseña !== altPass){
+      else if(!passValido){
         Swal.fire({
           icon:'error',
           title:'Contraseñas diferentes',
@@ -207,6 +531,17 @@ function FormExample() {
           icon:'error',
           title:'Número de teléfono con letras',
           text:'Se detecto letras en el campo de Teléfono, intente de nuevo',
+          showConfirmButton:false,
+          showDenyButton:true,
+          denyButtonText:'Volver a intentarlo'
+        });
+      }
+
+      else if(objED.No_Telf_E.length !== 10){
+        Swal.fire({
+          icon:'error',
+          title:'Número de teléfono con más o menos de 10 dígitos',
+          text:'Se detecto un número de teléfono imposible, asegúrese de escribir sin (+52) y solo dígitos',
           showConfirmButton:false,
           showDenyButton:true,
           denyButtonText:'Volver a intentarlo'
@@ -388,18 +723,18 @@ function FormExample() {
               </InputGroup>
             </Form.Group>
             <br /><br /><br />
-            <BotonEstado onStateSelect={handleStateSelect}/>
+            <BotonEstado handleStateSelect={handleStateSelect}/>
             <br />
           </Row>
           <Row className="mb-3">
               <Form.Group as={Col} md={12} className="position-relative mb-3">
                 <Form.Label>Selecciona una imagen para tu logo</Form.Label>
                 {/* Restricción de archivos a imágenes */}
-                <Form.Control type="file" name="file" accept="image/*, .jpg, .png" />
+                <Form.Control type="file" name="file" accept="image/*, .jpg, .png" onChange={e => handleImagenUpload(e)} />
                 <Form.Control.Feedback type="DocumentoInvalido" tooltip>
                   <br />
                   <div className="centrarServicios">
-                    <Servicios onServiceSelect={handleServiceSelect}/>
+                    <Servicios handleServiceSelect={handleServiceSelect}/>
                   </div>
                 </Form.Control.Feedback>
               </Form.Group>
@@ -464,20 +799,26 @@ function FormExample() {
             <Col md={12} className="text-center">
               <Button className="botonCrear" type="button"
                 onClick={ev => {
+
                   const Objeto = {
                     Correo: correo,
                     Password: password,
-                    //Nombre_Servicio: <Aquí ingresas el nombre de la constante de Servicio>
+                    Nombre_Servicio: servicioSeleccionado,
                     Nombre_E: nombreLocal,
                     Nombre: nombre,
                     No_Telf_E: telefono,
                     Calle: calle,
                     N_Exterior: numeroExterior,
                     N_Interior: numeroInterior,
-                    /*Pais: Localizacion.Pais,
-                    Estado: Localizacion.Estado, <Ingresas las propiedades del arreglo> 
-                    Municipio: Localizacion.Municipio*/
+                    Pais: estadoSeleccionado.Pais,
+                    Estado: estadoSeleccionado.Estado, 
+                    Municipio: estadoSeleccionado.Municipio,
+                    Referencias: referencias,
+                    RFC: rfc,
+                    FotoPerfil: imageUrl.data
                   }
+                  console.log(Objeto);
+                  registrarEmpresa(Objeto, navegar, altPass);
                 }}>
                 Crear cuenta
               </Button>
