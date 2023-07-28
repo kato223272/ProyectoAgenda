@@ -5,6 +5,7 @@ import { AiOutlinePhone, AiOutlineUser, AiOutlineHome, AiOutlineInfoCircle } fro
 import '../css/Card.css';
 
 function Principal({objEmpresa}) {
+  console.log(objEmpresa);
   return (
     <div className="d-flex justify-content-center">
       <Container>
@@ -19,7 +20,7 @@ function Principal({objEmpresa}) {
                 </Col>
                 <Col xs={12} sm={6}>
                   <Card.Body>
-                    <Card.Title className="nombreEmpresaa" id="nombreEmpresa">
+                    <Card.Title className="nombreEmpresaa" id="nombreEmpresa" style={{textAlign: "center"}}>
                       {objEmpresa.nombre_E}
                     </Card.Title>
                     <Card.Subtitle className="especialidad">{objEmpresa.nombre_Servicio}</Card.Subtitle>

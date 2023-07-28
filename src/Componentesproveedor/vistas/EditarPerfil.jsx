@@ -3,9 +3,40 @@ import '../css/EditarPerfil.css';
 import Navbar from '../components/NavbarProvTodas';
 import Footer from '../../ComponentGlobales/Footer.jsx';
 import Servicios from '../components/TipoDeServicio';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
+function eliminarCuenta(navegar){
+
+  const empresa = JSON.parse(localStorage.getItem("Empresa"));
+  try{
+    console.log(empresa);
+    const eliminado = axios.delete("https://localhost:44310/api/Empresas/EliminarEmpresa?id="+ empresa.nombre_E +"&id2="+ empresa.nombre_Servicio);
+      Swal.fire({
+        icon:'success',
+        title:'¡Cuenta eliminada!',
+        text:'¡Hasta pronto!',
+        showConfirmButton:true,
+        confirmButtonText:'Entrar'
+    }).then(
+        function (result){
+            if(result.isConfirmed){             
+                navegar('/');
+            }
+            if(result.isDismissed){
+                navegar('/');
+            }
+        }
+      );    
+  } catch (error){
+    console.error(error.response.data);            
+    navegar('/');
+  }
+}
 
 const EditProfileEmpresa = () => {
+  const navegar = useNavigate();
   const [empresaInfo, setEmpresaInfo] = useState({
     nombre: '',
     especialidad: '',
@@ -450,7 +481,8 @@ const handleLogoSelected = (event) => {
         <button onClick={handleAgregarTrabajador}>Agregar Trabajador</button>
       </div>
 
-        <button>Guardar Cambios Generales</button>
+        <button>Guardar Cambios Generales</button><br /><br />
+        <button onClick={() => eliminarCuenta(navegar)}>Eliminar cuenta</button>
       </div>
       <Footer />
     </>

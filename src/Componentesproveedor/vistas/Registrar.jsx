@@ -58,7 +58,7 @@ function FormExample() {
     console.log(file);
     formData.append("imagen", file, file.name);
     try{
-      const base64 = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RecibirImagenBase64", formData);
+      const base64 = await axios.post("https://localhost:44310/api/Empresas/RecibirImagenBase64", formData);
       if(base64.status === 200){
         setImageUrl(base64);
       }
@@ -108,13 +108,16 @@ function FormExample() {
 
   const registrarEmpresa = async (objED, navegar, altPass) =>{
     var formData = new FormData();
-    if(objED.FotoPerfil !== null || objED.FotoPerfil.length === 0){
+    if(objED.FotoPerfil !== undefined){
       const blob = b64toBlob(objED.FotoPerfil, 'image/png');
       const file = new File([blob], "image");      
       formData.append("imagen", file, file.name);
     }
-    else{      
-      formData.append("imagen", "", undefined);
+
+    else{
+      const blob = b64toBlob("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", 'image/png');
+      const file = new File([blob], "image")
+      formData.append("imagen", file, file.name);
     }
 
     const correoValido = /^\w+([.]\w+)*@\w+([.]\w+)*[.][a-zA-Z]{2,5}$/.test(objED.Correo);
@@ -130,12 +133,12 @@ function FormExample() {
       objED.RFC.trim("") && objED.N_Interior.trim("")){
         console.log("if principal-1");
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +"&RFC="+ 
             objED.RFC + "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
@@ -176,12 +179,12 @@ function FormExample() {
       else if(correoValido && nombreValido && passValido && numeroValido && objED.Referencias.trim("") 
        && objED.N_Interior.trim("")){
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&Referencias="+ objED.Referencias +"&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
@@ -222,12 +225,12 @@ function FormExample() {
       else if(correoValido && nombreValido && passValido && numeroValido  
       && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo + "&RFC=" + objED.RFC +
             "&Pass="+ objED.Password  +"&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
@@ -268,12 +271,12 @@ function FormExample() {
       else if(correoValido && nombreValido
       && passValido && numeroValido && objED.N_Interior.trim("") && objED.RFC.trim("")){
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
@@ -314,12 +317,12 @@ function FormExample() {
       else if(correoValido && nombreValido
         && passValido && numeroValido && objED.N_Interior.trim("") ){
           try{
-            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E  +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
               "&N_Exterior="+ objED.N_Exterior +"&N_Interior="+ objED.N_Interior, formData);
-              if(response.status === 201){
+              if(response.data.nombre_E === objED.Nombre_E){
                 Swal.fire({
                   icon:'success',
                   title:'¡Cuenta creada!',
@@ -347,16 +350,15 @@ function FormExample() {
       }
 
       else if(correoValido && nombreValido
-        && passValido && numeroValido  && objED.RFC.trim("")){
-          console.log("if principal-7");
+        && passValido && numeroValido  && objED.RFC.trim("")){          
           console.log("if principal-6");
           try{
-            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E + "&RFC=" + objED.RFC +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
               "&N_Exterior="+ objED.N_Exterior, formData);
-              if(response.status === 201){
+              if(response.data.nombre_E === objED.Nombre_E){
                 Swal.fire({
                   icon:'success',
                   title:'¡Cuenta creada!',
@@ -373,6 +375,7 @@ function FormExample() {
                 );
               }
           } catch(error){
+            console.error(error.response.data);
             Swal.fire({
               icon:'error',
               title:'¡Error!',
@@ -385,13 +388,12 @@ function FormExample() {
 
       else if(correoValido && nombreValido
       && passValido && numeroValido ){
-        console.log("if principal-7");
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
@@ -408,6 +410,7 @@ function FormExample() {
               );
             }
         } catch(error){
+          console.error(error.response.data);
           if(error.response.status === 409){
             Swal.fire({
               icon:'error',
@@ -432,12 +435,12 @@ function FormExample() {
       else if(correoValido && nombreValido
         && passValido && numeroValido && objED.N_Interior.trim("")){
           try{
-            const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+            const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
               + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
               "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
               "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
               "&N_Interior=" + objED.N_Interior, formData);
-              if(response.status === 201){
+              if(response.data.nombre_E === objED.Nombre_E){
                 Swal.fire({
                   icon:'success',
                   title:'¡Cuenta creada!',
@@ -467,12 +470,12 @@ function FormExample() {
         else if(correoValido && nombreValido
           && passValido && numeroValido && objED.RFC.trim("")){
             try{
-              const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+              const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
                 + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
                 "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
                 "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
                 "&RFC=" + objED.RFC);
-                if(response.status === 201){
+                if(response.data.nombre_E === objED.Nombre_E){
                   Swal.fire({
                     icon:'success',
                     title:'¡Cuenta creada!',
@@ -502,12 +505,12 @@ function FormExample() {
       else if(correoValido && nombreValido
       && passValido && numeroValido){
         try{
-          const response = await axios.post("http://jeshuabd-001-site1.dtempurl.com/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
+          const response = await axios.post("https://localhost:44310/api/Empresas/RegistroDeEmpresa?Nombre_E=" 
             + objED.Nombre_E + "&Nombre_Servicio=" + objED.Nombre_Servicio +"&Correo_E="+ objED.Correo +
             "&Pass="+ objED.Password + "&Nombre="+ objED.Nombre +"&No_Telf_E="+ objED.No_Telf_E +
             "&Calle="+ objED.Calle +"&Pais="+ objED.Pais +"&Estado="+ objED.Estado +"&Municipio="+ objED.Municipio +
             "&N_Exterior="+ objED.N_Exterior, formData);
-            if(response.status === 201){
+            if(response.data.nombre_E === objED.Nombre_E){
               Swal.fire({
                 icon:'success',
                 title:'¡Cuenta creada!',
